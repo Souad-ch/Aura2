@@ -102,6 +102,7 @@
 
     /* ── SERVICES ── */
     .svc-list{ display:flex; flex-direction:column; gap:20px; }
+    #svc-dynamic{ display:flex; flex-direction:column; gap:20px; }
     .svc{ background:var(--linen); border:1px solid #E4D8C5; border-radius:20px; overflow:hidden;
       display:grid; grid-template-columns:300px 1fr; transition:all .25s; }
     .svc:hover{ border-color:var(--bronze-a4); box-shadow:0 16px 40px rgba(45,38,32,.08); }
@@ -450,78 +451,7 @@
     </div>
     <div class="svc-list">
 
-      <div class="svc">
-        <div class="svc-side">
-          <div class="svc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#B0895A" stroke-width="1.4"/><path d="M9 16L12 7L15 16M10.2 13L13.8 13" stroke="#F7F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <h3>بناء العلامة</h3>
-          <div class="en">Branding</div>
-        </div>
-        <div class="svc-body">
-          <p class="svc-desc">نبني هوية بصرية متكاملة تجعل علامتك لا تُنسى وتعكس قيمتها الحقيقية في السوق.</p>
-          <div class="svc-items">
-            <span class="svc-item">تصميم الشعار</span>
-            <span class="svc-item">الهوية البصرية</span>
-            <span class="svc-item">استراتيجية العلامة</span>
-            <span class="svc-item">تموضع العلامة</span>
-            <span class="svc-item">دليل الصوت والرسالة</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="svc">
-        <div class="svc-side">
-          <div class="svc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 15L4 9L9 9L16 5L16 19L9 15Z" stroke="#B0895A" stroke-width="1.4" stroke-linejoin="round"/><path d="M18 9C20 10.5 20 13.5 18 15" stroke="#B0895A" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-          <h3>التسويق</h3>
-          <div class="en">Marketing</div>
-        </div>
-        <div class="svc-body">
-          <p class="svc-desc">حملات مدروسة تجذب العملاء المناسبين وتحوّلهم إلى مبيعات حقيقية عبر كل المنصات.</p>
-          <div class="svc-items">
-            <span class="svc-item">إدارة السوشال ميديا</span>
-            <span class="svc-item">إعلانات ميتا</span>
-            <span class="svc-item">إعلانات تيك توك</span>
-            <span class="svc-item">إعلانات جوجل</span>
-            <span class="svc-item">جذب العملاء المحتملين</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="svc">
-        <div class="svc-side">
-          <div class="svc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#B0895A" stroke-width="1.4"/><path d="M10 9.5L14.5 12L10 14.5Z" fill="#F7F1E8"/></svg></div>
-          <h3>صناعة المحتوى</h3>
-          <div class="en">Content</div>
-        </div>
-        <div class="svc-body">
-          <p class="svc-desc">محتوى إبداعي يوقف التمرير ويبني علاقة حقيقية بين علامتك وجمهورك.</p>
-          <div class="svc-items">
-            <span class="svc-item">ريلز</span>
-            <span class="svc-item">مونتاج فيديو</span>
-            <span class="svc-item">كتابة إعلانية</span>
-            <span class="svc-item">إدارة التصوير</span>
-            <span class="svc-item">تصميم جرافيك</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="svc">
-        <div class="svc-side">
-          <div class="svc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#B0895A" stroke-width="1.4"/><path d="M3 9L21 9" stroke="#B0895A" stroke-width="1.4"/><circle cx="5.6" cy="7" r="0.7" fill="#F7F1E8"/><circle cx="7.8" cy="7" r="0.7" fill="#F7F1E8"/></svg></div>
-          <h3>تطوير المواقع</h3>
-          <div class="en">Web</div>
-        </div>
-        <div class="svc-body">
-          <p class="svc-desc">مواقع وصفحات هبوط سريعة وأنيقة مصمّمة لتحويل الزوار إلى عملاء — من البرمجة المخصصة إلى منصات ووردبريس وشوبيفاي.</p>
-          <div class="svc-items">
-            <span class="svc-item">برمجة مخصصة</span>
-            <span class="svc-item">React / Next.js</span>
-            <span class="svc-item">ووردبريس</span>
-            <span class="svc-item">شوبيفاي</span>
-            <span class="svc-item">صفحات هبوط</span>
-            <span class="svc-item">تحسين معدّلات التحويل</span>
-          </div>
-        </div>
-      </div>
+      <div id="svc-dynamic"></div>
 
       <!-- Personal Branding — Limited seats -->
       <div class="svc svc-featured">
@@ -591,28 +521,7 @@
       <h2 class="sec-title">من الفكرة إلى<br><em>الهيبة الكاملة.</em></h2>
       <div class="g-div center"></div>
     </div>
-    <div class="process-steps">
-      <div class="step">
-        <div class="step-num">١</div>
-        <div class="step-title" id="cms-step1-title">الاستشارة</div>
-        <p class="step-desc" id="cms-step1-desc">جلسة مجانية نفهم فيها علامتك وطموحاتك وسوقك بعمق.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">٢</div>
-        <div class="step-title" id="cms-step2-title">الاستراتيجية</div>
-        <p class="step-desc" id="cms-step2-desc">نبني خارطة طريق رقمية مخصصة لك تماماً بناءً على البيانات.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">٣</div>
-        <div class="step-title" id="cms-step3-title">التنفيذ</div>
-        <p class="step-desc" id="cms-step3-desc">ننفذ بدقة متناهية مع تغذية راجعة مستمرة منك في كل مرحلة.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">٤</div>
-        <div class="step-title" id="cms-step4-title">الأثر</div>
-        <p class="step-desc" id="cms-step4-desc">نقيس النتائج ونطوّر باستمرار لضمان النمو الحقيقي والمستدام.</p>
-      </div>
-    </div>
+    <div class="process-steps" id="process-dynamic"></div>
   </div>
 </section>
 
@@ -624,32 +533,7 @@
       <h2 class="sec-title">العملاء هم<br><em>أصدق شاهد.</em></h2>
       <div class="g-div center"></div>
     </div>
-    <div class="test-grid">
-      <div class="test-card">
-        <div class="test-quote">"</div>
-        <p class="test-text" id="cms-test1-text">تعاملت مع عدة وكالات قبل Aura، لكن الفرق كان واضحاً من الجلسة الأولى. هم لا يبيعون خدمات — يبنون رؤية.</p>
-        <div class="test-author">
-          <div class="test-avatar" id="cms-test1-initial">م</div>
-          <div><div class="test-name" id="cms-test1-name">محمد الراشد</div><div class="test-role" id="cms-test1-role">مؤسس · Novar</div></div>
-        </div>
-      </div>
-      <div class="test-card">
-        <div class="test-quote">"</div>
-        <p class="test-text" id="cms-test2-text">بعد ثلاثة أشهر، أصبح اسمي يُذكر في كل نقاش عن مجالي. النتائج تتحدث عن نفسها.</p>
-        <div class="test-author">
-          <div class="test-avatar" id="cms-test2-initial">س</div>
-          <div><div class="test-name" id="cms-test2-name">سارة الأمين</div><div class="test-role" id="cms-test2-role">مستشارة أعمال · Aurel</div></div>
-        </div>
-      </div>
-      <div class="test-card">
-        <div class="test-quote">"</div>
-        <p class="test-text" id="cms-test3-text">الفريق يفكر معك كشريك حقيقي لا كمورّد. هذا هو الفرق الذي يصعب إيجاده في السوق.</p>
-        <div class="test-author">
-          <div class="test-avatar" id="cms-test3-initial">خ</div>
-          <div><div class="test-name" id="cms-test3-name">خالد الجابر</div><div class="test-role" id="cms-test3-role">CEO · Veyra Group</div></div>
-        </div>
-      </div>
-    </div>
+    <div class="test-grid" id="test-dynamic"></div>
   </div>
 </section>
 
@@ -680,35 +564,7 @@
       <h2 class="sec-title">معرفة تبني<br><em>هيبة حقيقية.</em></h2>
       <div class="g-div center"></div>
     </div>
-    <div class="blog-grid">
-      <div class="blog-card">
-        <span class="blog-cat" id="cms-blog1-cat">استراتيجية رقمية</span>
-        <h3 class="blog-title" id="cms-blog1-title">لماذا معظم العلامات التجارية تُخفق رقمياً رغم الميزانيات الضخمة؟</h3>
-        <p class="blog-excerpt" id="cms-blog1-excerpt">المشكلة ليست في الإنفاق — المشكلة في غياب الهندسة. اكتشف الفرق بين التواجد الرقمي والحضور الرقمي الحقيقي.</p>
-        <div class="blog-footer">
-          <span class="blog-meta" id="cms-blog1-readtime">٥ دقائق قراءة</span>
-          <span class="blog-read">اقرأ المقال ←</span>
-        </div>
-      </div>
-      <div class="blog-card">
-        <span class="blog-cat" id="cms-blog2-cat">Personal Branding</span>
-        <h3 class="blog-title" id="cms-blog2-title">العلامة الشخصية: كيف تجعل اسمك يُذكر قبل شركتك؟</h3>
-        <p class="blog-excerpt" id="cms-blog2-excerpt">في عصر الثقة الرقمية، الناس يتابعون أشخاصاً لا شعارات. دليلك الكامل لبناء علامة شخصية لا تُنسى.</p>
-        <div class="blog-footer">
-          <span class="blog-meta" id="cms-blog2-readtime">٧ دقائق قراءة</span>
-          <span class="blog-read">اقرأ المقال ←</span>
-        </div>
-      </div>
-      <div class="blog-card">
-        <span class="blog-cat" id="cms-blog3-cat">براندينغ فاخر</span>
-        <h3 class="blog-title" id="cms-blog3-title">الفخامة الرقمية: ما الذي يجعل علامة ما تبدو بمليون وأخرى بألف؟</h3>
-        <p class="blog-excerpt" id="cms-blog3-excerpt">الفرق ليس في السعر — إنه في القرارات التصميمية الصغيرة التي تُراكم هيبة لا تُشترى.</p>
-        <div class="blog-footer">
-          <span class="blog-meta" id="cms-blog3-readtime">٦ دقائق قراءة</span>
-          <span class="blog-read">اقرأ المقال ←</span>
-        </div>
-      </div>
-    </div>
+    <div class="blog-grid" id="blog-dynamic"></div>
   </div>
 </section>
 
@@ -1007,27 +863,17 @@ function applyCMS(section, d){
       if(d.mani2) txt('cms-mani2', d.mani2);
       if(d.mani3) txt('cms-mani3', d.mani3);
       break;
+    case 'services':
+      if(Array.isArray(d) && d.length) renderServices(d);
+      break;
     case 'process':
-      (d.steps||[]).forEach((s,i)=>{
-        txt(`cms-step${i+1}-title`, s.title);
-        txt(`cms-step${i+1}-desc`, s.desc);
-      });
+      if(d.steps && d.steps.length) renderProcess(d.steps);
       break;
     case 'testimonials':
-      (d.items||[]).forEach((t,i)=>{
-        txt(`cms-test${i+1}-text`, t.text);
-        txt(`cms-test${i+1}-initial`, t.initial);
-        txt(`cms-test${i+1}-name`, t.name);
-        txt(`cms-test${i+1}-role`, t.role);
-      });
+      if(d.items && d.items.length) renderTestimonials(d.items);
       break;
     case 'blog':
-      (d.articles||[]).forEach((a,i)=>{
-        txt(`cms-blog${i+1}-cat`, a.cat);
-        html(`cms-blog${i+1}-title`, a.title);
-        txt(`cms-blog${i+1}-excerpt`, a.excerpt);
-        txt(`cms-blog${i+1}-readtime`, a.readtime);
-      });
+      if(d.articles && d.articles.length) renderBlog(d.articles);
       break;
     case 'portfolio':
       renderPortfolio(d);
@@ -1100,8 +946,106 @@ function toArabicNum(n){
 
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
+// ── ICON LIBRARY (for service cards) ──
+const ICONS = {
+  branding:'<circle cx="12" cy="12" r="9" stroke="#B0895A" stroke-width="1.4"/><path d="M9 16L12 7L15 16M10.2 13L13.8 13" stroke="#F7F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>',
+  marketing:'<path d="M4 15L4 9L9 9L16 5L16 19L9 15Z" stroke="#B0895A" stroke-width="1.4" stroke-linejoin="round"/><path d="M18 9C20 10.5 20 13.5 18 15" stroke="#B0895A" stroke-width="1.4" stroke-linecap="round"/>',
+  content:'<rect x="4" y="6" width="16" height="12" rx="2" stroke="#B0895A" stroke-width="1.4"/><path d="M10 9.5L14.5 12L10 14.5Z" fill="#F7F1E8"/>',
+  web:'<rect x="3" y="5" width="18" height="14" rx="2" stroke="#B0895A" stroke-width="1.4"/><path d="M3 9L21 9" stroke="#B0895A" stroke-width="1.4"/><circle cx="5.6" cy="7" r="0.7" fill="#F7F1E8"/><circle cx="7.8" cy="7" r="0.7" fill="#F7F1E8"/>',
+  person:'<circle cx="12" cy="8" r="4" stroke="#B0895A" stroke-width="1.4"/><path d="M6 20C6 17.24 8.69 15 12 15C15.31 15 18 17.24 18 20" stroke="#B0895A" stroke-width="1.4" stroke-linecap="round"/>',
+  star:'<path d="M12 3L14.5 9L21 9.5L16 13.5L17.5 20L12 16.5L6.5 20L8 13.5L3 9.5L9.5 9Z" stroke="#B0895A" stroke-width="1.4" stroke-linejoin="round"/>',
+  rocket:'<path d="M5 15C3 17 3 21 3 21C3 21 7 21 9 19M14 4C18 5 19 10 19 10C19 10 20 11 14 17C12 19 9 19 9 19L5 15C5 15 5 12 7 10C13 4 14 4 14 4Z" stroke="#B0895A" stroke-width="1.4" stroke-linejoin="round"/><circle cx="14" cy="9" r="1.4" fill="#F7F1E8"/>',
+  chart:'<path d="M4 20L4 4M4 20L20 20" stroke="#B0895A" stroke-width="1.4" stroke-linecap="round"/><rect x="8" y="12" width="2.5" height="5" fill="#F7F1E8"/><rect x="13" y="8" width="2.5" height="9" fill="#F7F1E8"/>',
+  camera:'<rect x="3" y="7" width="18" height="13" rx="2" stroke="#B0895A" stroke-width="1.4"/><circle cx="12" cy="13.5" r="3.5" stroke="#F7F1E8" stroke-width="1.4"/><path d="M8 7L9.5 4.5H14.5L16 7" stroke="#B0895A" stroke-width="1.4" stroke-linejoin="round"/>',
+  pen:'<path d="M4 20L8 19L19 8C20 7 20 5.5 19 4.5C18 3.5 16.5 3.5 15.5 4.5L5 15.5L4 20Z" stroke="#B0895A" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 6L17.5 9.5" stroke="#F7F1E8" stroke-width="1.4"/>'
+};
+function svcIcon(key){ return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none">${ICONS[key]||ICONS.star}</svg>`; }
+
+// ── DYNAMIC SECTION RENDERERS ──
+function renderServices(arr){
+  const c=document.getElementById('svc-dynamic'); if(!c) return;
+  c.innerHTML = arr.map(s=>`
+    <div class="svc">
+      <div class="svc-side">
+        <div class="svc-ic">${svcIcon(s.icon)}</div>
+        <h3>${esc(s.title||'')}</h3>
+        ${s.en?`<div class="en">${esc(s.en)}</div>`:''}
+      </div>
+      <div class="svc-body">
+        <p class="svc-desc">${esc(s.desc||'')}</p>
+        <div class="svc-items">${(s.items||[]).map(i=>`<span class="svc-item">${esc(i)}</span>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+function renderProcess(arr){
+  const c=document.getElementById('process-dynamic'); if(!c) return;
+  c.innerHTML = arr.map((s,i)=>`
+    <div class="step">
+      <div class="step-num">${toArabicNum(i+1)}</div>
+      <div class="step-title">${esc(s.title||'')}</div>
+      <p class="step-desc">${esc(s.desc||'')}</p>
+    </div>`).join('');
+}
+function renderTestimonials(arr){
+  const c=document.getElementById('test-dynamic'); if(!c) return;
+  c.innerHTML = arr.map(t=>`
+    <div class="test-card">
+      <div class="test-quote">"</div>
+      <p class="test-text">${esc(t.text||'')}</p>
+      <div class="test-author">
+        <div class="test-avatar">${esc(t.initial||'')}</div>
+        <div><div class="test-name">${esc(t.name||'')}</div><div class="test-role">${esc(t.role||'')}</div></div>
+      </div>
+    </div>`).join('');
+}
+function renderBlog(arr){
+  const c=document.getElementById('blog-dynamic'); if(!c) return;
+  c.innerHTML = arr.map(a=>`
+    <div class="blog-card">
+      <span class="blog-cat">${esc(a.cat||'')}</span>
+      <h3 class="blog-title">${esc(a.title||'')}</h3>
+      <p class="blog-excerpt">${esc(a.excerpt||'')}</p>
+      <div class="blog-footer">
+        <span class="blog-meta">${esc(a.readtime||'')}</span>
+        <span class="blog-read">اقرأ المقال ←</span>
+      </div>
+    </div>`).join('');
+}
+
+// ── DEFAULT CONTENT (shown if no CMS data) ──
+const DEFAULTS = {
+  services:[
+    {icon:'branding',title:'بناء العلامة',en:'Branding',desc:'نبني هوية بصرية متكاملة تجعل علامتك لا تُنسى وتعكس قيمتها الحقيقية في السوق.',items:['تصميم الشعار','الهوية البصرية','استراتيجية العلامة','تموضع العلامة','دليل الصوت والرسالة']},
+    {icon:'marketing',title:'التسويق',en:'Marketing',desc:'حملات مدروسة تجذب العملاء المناسبين وتحوّلهم إلى مبيعات حقيقية عبر كل المنصات.',items:['إدارة السوشال ميديا','إعلانات ميتا','إعلانات تيك توك','إعلانات جوجل','جذب العملاء المحتملين']},
+    {icon:'content',title:'صناعة المحتوى',en:'Content',desc:'محتوى إبداعي يوقف التمرير ويبني علاقة حقيقية بين علامتك وجمهورك.',items:['ريلز','مونتاج فيديو','كتابة إعلانية','إدارة التصوير','تصميم جرافيك']},
+    {icon:'web',title:'تطوير المواقع',en:'Web',desc:'مواقع وصفحات هبوط سريعة وأنيقة مصمّمة لتحويل الزوار إلى عملاء — من البرمجة المخصصة إلى منصات ووردبريس وشوبيفاي.',items:['برمجة مخصصة','React / Next.js','ووردبريس','شوبيفاي','صفحات هبوط','تحسين معدّلات التحويل']}
+  ],
+  process:[
+    {title:'الاستشارة',desc:'جلسة مجانية نفهم فيها علامتك وطموحاتك وسوقك بعمق.'},
+    {title:'الاستراتيجية',desc:'نبني خارطة طريق رقمية مخصصة لك تماماً بناءً على البيانات.'},
+    {title:'التنفيذ',desc:'ننفذ بدقة متناهية مع تغذية راجعة مستمرة منك في كل مرحلة.'},
+    {title:'الأثر',desc:'نقيس النتائج ونطوّر باستمرار لضمان النمو الحقيقي والمستدام.'}
+  ],
+  testimonials:[
+    {initial:'م',text:'تعاملت مع عدة وكالات قبل Aura، لكن الفرق كان واضحاً من الجلسة الأولى. هم لا يبيعون خدمات — يبنون رؤية.',name:'محمد الراشد',role:'مؤسس · Novar'},
+    {initial:'س',text:'بعد ثلاثة أشهر، أصبح اسمي يُذكر في كل نقاش عن مجالي. النتائج تتحدث عن نفسها.',name:'سارة الأمين',role:'مستشارة أعمال · Aurel'},
+    {initial:'خ',text:'الفريق يفكر معك كشريك حقيقي لا كمورّد. هذا هو الفرق الذي يصعب إيجاده في السوق.',name:'خالد الجابر',role:'CEO · Veyra Group'}
+  ],
+  blog:[
+    {cat:'استراتيجية رقمية',title:'لماذا معظم العلامات التجارية تُخفق رقمياً رغم الميزانيات الضخمة؟',excerpt:'المشكلة ليست في الإنفاق — المشكلة في غياب الهندسة. اكتشف الفرق بين التواجد الرقمي والحضور الرقمي الحقيقي.',readtime:'٥ دقائق قراءة'},
+    {cat:'Personal Branding',title:'العلامة الشخصية: كيف تجعل اسمك يُذكر قبل شركتك؟',excerpt:'في عصر الثقة الرقمية، الناس يتابعون أشخاصاً لا شعارات. دليلك الكامل لبناء علامة شخصية لا تُنسى.',readtime:'٧ دقائق قراءة'},
+    {cat:'براندينغ فاخر',title:'الفخامة الرقمية: ما الذي يجعل علامة ما تبدو بمليون وأخرى بألف؟',excerpt:'الفرق ليس في السعر — إنه في القرارات التصميمية الصغيرة التي تُراكم هيبة لا تُشترى.',readtime:'٦ دقائق قراءة'}
+  ]
+};
+function renderDefaults(){
+  renderServices(DEFAULTS.services);
+  renderProcess(DEFAULTS.process);
+  renderTestimonials(DEFAULTS.testimonials);
+  renderBlog(DEFAULTS.blog);
+}
+
 // ── INIT ──
-document.addEventListener('DOMContentLoaded', loadCMSContent);
+document.addEventListener('DOMContentLoaded', ()=>{ renderDefaults(); loadCMSContent(); });
 
 // ── PRELOADER (premium intro ~2s) ──
 (function(){
