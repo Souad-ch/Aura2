@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 170" width="220" height="170">
+  <defs>
+    <style>
+      .wm-name { font-family: 'Montserrat','Arial Black',Arial,sans-serif; font-size: 34px; font-weight: 800; fill: #0F172A; letter-spacing: 8px; }
+      .wm-sub  { font-family: 'Montserrat',Arial,sans-serif; font-size: 10px; font-weight: 400; fill: #D4B483; letter-spacing: 7px; }
+    </style>
+  </defs>
+
+  <!-- Mark centered horizontally -->
+  <g transform="translate(60,8)">
+    <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+    <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+    <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+    <line x1="12" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+    <line x1="88" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+    <line x1="31" y1="62" x2="69" y2="62" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- Wordmark, centered -->
+  <text x="110" y="140" class="wm-name" text-anchor="middle">AURA</text>
+  <text x="112" y="158" class="wm-sub"  text-anchor="middle">MEDIA GROUP</text>
+</svg>

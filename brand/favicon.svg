@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Favicon — navy rounded square with simplified gold-aura A. Optimized for tiny sizes. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#0F172A"/>
+  <!-- single aura arc (others vanish at small sizes) -->
+  <path d="M 20,24 A 12,12 0 0 0 44,24" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <!-- A mark -->
+  <line x1="16" y1="48" x2="32" y2="24" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="48" y1="48" x2="32" y2="24" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="23" y1="38" x2="41" y2="38" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+</svg>

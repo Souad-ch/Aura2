@@ -6,8 +6,14 @@ Complete visual identity system for **Aura Media Group** — *Your Marketing Gro
 
 | File | Description |
 |------|-------------|
-| `brand-identity.html` | Full brand book — open in any browser |
-| `logo.svg` | Standalone logo (mark + horizontal wordmark) |
+| `brand-identity.html` | Full brand book (13 sections) — open in any browser |
+| `website-mockup.html` | Landing-page mockup (nav, hero, services, packages, footer) |
+| `proposal.html` | Client proposal & pricing template (printable / PDF-ready) |
+| `logo.svg` | Primary horizontal logo (mark + wordmark) |
+| `logo-stacked.svg` | Stacked logo (mark above wordmark) |
+| `logo-icon.svg` | Icon-only mark |
+| `logo-avatar.svg` | Circular social avatar (Instagram / WhatsApp / LinkedIn) |
+| `favicon.svg` | Favicon (navy rounded square) |
 
 ## How to view
 
