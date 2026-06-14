@@ -154,6 +154,22 @@
     .seat-dot.taken{background:var(--esp);border-color:var(--esp);}
     /* SCROLLBAR */
     ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--brza4);border-radius:100px;}
+    /* LIVE SIDE PREVIEW */
+    #side-preview{position:fixed;top:0;left:0;bottom:0;width:min(46vw,560px);background:var(--lin);
+      border-left:1px solid var(--sand);z-index:60;display:none;flex-direction:column;box-shadow:6px 0 30px rgba(45,38,32,.12);}
+    body.preview-on #side-preview{display:flex;}
+    body.preview-on #main-content{margin-left:min(46vw,560px);}
+    body.preview-on #side-toggle{background:var(--esp);color:var(--brz);}
+    .side-prev-bar{height:46px;flex-shrink:0;background:var(--esp);display:flex;align-items:center;gap:10px;padding:0 14px;}
+    .side-prev-bar span{flex:1;font-family:'Cairo',sans-serif;font-size:12.5px;font-weight:700;color:var(--cream);}
+    .side-prev-bar button{width:28px;height:28px;border-radius:7px;border:none;cursor:pointer;background:rgba(176,137,90,.18);color:var(--brz);font-size:14px;}
+    .side-prev-bar button:hover{background:rgba(176,137,90,.32);}
+    #side-frame{flex:1;border:none;width:100%;background:#fff;}
+    @media(max-width:1100px){
+      #side-preview{width:62vw;}
+      body.preview-on #main-content{margin-left:0;filter:blur(1px);pointer-events:none;}
+    }
+    @media(max-width:700px){ #side-preview{width:100vw;} }
     /* sidebar backdrop on mobile */
     #sb-backdrop{display:none;position:fixed;inset:0;background:rgba(45,38,32,.5);z-index:99;}
     #sb-backdrop.show{display:block;}
@@ -287,6 +303,16 @@
   </aside>
   <div id="sb-backdrop" onclick="toggleSidebar()"></div>
 
+  <!-- LIVE SIDE PREVIEW -->
+  <aside id="side-preview">
+    <div class="side-prev-bar">
+      <span>معاينة حية للموقع</span>
+      <button onclick="refreshPreview()" title="تحديث">↻</button>
+      <button onclick="toggleSidePreview()" title="إغلاق">✕</button>
+    </div>
+    <iframe id="side-frame" title="معاينة الموقع"></iframe>
+  </aside>
+
   <!-- MAIN -->
   <div id="main-content">
     <!-- TOPBAR -->
@@ -298,9 +324,9 @@
         <h1 id="panel-title">نظرة عامة</h1>
       </div>
       <div class="topbar-actions">
-        <button class="btn-top btn-preview-top" onclick="openPreview()">
+        <button class="btn-top btn-preview-top" id="side-toggle" onclick="toggleSidePreview()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;margin-left:4px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>
-          معاينة
+          معاينة حية
         </button>
         <button class="btn-top btn-save" id="save-btn" onclick="saveCurrentPanel()">حفظ التغييرات ✓</button>
       </div>
@@ -407,41 +433,8 @@
 
       <!-- ═══ SERVICES ═══ -->
       <div id="panel-services" class="panel">
-        <div class="cards-grid">
-
-          <div class="editor-card">
-            <h4><div class="card-num">١</div> بناء العلامة التجارية</h4>
-            <div class="form-group"><label>العنوان</label><input type="text" id="svc1-title" placeholder="بناء العلامة"></div>
-            <div class="form-group"><label>الاسم بالإنجليزي</label><input type="text" id="svc1-en" placeholder="Branding"></div>
-            <div class="form-group"><label>الوصف</label><textarea id="svc1-desc" rows="2"></textarea></div>
-            <div class="form-group"><label>العناصر (كل عنصر في سطر)</label><textarea id="svc1-items" rows="3"></textarea></div>
-          </div>
-
-          <div class="editor-card">
-            <h4><div class="card-num">٢</div> التسويق</h4>
-            <div class="form-group"><label>العنوان</label><input type="text" id="svc2-title" placeholder="التسويق"></div>
-            <div class="form-group"><label>الاسم بالإنجليزي</label><input type="text" id="svc2-en" placeholder="Marketing"></div>
-            <div class="form-group"><label>الوصف</label><textarea id="svc2-desc" rows="2"></textarea></div>
-            <div class="form-group"><label>العناصر</label><textarea id="svc2-items" rows="3"></textarea></div>
-          </div>
-
-          <div class="editor-card">
-            <h4><div class="card-num">٣</div> صناعة المحتوى</h4>
-            <div class="form-group"><label>العنوان</label><input type="text" id="svc3-title" placeholder="صناعة المحتوى"></div>
-            <div class="form-group"><label>الاسم بالإنجليزي</label><input type="text" id="svc3-en" placeholder="Content"></div>
-            <div class="form-group"><label>الوصف</label><textarea id="svc3-desc" rows="2"></textarea></div>
-            <div class="form-group"><label>العناصر</label><textarea id="svc3-items" rows="3"></textarea></div>
-          </div>
-
-          <div class="editor-card">
-            <h4><div class="card-num">٤</div> تطوير المواقع</h4>
-            <div class="form-group"><label>العنوان</label><input type="text" id="svc4-title" placeholder="تطوير المواقع"></div>
-            <div class="form-group"><label>الاسم بالإنجليزي</label><input type="text" id="svc4-en" placeholder="Web Dev"></div>
-            <div class="form-group"><label>الوصف</label><textarea id="svc4-desc" rows="2"></textarea></div>
-            <div class="form-group"><label>العناصر</label><textarea id="svc4-items" rows="3"></textarea></div>
-          </div>
-
-        </div>
+        <div style="margin-bottom:18px"><button class="btn-top btn-save" onclick="addServiceItem()">+ إضافة خدمة جديدة</button></div>
+        <div class="cards-grid" id="svc-editor"></div>
       </div>
 
       <!-- ═══ PERSONAL BRANDING ═══ -->
@@ -492,55 +485,14 @@
 
       <!-- ═══ PROCESS ═══ -->
       <div id="panel-process" class="panel">
-        <div class="cards-grid">
-          <div class="editor-card">
-            <h4><div class="card-num">١</div> الخطوة الأولى</h4>
-            <div class="form-group"><label>العنوان</label><input type="text" id="step1-title" placeholder="الاستشارة"></div>
-            <div class="form-group"><label>الوصف</label><textarea id="step1-desc" rows="2"></textarea></div>
-          </div>
-          <div class="editor-card">
-            <h4><div class="card-num">٢</div> الخطوة الثانية</h4>
-            <div class="form-group"><label>العنوان</label><input type="text" id="step2-title" placeholder="الاستراتيجية"></div>
-            <div class="form-group"><label>الوصف</label><textarea id="step2-desc" rows="2"></textarea></div>
-          </div>
-          <div class="editor-card">
-            <h4><div class="card-num">٣</div> الخطوة الثالثة</h4>
-            <div class="form-group"><label>العنوان</label><input type="text" id="step3-title" placeholder="التنفيذ"></div>
-            <div class="form-group"><label>الوصف</label><textarea id="step3-desc" rows="2"></textarea></div>
-          </div>
-          <div class="editor-card">
-            <h4><div class="card-num">٤</div> الخطوة الرابعة</h4>
-            <div class="form-group"><label>العنوان</label><input type="text" id="step4-title" placeholder="الأثر"></div>
-            <div class="form-group"><label>الوصف</label><textarea id="step4-desc" rows="2"></textarea></div>
-          </div>
-        </div>
+        <div style="margin-bottom:18px"><button class="btn-top btn-save" onclick="addProcessItem()">+ إضافة خطوة</button></div>
+        <div class="cards-grid" id="process-editor"></div>
       </div>
 
       <!-- ═══ TESTIMONIALS ═══ -->
       <div id="panel-testimonials" class="panel">
-        <div class="cards-grid">
-          <div class="editor-card">
-            <h4><div class="card-num">١</div> الشهادة الأولى</h4>
-            <div class="form-group"><label>الحرف الأول (الأفاتار)</label><input type="text" id="test1-initial" maxlength="1" style="width:60px"></div>
-            <div class="form-group"><label>نص الشهادة</label><textarea id="test1-text" rows="3"></textarea></div>
-            <div class="form-group"><label>الاسم</label><input type="text" id="test1-name"></div>
-            <div class="form-group"><label>المنصب والشركة</label><input type="text" id="test1-role"></div>
-          </div>
-          <div class="editor-card">
-            <h4><div class="card-num">٢</div> الشهادة الثانية</h4>
-            <div class="form-group"><label>الحرف الأول</label><input type="text" id="test2-initial" maxlength="1" style="width:60px"></div>
-            <div class="form-group"><label>نص الشهادة</label><textarea id="test2-text" rows="3"></textarea></div>
-            <div class="form-group"><label>الاسم</label><input type="text" id="test2-name"></div>
-            <div class="form-group"><label>المنصب والشركة</label><input type="text" id="test2-role"></div>
-          </div>
-          <div class="editor-card">
-            <h4><div class="card-num">٣</div> الشهادة الثالثة</h4>
-            <div class="form-group"><label>الحرف الأول</label><input type="text" id="test3-initial" maxlength="1" style="width:60px"></div>
-            <div class="form-group"><label>نص الشهادة</label><textarea id="test3-text" rows="3"></textarea></div>
-            <div class="form-group"><label>الاسم</label><input type="text" id="test3-name"></div>
-            <div class="form-group"><label>المنصب والشركة</label><input type="text" id="test3-role"></div>
-          </div>
-        </div>
+        <div style="margin-bottom:18px"><button class="btn-top btn-save" onclick="addTestItem()">+ إضافة رأي عميل</button></div>
+        <div class="cards-grid" id="test-editor"></div>
       </div>
 
       <!-- ═══ PORTFOLIO ═══ -->
@@ -579,29 +531,8 @@
 
       <!-- ═══ BLOG ═══ -->
       <div id="panel-blog" class="panel">
-        <div class="cards-grid">
-          <div class="editor-card">
-            <h4><div class="card-num">١</div> المقال الأول</h4>
-            <div class="form-group"><label>التصنيف</label><input type="text" id="blog1-cat"></div>
-            <div class="form-group"><label>العنوان</label><textarea id="blog1-title" rows="2"></textarea></div>
-            <div class="form-group"><label>المقتطف</label><textarea id="blog1-excerpt" rows="2"></textarea></div>
-            <div class="form-group"><label>وقت القراءة</label><input type="text" id="blog1-readtime" placeholder="٥ دقائق قراءة"></div>
-          </div>
-          <div class="editor-card">
-            <h4><div class="card-num">٢</div> المقال الثاني</h4>
-            <div class="form-group"><label>التصنيف</label><input type="text" id="blog2-cat"></div>
-            <div class="form-group"><label>العنوان</label><textarea id="blog2-title" rows="2"></textarea></div>
-            <div class="form-group"><label>المقتطف</label><textarea id="blog2-excerpt" rows="2"></textarea></div>
-            <div class="form-group"><label>وقت القراءة</label><input type="text" id="blog2-readtime"></div>
-          </div>
-          <div class="editor-card">
-            <h4><div class="card-num">٣</div> المقال الثالث</h4>
-            <div class="form-group"><label>التصنيف</label><input type="text" id="blog3-cat"></div>
-            <div class="form-group"><label>العنوان</label><textarea id="blog3-title" rows="2"></textarea></div>
-            <div class="form-group"><label>المقتطف</label><textarea id="blog3-excerpt" rows="2"></textarea></div>
-            <div class="form-group"><label>وقت القراءة</label><input type="text" id="blog3-readtime"></div>
-          </div>
-        </div>
+        <div style="margin-bottom:18px"><button class="btn-top btn-save" onclick="addBlogItem()">+ إضافة مقال</button></div>
+        <div class="cards-grid" id="blog-editor"></div>
       </div>
 
       <!-- ═══ BOOKINGS ═══ -->
@@ -614,11 +545,11 @@
           <table>
             <thead>
               <tr>
-                <th>الاسم</th><th>البريد</th><th>الخدمة</th><th>التاريخ</th><th>الوقت</th><th>الحالة</th><th>إجراء</th>
+                <th>الاسم</th><th>البريد</th><th>الخدمة</th><th>التاريخ</th><th>الحالة</th><th>إجراء</th>
               </tr>
             </thead>
             <tbody id="bookings-body">
-              <tr><td colspan="7" style="text-align:center;color:var(--mut);padding:32px">جاري تحميل الحجوزات...</td></tr>
+              <tr><td colspan="6" style="text-align:center;color:var(--mut);padding:32px">جاري تحميل الحجوزات...</td></tr>
             </tbody>
           </table>
         </div>
@@ -908,19 +839,13 @@ function populateForms(){
   sV('sticky-link', def('sticky','link','تواصل معنا ←'));
 
   // SERVICES
-  const svcs = cache['services']||[
-    {title:'بناء العلامة',en:'Branding',desc:'نبني هوية بصرية متكاملة تجعل علامتك لا تُنسى.',items:'تصميم الشعار\nالهوية البصرية\nاستراتيجية العلامة\nتموضع العلامة\nدليل الصوت والرسالة'},
-    {title:'التسويق',en:'Marketing',desc:'حملات مدروسة تجذب العملاء المناسبين.',items:'إدارة السوشال ميديا\nإعلانات ميتا\nإعلانات تيك توك\nإعلانات جوجل\nجذب العملاء المحتملين'},
-    {title:'صناعة المحتوى',en:'Content',desc:'محتوى إبداعي يوقف التمرير.',items:'ريلز\nمونتاج فيديو\nكتابة إعلانية\nإدارة التصوير\nتصميم جرافيك'},
-    {title:'تطوير المواقع',en:'Web',desc:'مواقع وصفحات هبوط سريعة وأنيقة.',items:'برمجة مخصصة\nReact / Next.js\nووردبريس\nشوبيفاي\nصفحات هبوط\nتحسين معدّلات التحويل'}
-  ];
-  [1,2,3,4].forEach(i=>{
-    const s=svcs[i-1]||{};
-    sV(`svc${i}-title`,s.title||''); sV(`svc${i}-en`,s.en||'');
-    sV(`svc${i}-desc`,s.desc||'');
-    const items = Array.isArray(s.items) ? s.items.join('\n') : (s.items||'');
-    sV(`svc${i}-items`,items);
-  });
+  svcList = (cache['services'] && cache['services'].length ? cache['services'] : [
+    {icon:'branding',title:'بناء العلامة',en:'Branding',desc:'نبني هوية بصرية متكاملة تجعل علامتك لا تُنسى.',items:['تصميم الشعار','الهوية البصرية','استراتيجية العلامة','تموضع العلامة','دليل الصوت والرسالة']},
+    {icon:'marketing',title:'التسويق',en:'Marketing',desc:'حملات مدروسة تجذب العملاء المناسبين.',items:['إدارة السوشال ميديا','إعلانات ميتا','إعلانات تيك توك','إعلانات جوجل','جذب العملاء المحتملين']},
+    {icon:'content',title:'صناعة المحتوى',en:'Content',desc:'محتوى إبداعي يوقف التمرير.',items:['ريلز','مونتاج فيديو','كتابة إعلانية','إدارة التصوير','تصميم جرافيك']},
+    {icon:'web',title:'تطوير المواقع',en:'Web',desc:'مواقع وصفحات هبوط سريعة وأنيقة.',items:['برمجة مخصصة','React / Next.js','ووردبريس','شوبيفاي','صفحات هبوط','تحسين معدّلات التحويل']}
+  ]).map(s=>({icon:s.icon||'star',title:s.title||'',en:s.en||'',desc:s.desc||'',items:Array.isArray(s.items)?s.items:String(s.items||'').split('\n').filter(Boolean)}));
+  renderSvcEditor();
 
   // PERSONAL BRANDING
   const pb = cache['pb']||{};
@@ -942,35 +867,32 @@ function populateForms(){
   sV('phil-mani3', ph.mani3||'لسنا ندير إعلانات — نبني أنظمة نمو.');
 
   // PROCESS
-  const pr = cache['process']||{};
-  const steps = pr.steps||[
+  processList = ((cache['process']&&cache['process'].steps&&cache['process'].steps.length) ? cache['process'].steps : [
     {title:'الاستشارة',desc:'جلسة مجانية نفهم فيها علامتك وطموحاتك وسوقك بعمق.'},
     {title:'الاستراتيجية',desc:'نبني خارطة طريق رقمية مخصصة لك تماماً بناءً على البيانات.'},
     {title:'التنفيذ',desc:'ننفذ بدقة متناهية مع تغذية راجعة مستمرة منك في كل مرحلة.'},
     {title:'الأثر',desc:'نقيس النتائج ونطوّر باستمرار لضمان النمو الحقيقي والمستدام.'}
-  ];
-  [1,2,3,4].forEach(i=>{ const s=steps[i-1]||{}; sV(`step${i}-title`,s.title||''); sV(`step${i}-desc`,s.desc||''); });
+  ]).map(s=>({title:s.title||'',desc:s.desc||''}));
+  renderProcessEditor();
 
   // TESTIMONIALS
-  const te = cache['testimonials']||{};
-  const tests = te.items||[
+  testList = ((cache['testimonials']&&cache['testimonials'].items&&cache['testimonials'].items.length) ? cache['testimonials'].items : [
     {initial:'م',text:'تعاملت مع عدة وكالات قبل Aura، لكن الفرق كان واضحاً من الجلسة الأولى. هم لا يبيعون خدمات — يبنون رؤية.',name:'محمد الراشد',role:'مؤسس · Novar'},
     {initial:'س',text:'بعد ثلاثة أشهر، أصبح اسمي يُذكر في كل نقاش عن مجالي. النتائج تتحدث عن نفسها.',name:'سارة الأمين',role:'مستشارة أعمال · Aurel'},
     {initial:'خ',text:'الفريق يفكر معك كشريك حقيقي لا كمورّد. هذا هو الفرق الذي يصعب إيجاده في السوق.',name:'خالد الجابر',role:'CEO · Veyra Group'}
-  ];
-  [1,2,3].forEach(i=>{ const t=tests[i-1]||{}; sV(`test${i}-initial`,t.initial||''); sV(`test${i}-text`,t.text||''); sV(`test${i}-name`,t.name||''); sV(`test${i}-role`,t.role||''); });
+  ]).map(t=>({initial:t.initial||'',text:t.text||'',name:t.name||'',role:t.role||''}));
+  renderTestEditor();
 
   // PORTFOLIO
   renderPortfolioAdmin(cache['portfolio']);
 
   // BLOG
-  const bl = cache['blog']||{};
-  const arts = bl.articles||[
+  blogList = ((cache['blog']&&cache['blog'].articles&&cache['blog'].articles.length) ? cache['blog'].articles : [
     {cat:'استراتيجية رقمية',title:'لماذا معظم العلامات التجارية تُخفق رقمياً رغم الميزانيات الضخمة؟',excerpt:'المشكلة ليست في الإنفاق — المشكلة في غياب الهندسة.',readtime:'٥ دقائق قراءة'},
     {cat:'Personal Branding',title:'العلامة الشخصية: كيف تجعل اسمك يُذكر قبل شركتك؟',excerpt:'في عصر الثقة الرقمية، الناس يتابعون أشخاصاً لا شعارات.',readtime:'٧ دقائق قراءة'},
     {cat:'براندينغ فاخر',title:'الفخامة الرقمية: ما الذي يجعل علامة ما تبدو بمليون وأخرى بألف؟',excerpt:'الفرق ليس في السعر — إنه في القرارات التصميمية الصغيرة.',readtime:'٦ دقائق قراءة'}
-  ];
-  [1,2,3].forEach(i=>{ const a=arts[i-1]||{}; sV(`blog${i}-cat`,a.cat||''); sV(`blog${i}-title`,a.title||''); sV(`blog${i}-excerpt`,a.excerpt||''); sV(`blog${i}-readtime`,a.readtime||''); });
+  ]).map(a=>({cat:a.cat||'',title:a.title||'',excerpt:a.excerpt||'',readtime:a.readtime||''}));
+  renderBlogEditor();
 
   // SETTINGS
   const se = cache['settings']||{};
@@ -1028,14 +950,11 @@ function saveSticky(){
 }
 
 function saveServices(){
-  const svcs=[];
-  [1,2,3,4].forEach(i=>{
-    svcs.push({
-      title:gV(`svc${i}-title`), en:gV(`svc${i}-en`), desc:gV(`svc${i}-desc`),
-      items:gV(`svc${i}-items`).split('\n').filter(Boolean)
-    });
-  });
-  saveSection('services', svcs);
+  const clean = svcList.filter(s=>s.title||s.desc).map(s=>({
+    icon:s.icon||'star', title:s.title||'', en:s.en||'', desc:s.desc||'',
+    items:(Array.isArray(s.items)?s.items:String(s.items||'').split('\n')).filter(Boolean)
+  }));
+  saveSection('services', clean);
 }
 
 function savePB(){
@@ -1056,21 +975,79 @@ function savePhilosophy(){
 }
 
 function saveProcess(){
-  const steps=[];
-  [1,2,3,4].forEach(i=>{ steps.push({title:gV(`step${i}-title`),desc:gV(`step${i}-desc`)}); });
+  const steps = processList.filter(s=>s.title||s.desc).map(s=>({title:s.title||'',desc:s.desc||''}));
   saveSection('process',{steps});
 }
 
 function saveTestimonials(){
-  const items=[];
-  [1,2,3].forEach(i=>{ items.push({initial:gV(`test${i}-initial`),text:gV(`test${i}-text`),name:gV(`test${i}-name`),role:gV(`test${i}-role`)}); });
+  const items = testList.filter(t=>t.text||t.name).map(t=>({initial:t.initial||'',text:t.text||'',name:t.name||'',role:t.role||''}));
   saveSection('testimonials',{items});
 }
 
 function saveBlog(){
-  const articles=[];
-  [1,2,3].forEach(i=>{ articles.push({cat:gV(`blog${i}-cat`),title:gV(`blog${i}-title`),excerpt:gV(`blog${i}-excerpt`),readtime:gV(`blog${i}-readtime`)}); });
+  const articles = blogList.filter(a=>a.title).map(a=>({cat:a.cat||'',title:a.title||'',excerpt:a.excerpt||'',readtime:a.readtime||''}));
   saveSection('blog',{articles});
+}
+
+// ══ DYNAMIC LIST EDITORS (add / edit / delete) ══
+let svcList=[], processList=[], testList=[], blogList=[];
+const ICON_KEYS = [['branding','علامة'],['marketing','تسويق'],['content','محتوى'],['web','ويب'],['person','شخصي'],['star','نجمة'],['rocket','صاروخ'],['chart','رسم بياني'],['camera','كاميرا'],['pen','قلم']];
+function iconOptions(sel){ return ICON_KEYS.map(([k,l])=>`<option value="${k}" ${k===sel?'selected':''}>${l}</option>`).join(''); }
+function escA(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escT(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function renderSvcEditor(){
+  const c=document.getElementById('svc-editor'); if(!c) return;
+  c.innerHTML = svcList.map((s,i)=>`
+    <div class="editor-card">
+      <h4><div class="card-num">${i+1}</div> خدمة <button class="btn-del" style="margin-right:auto" onclick="delItem('svc',${i})">حذف ✕</button></h4>
+      <div class="form-group"><label>العنوان</label><input value="${escA(s.title)}" oninput="svcList[${i}].title=this.value"></div>
+      <div class="form-group"><label>الاسم بالإنجليزي</label><input value="${escA(s.en)}" oninput="svcList[${i}].en=this.value" dir="ltr"></div>
+      <div class="form-group"><label>الأيقونة</label><select onchange="svcList[${i}].icon=this.value">${iconOptions(s.icon)}</select></div>
+      <div class="form-group"><label>الوصف</label><textarea rows="2" oninput="svcList[${i}].desc=this.value">${escT(s.desc)}</textarea></div>
+      <div class="form-group"><label>العناصر (كل عنصر بسطر)</label><textarea rows="4" oninput="svcList[${i}].items=this.value.split('\\n')">${escT((s.items||[]).join('\n'))}</textarea></div>
+    </div>`).join('') || '<p style="color:var(--mut);font-size:13.5px;grid-column:1/-1">لا توجد خدمات — أضف واحدة بالأعلى</p>';
+}
+function renderProcessEditor(){
+  const c=document.getElementById('process-editor'); if(!c) return;
+  c.innerHTML = processList.map((s,i)=>`
+    <div class="editor-card">
+      <h4><div class="card-num">${i+1}</div> خطوة <button class="btn-del" style="margin-right:auto" onclick="delItem('process',${i})">حذف ✕</button></h4>
+      <div class="form-group"><label>العنوان</label><input value="${escA(s.title)}" oninput="processList[${i}].title=this.value"></div>
+      <div class="form-group"><label>الوصف</label><textarea rows="2" oninput="processList[${i}].desc=this.value">${escT(s.desc)}</textarea></div>
+    </div>`).join('') || '<p style="color:var(--mut);font-size:13.5px;grid-column:1/-1">لا توجد خطوات</p>';
+}
+function renderTestEditor(){
+  const c=document.getElementById('test-editor'); if(!c) return;
+  c.innerHTML = testList.map((t,i)=>`
+    <div class="editor-card">
+      <h4><div class="card-num">${i+1}</div> رأي عميل <button class="btn-del" style="margin-right:auto" onclick="delItem('test',${i})">حذف ✕</button></h4>
+      <div class="form-group"><label>الحرف الأول (الأفاتار)</label><input maxlength="1" style="width:64px" value="${escA(t.initial)}" oninput="testList[${i}].initial=this.value"></div>
+      <div class="form-group"><label>نص الشهادة</label><textarea rows="3" oninput="testList[${i}].text=this.value">${escT(t.text)}</textarea></div>
+      <div class="form-group"><label>الاسم</label><input value="${escA(t.name)}" oninput="testList[${i}].name=this.value"></div>
+      <div class="form-group"><label>المنصب والشركة</label><input value="${escA(t.role)}" oninput="testList[${i}].role=this.value"></div>
+    </div>`).join('') || '<p style="color:var(--mut);font-size:13.5px;grid-column:1/-1">لا توجد آراء</p>';
+}
+function renderBlogEditor(){
+  const c=document.getElementById('blog-editor'); if(!c) return;
+  c.innerHTML = blogList.map((a,i)=>`
+    <div class="editor-card">
+      <h4><div class="card-num">${i+1}</div> مقال <button class="btn-del" style="margin-right:auto" onclick="delItem('blog',${i})">حذف ✕</button></h4>
+      <div class="form-group"><label>التصنيف</label><input value="${escA(a.cat)}" oninput="blogList[${i}].cat=this.value"></div>
+      <div class="form-group"><label>العنوان</label><textarea rows="2" oninput="blogList[${i}].title=this.value">${escT(a.title)}</textarea></div>
+      <div class="form-group"><label>المقتطف</label><textarea rows="2" oninput="blogList[${i}].excerpt=this.value">${escT(a.excerpt)}</textarea></div>
+      <div class="form-group"><label>وقت القراءة</label><input value="${escA(a.readtime)}" oninput="blogList[${i}].readtime=this.value"></div>
+    </div>`).join('') || '<p style="color:var(--mut);font-size:13.5px;grid-column:1/-1">لا توجد مقالات</p>';
+}
+function addServiceItem(){ svcList.push({icon:'star',title:'',en:'',desc:'',items:[]}); renderSvcEditor(); }
+function addProcessItem(){ processList.push({title:'',desc:''}); renderProcessEditor(); }
+function addTestItem(){ testList.push({initial:'',text:'',name:'',role:''}); renderTestEditor(); }
+function addBlogItem(){ blogList.push({cat:'',title:'',excerpt:'',readtime:''}); renderBlogEditor(); }
+function delItem(kind,i){
+  if(kind==='svc'){ svcList.splice(i,1); renderSvcEditor(); }
+  if(kind==='process'){ processList.splice(i,1); renderProcessEditor(); }
+  if(kind==='test'){ testList.splice(i,1); renderTestEditor(); }
+  if(kind==='blog'){ blogList.splice(i,1); renderBlogEditor(); }
 }
 
 async function saveSettings(){
@@ -1173,14 +1150,13 @@ async function loadBookings(){
   const tbody = document.getElementById('bookings-body');
   try{
     const data = await sbGet('aura_bookings','?order=created_at.desc&limit=50');
-    if(!data.length){ tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--mut);padding:32px">لا توجد حجوزات بعد</td></tr>'; return; }
+    if(!data.length){ tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--mut);padding:32px">لا توجد حجوزات بعد</td></tr>'; return; }
     tbody.innerHTML = data.map(b=>`
       <tr>
         <td><strong>${esc(b.name||'')}</strong></td>
         <td style="direction:ltr;font-size:12.5px">${esc(b.email||'')}</td>
         <td>${esc(b.service||'—')}</td>
         <td>${esc(b.date||'—')}</td>
-        <td>${esc(b.time||'—')}</td>
         <td><span class="status-badge status-${b.status||'pending'}">${statusLabel(b.status)}</span></td>
         <td>
           <button class="btn-sm btn-confirm" onclick="updateBooking('${b.id}','confirmed')">تأكيد</button>
@@ -1189,7 +1165,7 @@ async function loadBookings(){
       </tr>
     `).join('');
   } catch(e){
-    tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:#c0392b;padding:24px">خطأ في تحميل الحجوزات — تأكد من إعداد قاعدة البيانات</td></tr>';
+    tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:#c0392b;padding:24px">خطأ في تحميل الحجوزات — تأكد من إعداد قاعدة البيانات</td></tr>';
   }
 }
 
@@ -1247,7 +1223,16 @@ function closePreview(){ document.getElementById('preview-modal').classList.remo
 
 function refreshPreview(){
   const fr=document.getElementById('preview-frame');
-  fr.src=fr.src; // reload
+  if(fr) fr.src=fr.src; // reload modal
+  const sf=document.getElementById('side-frame');
+  if(sf && document.body.classList.contains('preview-on')) sf.src=sf.src; // reload side
+}
+
+function toggleSidePreview(){
+  const on = document.body.classList.toggle('preview-on');
+  const sf=document.getElementById('side-frame');
+  if(on && sf && !sf.src){ sf.src='../brand/website-mockup.html'; }
+  else if(on && sf){ sf.src=sf.src; }
 }
 
 // ══ TEST CONNECTION ══
