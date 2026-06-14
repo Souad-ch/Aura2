@@ -172,6 +172,32 @@
     .why-item h4{ font-size:18px; font-weight:700; margin-bottom:8px; }
     .why-item p{ font-size:14.5px; color:var(--muted); line-height:1.9; }
 
+    /* ── PORTFOLIO ── */
+    .port-section{ background:var(--sand); }
+    .port-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
+    .port-card{ background:var(--linen); border:1px solid #E4D8C5; border-radius:20px; overflow:hidden; transition:all .25s; }
+    .port-card:hover{ border-color:var(--bronze-a4); transform:translateY(-4px); box-shadow:0 16px 40px rgba(45,38,32,.1); }
+    .port-img{ width:100%; height:200px; object-fit:cover; display:block; background:var(--sand); }
+    .port-img-ph{ width:100%; height:200px; background:linear-gradient(145deg,var(--espresso),var(--coffee)); display:flex; align-items:center; justify-content:center; }
+    .port-img-ph svg{ opacity:.15; }
+    .port-body{ padding:22px; }
+    .port-cat{ display:inline-block; font-family:'Cairo',sans-serif; font-size:10px; font-weight:700; color:var(--bronze-d); background:var(--bronze-a1); border:1px solid var(--bronze-a4); padding:4px 12px; border-radius:100px; margin-bottom:10px; }
+    .port-title{ font-family:'Cairo',sans-serif; font-size:17px; font-weight:800; color:var(--espresso); margin-bottom:8px; line-height:1.4; }
+    .port-desc{ font-size:13.5px; color:var(--muted); line-height:1.8; }
+    .port-link{ display:inline-flex; align-items:center; gap:5px; font-family:'Cairo',sans-serif; font-size:12.5px; font-weight:700; color:var(--bronze); margin-top:12px; }
+    /* CAROUSEL mode */
+    .port-carousel-wrap{ position:relative; overflow:hidden; }
+    .port-carousel{ display:flex; gap:22px; transition:transform .4s ease; }
+    .port-carousel .port-card{ flex:0 0 calc(33.33% - 15px); }
+    .port-nav{ position:absolute; top:50%; transform:translateY(-50%); width:46px; height:46px; border-radius:50%; background:var(--espresso); color:var(--cream); border:none; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; z-index:2; transition:.2s; }
+    .port-nav:hover{ background:var(--bronze); }
+    .port-prev{ right:-10px; }
+    .port-next{ left:-10px; }
+    @media(max-width:700px){
+      .port-carousel .port-card{ flex:0 0 85vw; }
+      .port-grid{ grid-template-columns:1fr; }
+    }
+
     /* ── BLOG ── */
     .blog-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
     .blog-card{ background:var(--linen); border:1px solid #E4D8C5; border-radius:18px; padding:30px; display:flex; flex-direction:column; transition:all .22s; }
@@ -291,9 +317,9 @@
 <body>
 
 <!-- STICKY BAR -->
-<div class="sticky-bar">
-  مقاعدنا <em>محدودة</em> — احجز استشارتك المجانية الآن
-  <a href="#contact">تواصل معنا ←</a>
+<div class="sticky-bar" id="sticky-bar">
+  <span id="cms-sticky-text">مقاعدنا <em>محدودة</em> — احجز استشارتك المجانية الآن</span>
+  <a href="#contact" id="cms-sticky-link">تواصل معنا ←</a>
 </div>
 
 <!-- NAV -->
@@ -305,6 +331,7 @@
     <nav class="nav-links">
       <a href="#services">الخدمات</a>
       <a href="#process">كيف نعمل</a>
+      <a href="#portfolio">أعمالنا</a>
       <a href="#testimonials">العملاء</a>
       <a href="#blog">المدونة</a>
       <a href="#contact" class="btn btn-bronze">استشارة مجانية</a>
@@ -316,10 +343,10 @@
 <section class="hero">
   <div class="container">
     <img class="hero-logo" src="logo-animated.svg" alt="أورا ميديا جروب">
-    <div class="hero-badge">نهندس الهيبة الرقمية</div>
-    <h1>حضورك الرقمي<br>إما أن <em>يُهاب</em>,<br>أو لا يُرى.</h1>
+    <div class="hero-badge" id="cms-hero-badge">نهندس الهيبة الرقمية</div>
+    <h1 id="cms-hero-headline">حضورك الرقمي<br>إما أن <em>يُهاب</em>,<br>أو لا يُرى.</h1>
     <div class="hero-rule"></div>
-    <p>نهندس الهيبة الرقمية للعلامات التي ترفض الاندماج في الضجيج.<br>لسنا وكالة تسويق — نحن مهندسو الوجود.</p>
+    <p id="cms-hero-subtitle">نهندس الهيبة الرقمية للعلامات التي ترفض الاندماج في الضجيج.<br>لسنا وكالة تسويق — نحن مهندسو الوجود.</p>
     <div class="hero-cta">
       <a href="#contact" class="btn btn-bronze">
         <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -328,9 +355,9 @@
       <a href="#services" class="btn btn-ghost">استكشف الخدمات</a>
     </div>
     <div class="hero-stats">
-      <div><div class="hstat-n"><span>+</span>120</div><div class="hstat-l">علامة تجارية</div></div>
-      <div><div class="hstat-n">3.4<span>x</span></div><div class="hstat-l">متوسط النمو</div></div>
-      <div><div class="hstat-n">98<span>%</span></div><div class="hstat-l">بقاء العملاء</div></div>
+      <div><div class="hstat-n" id="cms-stat1n">+120</div><div class="hstat-l" id="cms-stat1l">علامة تجارية</div></div>
+      <div><div class="hstat-n" id="cms-stat2n">3.4x</div><div class="hstat-l" id="cms-stat2l">متوسط النمو</div></div>
+      <div><div class="hstat-n" id="cms-stat3n">98%</div><div class="hstat-l" id="cms-stat3l">بقاء العملاء</div></div>
     </div>
   </div>
 </section>
@@ -433,10 +460,10 @@
           <div class="seats-bar-wrap">
             <div class="seats-bar-top">
               <span class="seats-label">المقاعد المتاحة لهذا العام</span>
-              <span class="seats-count"><strong>٣</strong> / ٣</span>
+              <span class="seats-count"><strong id="cms-pb-available">٣</strong> / <span id="cms-pb-total">٣</span></span>
             </div>
-            <div class="seats-track"><div class="seats-fill" style="width:0%"></div></div>
-            <div class="seats-note">المقاعد تُفتح مرة واحدة سنوياً — سجّل اهتمامك لتكون الأول</div>
+            <div class="seats-track"><div class="seats-fill" id="cms-pb-fill" style="width:0%"></div></div>
+            <div class="seats-note" id="cms-pb-note">المقاعد تُفتح مرة واحدة سنوياً — سجّل اهتمامك لتكون الأول</div>
           </div>
           <p class="svc-desc">الناس لا يتابعون شركات — يتابعون أشخاصاً. برنامج حصري لرواد الأعمال لبناء حضور شخصي قوي. حين يُذكر مجالك، يُذكر اسمك.</p>
           <div class="svc-items">
@@ -460,17 +487,17 @@
     <div class="phil-grid">
       <div class="phil-left">
         <div class="eyebrow">فلسفتنا</div>
-        <h2 class="sec-title on-dark" style="margin-bottom:24px;">لم نُؤسَّس<br>لنبيع <em>خدمات.</em></h2>
+        <h2 class="sec-title on-dark" id="cms-phil-headline" style="margin-bottom:24px;">لم نُؤسَّس<br>لنبيع <em>خدمات.</em></h2>
         <div class="g-div"></div>
-        <p>في عالم مليء بوكالات تتسابق على الأسعار، اخترنا مساراً مختلفاً تماماً — التسابق على الأثر.</p>
-        <p>نحن نؤمن أن الهيبة الرقمية ليست صدفة، إنها قرار يُنفَّذ بدقة، ويُبنى بإتقان.</p>
-        <div class="phil-quote">"نختار عملاءنا بعناية —<br>ونبني معهم امبراطوريات رقمية تدوم."</div>
+        <p id="cms-phil-p1">في عالم مليء بوكالات تتسابق على الأسعار، اخترنا مساراً مختلفاً تماماً — التسابق على الأثر.</p>
+        <p id="cms-phil-p2">نحن نؤمن أن الهيبة الرقمية ليست صدفة، إنها قرار يُنفَّذ بدقة، ويُبنى بإتقان.</p>
+        <div class="phil-quote" id="cms-phil-quote">"نختار عملاءنا بعناية —<br>ونبني معهم امبراطوريات رقمية تدوم."</div>
       </div>
       <div>
         <div class="manifesto">
-          <div class="mani-line">لسنا نصمم مواقع — نبني <em>معمار رقمي.</em></div>
-          <div class="mani-line">لسنا ننشر محتوى — نهندس <em>تأثيراً.</em></div>
-          <div class="mani-line">لسنا ندير إعلانات — نبني <em>أنظمة نمو.</em></div>
+          <div class="mani-line" id="cms-mani1">لسنا نصمم مواقع — نبني <em>معمار رقمي.</em></div>
+          <div class="mani-line" id="cms-mani2">لسنا ننشر محتوى — نهندس <em>تأثيراً.</em></div>
+          <div class="mani-line" id="cms-mani3">لسنا ندير إعلانات — نبني <em>أنظمة نمو.</em></div>
           <div class="mani-line" style="color:rgba(247,241,232,.18);">"إذا كنت تؤمن أن علامتك تستحق<br>أكثر مما يراه الآخرون —<br><em>نحن نتفق معك تماماً."</em></div>
         </div>
       </div>
@@ -489,23 +516,23 @@
     <div class="process-steps">
       <div class="step">
         <div class="step-num">١</div>
-        <div class="step-title">الاستشارة</div>
-        <p class="step-desc">جلسة مجانية نفهم فيها علامتك وطموحاتك وسوقك بعمق.</p>
+        <div class="step-title" id="cms-step1-title">الاستشارة</div>
+        <p class="step-desc" id="cms-step1-desc">جلسة مجانية نفهم فيها علامتك وطموحاتك وسوقك بعمق.</p>
       </div>
       <div class="step">
         <div class="step-num">٢</div>
-        <div class="step-title">الاستراتيجية</div>
-        <p class="step-desc">نبني خارطة طريق رقمية مخصصة لك تماماً بناءً على البيانات.</p>
+        <div class="step-title" id="cms-step2-title">الاستراتيجية</div>
+        <p class="step-desc" id="cms-step2-desc">نبني خارطة طريق رقمية مخصصة لك تماماً بناءً على البيانات.</p>
       </div>
       <div class="step">
         <div class="step-num">٣</div>
-        <div class="step-title">التنفيذ</div>
-        <p class="step-desc">ننفذ بدقة متناهية مع تغذية راجعة مستمرة منك في كل مرحلة.</p>
+        <div class="step-title" id="cms-step3-title">التنفيذ</div>
+        <p class="step-desc" id="cms-step3-desc">ننفذ بدقة متناهية مع تغذية راجعة مستمرة منك في كل مرحلة.</p>
       </div>
       <div class="step">
         <div class="step-num">٤</div>
-        <div class="step-title">الأثر</div>
-        <p class="step-desc">نقيس النتائج ونطوّر باستمرار لضمان النمو الحقيقي والمستدام.</p>
+        <div class="step-title" id="cms-step4-title">الأثر</div>
+        <p class="step-desc" id="cms-step4-desc">نقيس النتائج ونطوّر باستمرار لضمان النمو الحقيقي والمستدام.</p>
       </div>
     </div>
   </div>
@@ -522,26 +549,26 @@
     <div class="test-grid">
       <div class="test-card">
         <div class="test-quote">"</div>
-        <p class="test-text">تعاملت مع عدة وكالات قبل Aura، لكن الفرق كان واضحاً من الجلسة الأولى. هم لا يبيعون خدمات — يبنون رؤية.</p>
+        <p class="test-text" id="cms-test1-text">تعاملت مع عدة وكالات قبل Aura، لكن الفرق كان واضحاً من الجلسة الأولى. هم لا يبيعون خدمات — يبنون رؤية.</p>
         <div class="test-author">
-          <div class="test-avatar">م</div>
-          <div><div class="test-name">محمد الراشد</div><div class="test-role">مؤسس · Novar</div></div>
+          <div class="test-avatar" id="cms-test1-initial">م</div>
+          <div><div class="test-name" id="cms-test1-name">محمد الراشد</div><div class="test-role" id="cms-test1-role">مؤسس · Novar</div></div>
         </div>
       </div>
       <div class="test-card">
         <div class="test-quote">"</div>
-        <p class="test-text">بعد ثلاثة أشهر، أصبح اسمي يُذكر في كل نقاش عن مجالي. النتائج تتحدث عن نفسها.</p>
+        <p class="test-text" id="cms-test2-text">بعد ثلاثة أشهر، أصبح اسمي يُذكر في كل نقاش عن مجالي. النتائج تتحدث عن نفسها.</p>
         <div class="test-author">
-          <div class="test-avatar">س</div>
-          <div><div class="test-name">سارة الأمين</div><div class="test-role">مستشارة أعمال · Aurel</div></div>
+          <div class="test-avatar" id="cms-test2-initial">س</div>
+          <div><div class="test-name" id="cms-test2-name">سارة الأمين</div><div class="test-role" id="cms-test2-role">مستشارة أعمال · Aurel</div></div>
         </div>
       </div>
       <div class="test-card">
         <div class="test-quote">"</div>
-        <p class="test-text">الفريق يفكر معك كشريك حقيقي لا كمورّد. هذا هو الفرق الذي يصعب إيجاده في السوق.</p>
+        <p class="test-text" id="cms-test3-text">الفريق يفكر معك كشريك حقيقي لا كمورّد. هذا هو الفرق الذي يصعب إيجاده في السوق.</p>
         <div class="test-author">
-          <div class="test-avatar">خ</div>
-          <div><div class="test-name">خالد الجابر</div><div class="test-role">CEO · Veyra Group</div></div>
+          <div class="test-avatar" id="cms-test3-initial">خ</div>
+          <div><div class="test-name" id="cms-test3-name">خالد الجابر</div><div class="test-role" id="cms-test3-role">CEO · Veyra Group</div></div>
         </div>
       </div>
     </div>
@@ -577,31 +604,48 @@
     </div>
     <div class="blog-grid">
       <div class="blog-card">
-        <span class="blog-cat">استراتيجية رقمية</span>
-        <h3 class="blog-title">لماذا معظم العلامات التجارية تُخفق رقمياً رغم الميزانيات الضخمة؟</h3>
-        <p class="blog-excerpt">المشكلة ليست في الإنفاق — المشكلة في غياب الهندسة. اكتشف الفرق بين التواجد الرقمي والحضور الرقمي الحقيقي.</p>
+        <span class="blog-cat" id="cms-blog1-cat">استراتيجية رقمية</span>
+        <h3 class="blog-title" id="cms-blog1-title">لماذا معظم العلامات التجارية تُخفق رقمياً رغم الميزانيات الضخمة؟</h3>
+        <p class="blog-excerpt" id="cms-blog1-excerpt">المشكلة ليست في الإنفاق — المشكلة في غياب الهندسة. اكتشف الفرق بين التواجد الرقمي والحضور الرقمي الحقيقي.</p>
         <div class="blog-footer">
-          <span class="blog-meta">٥ دقائق قراءة</span>
+          <span class="blog-meta" id="cms-blog1-readtime">٥ دقائق قراءة</span>
           <span class="blog-read">اقرأ المقال ←</span>
         </div>
       </div>
       <div class="blog-card">
-        <span class="blog-cat">Personal Branding</span>
-        <h3 class="blog-title">العلامة الشخصية: كيف تجعل اسمك يُذكر قبل شركتك؟</h3>
-        <p class="blog-excerpt">في عصر الثقة الرقمية، الناس يتابعون أشخاصاً لا شعارات. دليلك الكامل لبناء علامة شخصية لا تُنسى.</p>
+        <span class="blog-cat" id="cms-blog2-cat">Personal Branding</span>
+        <h3 class="blog-title" id="cms-blog2-title">العلامة الشخصية: كيف تجعل اسمك يُذكر قبل شركتك؟</h3>
+        <p class="blog-excerpt" id="cms-blog2-excerpt">في عصر الثقة الرقمية، الناس يتابعون أشخاصاً لا شعارات. دليلك الكامل لبناء علامة شخصية لا تُنسى.</p>
         <div class="blog-footer">
-          <span class="blog-meta">٧ دقائق قراءة</span>
+          <span class="blog-meta" id="cms-blog2-readtime">٧ دقائق قراءة</span>
           <span class="blog-read">اقرأ المقال ←</span>
         </div>
       </div>
       <div class="blog-card">
-        <span class="blog-cat">براندينغ فاخر</span>
-        <h3 class="blog-title">الفخامة الرقمية: ما الذي يجعل علامة ما تبدو بمليون وأخرى بألف؟</h3>
-        <p class="blog-excerpt">الفرق ليس في السعر — إنه في القرارات التصميمية الصغيرة التي تُراكم هيبة لا تُشترى.</p>
+        <span class="blog-cat" id="cms-blog3-cat">براندينغ فاخر</span>
+        <h3 class="blog-title" id="cms-blog3-title">الفخامة الرقمية: ما الذي يجعل علامة ما تبدو بمليون وأخرى بألف؟</h3>
+        <p class="blog-excerpt" id="cms-blog3-excerpt">الفرق ليس في السعر — إنه في القرارات التصميمية الصغيرة التي تُراكم هيبة لا تُشترى.</p>
         <div class="blog-footer">
-          <span class="blog-meta">٦ دقائق قراءة</span>
+          <span class="blog-meta" id="cms-blog3-readtime">٦ دقائق قراءة</span>
           <span class="blog-read">اقرأ المقال ←</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO / أعمالنا -->
+<section id="portfolio" class="port-section">
+  <div class="container">
+    <div class="sec-head center">
+      <div class="eyebrow">أعمالنا</div>
+      <h2 class="sec-title">نماذج من <em>إبداعاتنا.</em></h2>
+      <div class="g-div center"></div>
+    </div>
+    <div id="portfolio-container">
+      <!-- Populated dynamically by CMS or shown as placeholder -->
+      <div style="text-align:center;padding:40px 0;color:var(--muted);font-size:14px;" id="portfolio-placeholder">
+        المشاريع قيد الإضافة من لوحة التحكم ✦
       </div>
     </div>
   </div>
@@ -730,7 +774,7 @@
       </div>
       <div class="foot-col">
         <h5>تواصل معنا</h5>
-        <a href="mailto:info@auramediagroup.com" dir="ltr">info@auramediagroup.com</a>
+        <a href="mailto:info@auramediagroup.com" dir="ltr" data-email-link>info@auramediagroup.com</a>
         <a href="#contact">احجز استشارة مجانية</a>
       </div>
     </div>
@@ -750,41 +794,236 @@
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.112 1.522 5.84L.057 23.5a.5.5 0 0 0 .614.614l5.701-1.453A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.943 9.943 0 0 1-5.032-1.364l-.362-.213-3.734.952.972-3.647-.234-.375A9.964 9.964 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
 </a>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+// ── CONFIG ──
+const SUPA_URL = 'https://fqggbuutyqibcddxeqaf.supabase.co';
+const SUPA_KEY = 'sb_publishable_ZIvYx8-nBGHY4TLcx4L8pA_SGwHJABr';
+const EMAILJS_PUB = 'vaADDae7AJ5KMftDh';
+const EMAILJS_TMPL = 'template_l63roi8';
+
 // Set min date to tomorrow
 const dateInput = document.getElementById('fdate');
 if(dateInput){ const d=new Date(); d.setDate(d.getDate()+1); dateInput.min=d.toISOString().split('T')[0]; }
 
-// Form submission
+// ── FORM SUBMISSION ──
 async function handleSubmit(e){
   e.preventDefault();
   const form = e.target;
   const btn = form.querySelector('.btn-book');
   btn.textContent = 'جاري الإرسال...';
   btn.disabled = true;
+
+  const payload = {
+    name: form.name.value, email: form.email.value,
+    date: form.date?.value||'', time: form.time?.value||'',
+    service: form.service?.value||'', message: form.message?.value||''
+  };
+
+  let sent = false;
+
+  // 1. Try EmailJS
   try{
-    const res = await fetch('https://api.web3forms.com/submit',{
-      method:'POST', body: new FormData(form)
-    });
-    const data = await res.json();
-    if(data.success){
-      form.style.display='none';
-      document.getElementById('formSuccess').style.display='block';
-    } else {
-      document.getElementById('formOk').style.display='block';
-      document.getElementById('formOk').textContent='✦ وصلنا طلبك — سنتواصل معك قريباً.';
-      btn.textContent='تأكيد الحجز — مجاناً'; btn.disabled=false;
+    const svc = await getSettingVal('emailjs_service');
+    if(svc){
+      emailjs.init(EMAILJS_PUB);
+      await emailjs.send(svc, EMAILJS_TMPL, {
+        from_name: payload.name, from_email: payload.email,
+        date: payload.date, time: payload.time,
+        service: payload.service, message: payload.message,
+        to_email: 'info@auramediagroup.com'
+      });
+      sent = true;
     }
-  } catch(err){
-    // fallback: mailto
-    const f = form;
-    const s = encodeURIComponent('طلب استشارة — '+f.name.value);
-    const b = encodeURIComponent('الاسم: '+f.name.value+'\nالإيميل: '+f.email.value+'\nالتاريخ: '+(f.date?f.date.value:'')+'\nالوقت: '+(f.time?f.time.value:'')+'\nالخدمة: '+(f.service?f.service.value:''));
-    window.location.href='mailto:info@auramediagroup.com?subject='+s+'&body='+b;
-    document.getElementById('formSuccess').style.display='block';
-    form.style.display='none';
+  } catch(_){}
+
+  // 2. Try web3forms if EmailJS didn't work
+  if(!sent){
+    try{
+      const res = await fetch('https://api.web3forms.com/submit',{ method:'POST', body: new FormData(form) });
+      const data = await res.json();
+      if(data.success) sent = true;
+    } catch(_){}
+  }
+
+  // 3. Save to Supabase bookings table
+  try{
+    await fetch(`${SUPA_URL}/rest/v1/aura_bookings`,{
+      method:'POST',
+      headers:{
+        'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,
+        'Content-Type':'application/json','Prefer':'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch(_){}
+
+  // 4. Show success
+  form.style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+
+  // Fallback: open mailto if nothing worked
+  if(!sent){
+    const s = encodeURIComponent('طلب استشارة — '+payload.name);
+    const b = encodeURIComponent(`الاسم: ${payload.name}\nالإيميل: ${payload.email}\nالتاريخ: ${payload.date}\nالوقت: ${payload.time}\nالخدمة: ${payload.service}`);
+    setTimeout(()=>{ window.open('mailto:info@auramediagroup.com?subject='+s+'&body='+b); }, 800);
   }
 }
+
+async function getSettingVal(key){
+  try{
+    const r = await fetch(`${SUPA_URL}/rest/v1/aura_content?section=eq.settings&select=data`,{
+      headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`}
+    });
+    const rows = await r.json();
+    return rows[0]?.data?.[key]||null;
+  } catch(_){ return null; }
+}
+
+// ── CMS CONTENT LOADER ──
+async function loadCMSContent(){
+  try{
+    const r = await fetch(`${SUPA_URL}/rest/v1/aura_content?select=section,data`,{
+      headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,'Accept':'application/json'}
+    });
+    if(!r.ok) return;
+    const rows = await r.json();
+    rows.forEach(row => applyCMS(row.section, row.data));
+  } catch(_){ /* silent */ }
+}
+
+function txt(id, val){ const el=document.getElementById(id); if(el&&val!=null) el.textContent=val; }
+function html(id, val){ const el=document.getElementById(id); if(el&&val!=null) el.innerHTML=val; }
+
+function applyCMS(section, d){
+  if(!d) return;
+  switch(section){
+    case 'sticky':
+      html('cms-sticky-text', d.text);
+      if(d.link) html('cms-sticky-link', d.link);
+      break;
+    case 'hero':
+      if(d.badge) txt('cms-hero-badge', d.badge);
+      if(d.headline) html('cms-hero-headline', d.headline.replace(/\n/g,'<br>'));
+      if(d.subtitle) html('cms-hero-subtitle', d.subtitle.replace(/\n/g,'<br>'));
+      if(d.stat1_n) txt('cms-stat1n', d.stat1_n);
+      if(d.stat1_l) txt('cms-stat1l', d.stat1_l);
+      if(d.stat2_n) txt('cms-stat2n', d.stat2_n);
+      if(d.stat2_l) txt('cms-stat2l', d.stat2_l);
+      if(d.stat3_n) txt('cms-stat3n', d.stat3_n);
+      if(d.stat3_l) txt('cms-stat3l', d.stat3_l);
+      break;
+    case 'pb':
+      const total=d.seats_total||3, taken=d.seats_taken||0, avail=total-taken;
+      txt('cms-pb-available', toArabicNum(avail));
+      txt('cms-pb-total', toArabicNum(total));
+      const fill=document.getElementById('cms-pb-fill');
+      if(fill) fill.style.width = `${Math.round((taken/total)*100)}%`;
+      break;
+    case 'philosophy':
+      if(d.headline) html('cms-phil-headline', d.headline.replace(/\n/g,'<br>'));
+      if(d.p1) txt('cms-phil-p1', d.p1);
+      if(d.p2) txt('cms-phil-p2', d.p2);
+      if(d.quote) html('cms-phil-quote', d.quote.replace(/\n/g,'<br>'));
+      if(d.mani1) txt('cms-mani1', d.mani1);
+      if(d.mani2) txt('cms-mani2', d.mani2);
+      if(d.mani3) txt('cms-mani3', d.mani3);
+      break;
+    case 'process':
+      (d.steps||[]).forEach((s,i)=>{
+        txt(`cms-step${i+1}-title`, s.title);
+        txt(`cms-step${i+1}-desc`, s.desc);
+      });
+      break;
+    case 'testimonials':
+      (d.items||[]).forEach((t,i)=>{
+        txt(`cms-test${i+1}-text`, t.text);
+        txt(`cms-test${i+1}-initial`, t.initial);
+        txt(`cms-test${i+1}-name`, t.name);
+        txt(`cms-test${i+1}-role`, t.role);
+      });
+      break;
+    case 'blog':
+      (d.articles||[]).forEach((a,i)=>{
+        txt(`cms-blog${i+1}-cat`, a.cat);
+        html(`cms-blog${i+1}-title`, a.title);
+        txt(`cms-blog${i+1}-excerpt`, a.excerpt);
+        txt(`cms-blog${i+1}-readtime`, a.readtime);
+      });
+      break;
+    case 'portfolio':
+      renderPortfolio(d);
+      break;
+    case 'settings':
+      if(d.wa_link){ const wa=document.querySelector('.wa-float'); if(wa) wa.href=d.wa_link; }
+      if(d.email){ document.querySelectorAll('[data-email-link]').forEach(el=>{ el.href='mailto:'+d.email; el.textContent=d.email; }); }
+      if(d.web3forms_key){ const inp=document.querySelector('[name="access_key"]'); if(inp) inp.value=d.web3forms_key; }
+      break;
+  }
+}
+
+// ── PORTFOLIO RENDERER ──
+let portCarouselIdx = 0;
+
+function renderPortfolio(data){
+  const container = document.getElementById('portfolio-container');
+  const placeholder = document.getElementById('portfolio-placeholder');
+  const items = data.items||[];
+  if(!items.length){ if(placeholder) placeholder.style.display='block'; return; }
+  if(placeholder) placeholder.style.display='none';
+  const mode = data.display||'grid';
+
+  if(mode==='carousel'){
+    container.innerHTML = `
+      <div class="port-carousel-wrap" id="port-carousel-wrap">
+        <button class="port-nav port-prev" onclick="slidePort(-1)" aria-label="السابق">‹</button>
+        <div class="port-carousel" id="port-carousel">
+          ${items.map(buildPortCard).join('')}
+        </div>
+        <button class="port-nav port-next" onclick="slidePort(1)" aria-label="التالي">›</button>
+      </div>
+    `;
+    portCarouselIdx=0;
+  } else {
+    container.innerHTML = `<div class="port-grid">${items.map(buildPortCard).join('')}</div>`;
+  }
+}
+
+function buildPortCard(p){
+  return `
+    <div class="port-card">
+      ${p.img_url
+        ? `<img src="${esc(p.img_url)}" class="port-img" alt="${esc(p.title||'')}" loading="lazy">`
+        : `<div class="port-img-ph"><svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#fff" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="#fff"/><path d="M21 15l-5-5L5 21" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div>`
+      }
+      <div class="port-body">
+        ${p.category||p.cat ? `<span class="port-cat">${esc(p.category||p.cat||'')}</span>` : ''}
+        <div class="port-title">${esc(p.title||'')}</div>
+        ${p.desc ? `<div class="port-desc">${esc(p.desc)}</div>` : ''}
+        ${p.link ? `<a class="port-link" href="${esc(p.link)}" target="_blank" rel="noopener">عرض المشروع ↗</a>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function slidePort(dir){
+  const carousel = document.getElementById('port-carousel');
+  if(!carousel) return;
+  const cards = carousel.querySelectorAll('.port-card');
+  const max = Math.max(0, cards.length - (window.innerWidth > 900 ? 3 : 1));
+  portCarouselIdx = Math.min(max, Math.max(0, portCarouselIdx + dir));
+  const cardW = cards[0]?.offsetWidth + 22 || 0;
+  carousel.style.transform = `translateX(${portCarouselIdx * cardW * (document.documentElement.dir==='rtl'?1:-1)}px)`;
+}
+
+function toArabicNum(n){
+  return String(n).replace(/[0-9]/g, d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', loadCMSContent);
 </script>
 
 </body>

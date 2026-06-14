@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura CMS — لوحة التحكم</title>
+  <link rel="icon" href="../brand/favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --esp:#2D2620;--cof:#3E342B;--brz:#B0895A;--brzd:#8A6A42;
+      --cream:#F7F1E8;--sand:#ECE1D1;--lin:#FCF8F2;--mut:#94856F;
+      --brza4:rgba(176,137,90,.4);--brza1:rgba(176,137,90,.10);
+      --sb:220px;--top:64px;
+    }
+    html,body{height:100%;font-family:'Tajawal',sans-serif;color:var(--cof);background:#F0EBE2;}
+    a{text-decoration:none;color:inherit;cursor:pointer}
+    /* ── LOGIN ── */
+    #login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--esp);}
+    .login-box{background:var(--lin);border-radius:24px;padding:48px 44px;width:min(400px,90vw);text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.3);}
+    .login-logo{height:44px;margin:0 auto 24px;}
+    .login-box h2{font-family:'Cairo',sans-serif;font-size:22px;font-weight:800;color:var(--esp);margin-bottom:6px;}
+    .login-box p{font-size:13.5px;color:var(--mut);margin-bottom:28px;}
+    .login-box input{width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:12px;font-family:'Cairo',sans-serif;font-size:15px;color:var(--esp);background:#fff;outline:none;margin-bottom:12px;transition:.2s;direction:ltr;}
+    .login-box input:focus{border-color:var(--brz);}
+    .login-box button{width:100%;padding:14px;background:var(--esp);color:var(--cream);border:none;border-radius:12px;font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;}
+    .login-box button:hover{background:var(--cof);}
+    #login-err{color:#c0392b;font-size:13px;margin-top:10px;display:none;}
+    /* ── LAYOUT ── */
+    #dash{display:none;height:100vh;overflow:hidden;}
+    /* SIDEBAR */
+    #sidebar{position:fixed;top:0;right:0;width:var(--sb);height:100vh;background:var(--esp);display:flex;flex-direction:column;z-index:100;overflow-y:auto;}
+    .sb-brand{padding:22px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(247,241,232,.08);}
+    .sb-logo{height:32px;}
+    .sb-title{font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;color:var(--brz);letter-spacing:.1em;text-transform:uppercase;}
+    .sb-nav{flex:1;padding:12px 0;}
+    .nav-item{display:flex;align-items:center;gap:11px;padding:11px 18px;font-family:'Cairo',sans-serif;font-size:13.5px;font-weight:600;color:rgba(247,241,232,.55);cursor:pointer;transition:.18s;border-right:3px solid transparent;margin-bottom:1px;}
+    .nav-item:hover{color:var(--cream);background:rgba(247,241,232,.05);}
+    .nav-item.active{color:var(--brz);border-right-color:var(--brz);background:rgba(176,137,90,.08);}
+    .nav-item svg{width:17px;height:17px;flex-shrink:0;}
+    .sb-section{padding:6px 18px;font-size:10px;font-weight:700;color:rgba(247,241,232,.22);letter-spacing:.12em;text-transform:uppercase;margin-top:8px;}
+    .sb-bottom{padding:16px 12px;border-top:1px solid rgba(247,241,232,.08);}
+    .sb-btn{display:flex;align-items:center;gap:9px;padding:10px 14px;border-radius:10px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.18s;}
+    .sb-preview{background:rgba(176,137,90,.15);color:var(--brz);}
+    .sb-preview:hover{background:rgba(176,137,90,.25);}
+    .sb-logout{color:rgba(247,241,232,.4);margin-top:6px;}
+    .sb-logout:hover{color:rgba(247,241,232,.7);}
+    /* MAIN */
+    #main-content{margin-right:var(--sb);height:100vh;overflow-y:auto;display:flex;flex-direction:column;}
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(240,235,226,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--sand);padding:0 32px;height:var(--top);display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    #panel-title{font-family:'Cairo',sans-serif;font-size:18px;font-weight:800;color:var(--esp);}
+    .topbar-actions{display:flex;align-items:center;gap:10px;}
+    .btn-top{font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;padding:9px 18px;border-radius:10px;cursor:pointer;border:none;transition:.2s;}
+    .btn-save{background:var(--esp);color:var(--cream);}
+    .btn-save:hover{background:var(--cof);}
+    .btn-preview-top{background:var(--brza1);color:var(--brzd);border:1px solid var(--brza4);}
+    .btn-preview-top:hover{background:rgba(176,137,90,.2);}
+    /* PANELS */
+    .panel-wrap{flex:1;padding:32px;}
+    .panel{display:none;}
+    .panel.active{display:block;}
+    /* CARDS */
+    .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:28px;}
+    .stat-card{background:var(--lin);border:1px solid var(--sand);border-radius:16px;padding:22px 24px;}
+    .stat-card .n{font-family:'Cairo',sans-serif;font-size:32px;font-weight:800;color:var(--esp);}
+    .stat-card .l{font-size:13px;color:var(--mut);margin-top:4px;}
+    .stat-card .badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;margin-top:8px;}
+    .badge-ok{background:rgba(39,174,96,.12);color:#27ae60;}
+    .badge-warn{background:rgba(230,126,34,.12);color:#e67e22;}
+    /* FORM ELEMENTS */
+    .form-section{background:var(--lin);border:1px solid var(--sand);border-radius:18px;padding:28px;margin-bottom:20px;}
+    .form-section h3{font-family:'Cairo',sans-serif;font-size:16px;font-weight:700;color:var(--esp);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--sand);}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .form-row.three{grid-template-columns:1fr 1fr 1fr;}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+    .form-group label{font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;color:var(--esp);}
+    .form-group input,.form-group textarea,.form-group select{
+      padding:11px 14px;border:1.5px solid var(--sand);border-radius:10px;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--cof);background:#fff;outline:none;transition:.2s;resize:vertical;
+    }
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--brz);}
+    .form-group textarea{min-height:90px;}
+    .form-hint{font-size:11.5px;color:var(--mut);margin-top:4px;}
+    /* CARDS EDITOR (services, testimonials, blog) */
+    .cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .editor-card{background:var(--lin);border:1.5px solid var(--sand);border-radius:16px;padding:22px;transition:.2s;}
+    .editor-card:hover{border-color:var(--brza4);}
+    .editor-card h4{font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;color:var(--esp);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+    .card-num{width:26px;height:26px;border-radius:8px;background:var(--esp);color:var(--brz);font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+    /* PORTFOLIO PANEL */
+    .port-controls{display:flex;align-items:center;gap:12px;margin-bottom:20px;background:var(--lin);border:1px solid var(--sand);border-radius:14px;padding:16px 20px;}
+    .port-controls label{font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;color:var(--esp);}
+    .toggle-group{display:flex;gap:0;border:1.5px solid var(--sand);border-radius:10px;overflow:hidden;}
+    .toggle-btn{padding:9px 18px;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#fff;color:var(--mut);transition:.2s;}
+    .toggle-btn.active{background:var(--esp);color:var(--brz);}
+    .port-add{background:var(--lin);border:2px dashed var(--brza4);border-radius:16px;padding:24px;margin-bottom:20px;}
+    .port-add h4{font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;color:var(--esp);margin-bottom:14px;}
+    #port-list{display:flex;flex-direction:column;gap:12px;}
+    .port-item{background:var(--lin);border:1.5px solid var(--sand);border-radius:14px;padding:18px;display:grid;grid-template-columns:80px 1fr auto;gap:16px;align-items:start;}
+    .port-img-preview{width:80px;height:70px;border-radius:10px;object-fit:cover;background:var(--sand);}
+    .port-img-placeholder{width:80px;height:70px;border-radius:10px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mut);text-align:center;}
+    .port-info{display:flex;flex-direction:column;gap:6px;}
+    .port-info strong{font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;color:var(--esp);}
+    .port-info span{font-size:12.5px;color:var(--mut);}
+    .btn-del{background:rgba(192,57,43,.08);color:#c0392b;border:none;border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;transition:.2s;}
+    .btn-del:hover{background:rgba(192,57,43,.15);}
+    /* BOOKINGS TABLE */
+    .table-wrap{background:var(--lin);border:1px solid var(--sand);border-radius:18px;overflow:hidden;}
+    table{width:100%;border-collapse:collapse;}
+    th{background:var(--esp);color:var(--cream);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:12px 16px;text-align:right;}
+    td{padding:12px 16px;font-size:13.5px;border-bottom:1px solid var(--sand);color:var(--cof);}
+    tr:last-child td{border-bottom:none;}
+    tr:hover td{background:rgba(176,137,90,.04);}
+    .status-badge{display:inline-block;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;}
+    .status-pending{background:rgba(230,126,34,.12);color:#e67e22;}
+    .status-confirmed{background:rgba(39,174,96,.12);color:#27ae60;}
+    .status-cancelled{background:rgba(192,57,43,.12);color:#c0392b;}
+    .btn-sm{padding:5px 10px;border-radius:6px;border:none;cursor:pointer;font-size:11.5px;font-weight:700;font-family:'Cairo',sans-serif;}
+    .btn-confirm{background:rgba(39,174,96,.12);color:#27ae60;}
+    .btn-cancel{background:rgba(192,57,43,.08);color:#c0392b;}
+    /* SETUP PANEL */
+    .setup-step{background:var(--lin);border:1px solid var(--sand);border-radius:16px;padding:24px;margin-bottom:16px;position:relative;}
+    .setup-step::before{content:attr(data-step);position:absolute;top:-12px;right:24px;background:var(--esp);color:var(--brz);font-family:'Cairo',sans-serif;font-size:12px;font-weight:800;padding:4px 14px;border-radius:100px;}
+    .setup-step h3{font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;color:var(--esp);margin-bottom:10px;}
+    .setup-step p{font-size:13.5px;color:var(--mut);line-height:1.8;margin-bottom:12px;}
+    .sql-block{background:var(--esp);border-radius:10px;padding:18px;font-family:monospace;font-size:12.5px;color:rgba(247,241,232,.85);line-height:1.7;overflow-x:auto;position:relative;}
+    .copy-btn{position:absolute;top:10px;left:10px;background:var(--brza1);color:var(--brz);border:1px solid var(--brza4);border-radius:6px;padding:5px 12px;font-size:11px;cursor:pointer;font-family:'Cairo',sans-serif;}
+    .copy-btn:hover{background:rgba(176,137,90,.2);}
+    .setup-link{display:inline-flex;align-items:center;gap:6px;color:var(--brz);font-weight:600;font-size:13px;text-decoration:underline;text-underline-offset:3px;}
+    /* TOAST */
+    #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--esp);color:var(--cream);font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;padding:12px 28px;border-radius:100px;z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s;white-space:nowrap;}
+    #toast.show{opacity:1;}
+    #toast.ok{background:#27ae60;}
+    #toast.err{background:#c0392b;}
+    /* PREVIEW MODAL */
+    #preview-modal{position:fixed;inset:0;z-index:200;display:none;flex-direction:column;background:var(--esp);}
+    #preview-modal.open{display:flex;}
+    .preview-bar{height:52px;background:var(--esp);display:flex;align-items:center;gap:12px;padding:0 20px;border-bottom:1px solid rgba(247,241,232,.1);flex-shrink:0;}
+    .preview-bar span{font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;color:var(--cream);flex:1;}
+    .preview-bar button{font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;padding:7px 16px;border-radius:8px;cursor:pointer;border:none;}
+    .btn-refresh{background:var(--brza1);color:var(--brz);}
+    .btn-close-prev{background:rgba(192,57,43,.15);color:#e74c3c;}
+    #preview-frame{flex:1;border:none;width:100%;}
+    /* SEATS SLIDER */
+    .seats-visual{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px;}
+    .seat-dot{width:36px;height:36px;border-radius:10px;border:2px solid var(--brza4);display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s;cursor:pointer;background:#fff;}
+    .seat-dot.taken{background:var(--esp);border-color:var(--esp);}
+    /* SCROLLBAR */
+    ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--brza4);border-radius:100px;}
+    @media(max-width:900px){
+      :root{--sb:0px;}
+      #sidebar{transform:translateX(100%);transition:transform .3s;}
+      #sidebar.open{transform:translateX(0);}
+      #main-content{margin-right:0;}
+      .cards-grid{grid-template-columns:1fr;}
+      .form-row{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div id="login-screen">
+  <div class="login-box">
+    <img src="../brand/logo.svg" class="login-logo" alt="Aura">
+    <h2>لوحة تحكم Aura</h2>
+    <p>أدخل كلمة المرور للدخول</p>
+    <form onsubmit="doLogin(event)">
+      <input type="password" id="pwd" placeholder="كلمة المرور" autocomplete="current-password">
+      <button type="submit">دخول ←</button>
+    </form>
+    <p id="login-err">كلمة المرور غير صحيحة</p>
+    <p style="font-size:11px;color:var(--mut);margin-top:14px;">كلمة المرور الافتراضية: <strong>aura2024</strong></p>
+  </div>
+</div>
+
+<!-- ══ DASHBOARD ══ -->
+<div id="dash">
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sb-brand">
+      <img src="../brand/logo.svg" class="sb-logo" alt="Aura">
+      <div class="sb-title">CMS</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">عام</div>
+      <div class="nav-item active" data-panel="overview" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>نظرة عامة</span>
+      </div>
+
+      <div class="sb-section">أقسام الموقع</div>
+      <div class="nav-item" data-panel="hero" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-6 9 6v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>الهيرو</span>
+      </div>
+      <div class="nav-item" data-panel="sticky" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M5 8h14M5 16h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>الشريط العلوي</span>
+      </div>
+      <div class="nav-item" data-panel="services" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 10h16M4 14h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>الخدمات</span>
+      </div>
+      <div class="nav-item" data-panel="pb" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M6 20c0-2.761 2.686-5 6-5s6 2.239 6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>البراند الشخصي</span>
+      </div>
+      <div class="nav-item" data-panel="philosophy" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>الفلسفة</span>
+      </div>
+      <div class="nav-item" data-panel="process" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="5" cy="12" r="2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="12" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 12h3M14 12h3" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>كيف نعمل</span>
+      </div>
+      <div class="nav-item" data-panel="testimonials" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>آراء العملاء</span>
+      </div>
+      <div class="nav-item" data-panel="portfolio" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 7V5a1 1 0 011-1h6a1 1 0 011 1v2" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>أعمالنا</span>
+      </div>
+      <div class="nav-item" data-panel="blog" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 10h10M4 14h12M4 18h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>المدونة</span>
+      </div>
+
+      <div class="sb-section">إدارة</div>
+      <div class="nav-item" data-panel="bookings" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>الحجوزات</span>
+      </div>
+      <div class="nav-item" data-panel="settings" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>الإعدادات</span>
+      </div>
+      <div class="nav-item" data-panel="setup" onclick="showPanel(this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>إعداد قاعدة البيانات</span>
+      </div>
+    </nav>
+    <div class="sb-bottom">
+      <div class="sb-btn sb-preview" onclick="openPreview()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+        معاينة الموقع
+      </div>
+      <div class="sb-btn sb-logout" onclick="logout()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        تسجيل الخروج
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div id="main-content">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="sb-btn" onclick="toggleSidebar()" style="display:none;padding:8px;background:none;border:1px solid var(--sand);border-radius:8px;cursor:pointer;" id="burger-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="var(--esp)" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <h1 id="panel-title">نظرة عامة</h1>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn-top btn-preview-top" onclick="openPreview()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;margin-left:4px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>
+          معاينة
+        </button>
+        <button class="btn-top btn-save" id="save-btn" onclick="saveCurrentPanel()">حفظ التغييرات ✓</button>
+      </div>
+    </div>
+
+    <!-- PANEL CONTENT -->
+    <div class="panel-wrap">
+
+      <!-- ═══ OVERVIEW ═══ -->
+      <div id="panel-overview" class="panel active">
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="n" id="stat-bookings">—</div>
+            <div class="l">إجمالي الحجوزات</div>
+            <div class="badge badge-ok" id="stat-pending-badge"></div>
+          </div>
+          <div class="stat-card">
+            <div class="n" id="stat-seats">—</div>
+            <div class="l">مقاعد البراند الشخصي</div>
+            <div class="badge badge-warn" id="stat-seats-badge"></div>
+          </div>
+          <div class="stat-card">
+            <div class="n" id="stat-portfolio">—</div>
+            <div class="l">مشاريع في المعرض</div>
+            <div class="badge badge-ok">معروضة</div>
+          </div>
+          <div class="stat-card">
+            <div class="n" id="stat-updated">—</div>
+            <div class="l">آخر تحديث للمحتوى</div>
+            <div class="badge badge-ok">مزامن مع الموقع</div>
+          </div>
+        </div>
+        <div class="form-section" style="margin-top:8px;">
+          <h3>آخر الحجوزات</h3>
+          <div id="recent-bookings-wrap" style="overflow-x:auto;">
+            <table>
+              <thead><tr><th>الاسم</th><th>الخدمة</th><th>التاريخ</th><th>الحالة</th></tr></thead>
+              <tbody id="recent-bookings-body"><tr><td colspan="4" style="text-align:center;color:var(--mut)">جاري التحميل...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ HERO ═══ -->
+      <div id="panel-hero" class="panel">
+        <div class="form-section">
+          <h3>نص البادج</h3>
+          <div class="form-group">
+            <label>نص البادج (أعلى العنوان)</label>
+            <input type="text" id="hero-badge" placeholder="نهندس الهيبة الرقمية">
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>العنوان الرئيسي</h3>
+          <div class="form-group">
+            <label>نص H1 (أدخل كل سطر منفصل)</label>
+            <textarea id="hero-headline" rows="4" placeholder="حضورك الرقمي&#10;إما أن يُهاب,&#10;أو لا يُرى."></textarea>
+            <div class="form-hint">لإضافة تمييز ذهبي لكلمة، أحطها بـ &lt;em&gt;كلمة&lt;/em&gt;</div>
+          </div>
+          <div class="form-group">
+            <label>النص الفرعي (subtitle)</label>
+            <textarea id="hero-subtitle" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>إحصائيات الهيرو</h3>
+          <div class="form-row three">
+            <div class="form-group">
+              <label>رقم الإحصاء ١</label>
+              <input type="text" id="hero-stat1n" placeholder="+120">
+              <label style="margin-top:8px">تسمية الإحصاء ١</label>
+              <input type="text" id="hero-stat1l" placeholder="علامة تجارية">
+            </div>
+            <div class="form-group">
+              <label>رقم الإحصاء ٢</label>
+              <input type="text" id="hero-stat2n" placeholder="3.4x">
+              <label style="margin-top:8px">تسمية الإحصاء ٢</label>
+              <input type="text" id="hero-stat2l" placeholder="متوسط النمو">
+            </div>
+            <div class="form-group">
+              <label>رقم الإحصاء ٣</label>
+              <input type="text" id="hero-stat3n" placeholder="98%">
+              <label style="margin-top:8px">تسمية الإحصاء ٣</label>
+              <input type="text" id="hero-stat3l" placeholder="بقاء العملاء">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STICKY BAR ═══ -->
+      <div id="panel-sticky" class="panel">
+        <div class="form-section">
+          <h3>الشريط العلوي (Sticky Bar)</h3>
+          <div class="form-group">
+            <label>النص (يمكن استخدام &lt;em&gt; للتمييز الذهبي)</label>
+            <input type="text" id="sticky-text" placeholder="مقاعدنا محدودة — احجز استشارتك المجانية الآن">
+          </div>
+          <div class="form-group">
+            <label>نص الرابط</label>
+            <input type="text" id="sticky-link" placeholder="تواصل معنا ←">
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SERVICES ═══ -->
+      <div id="panel-services" class="panel">
+        <div class="cards-grid">
+
+          <div class="editor-card">
+            <h4><div class="card-num">١</div> بناء العلامة التجارية</h4>
+            <div class="form-group"><label>العنوان</label><input type="text" id="svc1-title" placeholder="بناء العلامة"></div>
+            <div class="form-group"><label>الاسم بالإنجليزي</label><input type="text" id="svc1-en" placeholder="Branding"></div>
+            <div class="form-group"><label>الوصف</label><textarea id="svc1-desc" rows="2"></textarea></div>
+            <div class="form-group"><label>العناصر (كل عنصر في سطر)</label><textarea id="svc1-items" rows="3"></textarea></div>
+          </div>
+
+          <div class="editor-card">
+            <h4><div class="card-num">٢</div> التسويق</h4>
+            <div class="form-group"><label>العنوان</label><input type="text" id="svc2-title" placeholder="التسويق"></div>
+            <div class="form-group"><label>الاسم بالإنجليزي</label><input type="text" id="svc2-en" placeholder="Marketing"></div>
+            <div class="form-group"><label>الوصف</label><textarea id="svc2-desc" rows="2"></textarea></div>
+            <div class="form-group"><label>العناصر</label><textarea id="svc2-items" rows="3"></textarea></div>
+          </div>
+
+          <div class="editor-card">
+            <h4><div class="card-num">٣</div> صناعة المحتوى</h4>
+            <div class="form-group"><label>العنوان</label><input type="text" id="svc3-title" placeholder="صناعة المحتوى"></div>
+            <div class="form-group"><label>الاسم بالإنجليزي</label><input type="text" id="svc3-en" placeholder="Content"></div>
+            <div class="form-group"><label>الوصف</label><textarea id="svc3-desc" rows="2"></textarea></div>
+            <div class="form-group"><label>العناصر</label><textarea id="svc3-items" rows="3"></textarea></div>
+          </div>
+
+          <div class="editor-card">
+            <h4><div class="card-num">٤</div> تطوير المواقع</h4>
+            <div class="form-group"><label>العنوان</label><input type="text" id="svc4-title" placeholder="تطوير المواقع"></div>
+            <div class="form-group"><label>الاسم بالإنجليزي</label><input type="text" id="svc4-en" placeholder="Web Dev"></div>
+            <div class="form-group"><label>الوصف</label><textarea id="svc4-desc" rows="2"></textarea></div>
+            <div class="form-group"><label>العناصر</label><textarea id="svc4-items" rows="3"></textarea></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══ PERSONAL BRANDING ═══ -->
+      <div id="panel-pb" class="panel">
+        <div class="form-section">
+          <h3>إدارة مقاعد البراند الشخصي</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>إجمالي المقاعد سنوياً</label>
+              <input type="number" id="pb-seats-total" min="1" max="20" value="3">
+            </div>
+            <div class="form-group">
+              <label>المقاعد المشغولة</label>
+              <input type="number" id="pb-seats-taken" min="0" max="20" value="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>معاينة شريط المقاعد</label>
+            <div class="seats-visual" id="seats-visual"></div>
+          </div>
+          <div class="form-group">
+            <label>وصف الخدمة</label>
+            <textarea id="pb-desc" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label>العناصر المضمّنة (كل عنصر في سطر)</label>
+            <textarea id="pb-items" rows="4" placeholder="استراتيجية علامة شخصية&#10;دليل الصوت والرسالة&#10;LinkedIn & سوشال&#10;Bio & Media Kit&#10;محتوى القيادة الفكرية&#10;استشارات شهرية"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PHILOSOPHY ═══ -->
+      <div id="panel-philosophy" class="panel">
+        <div class="form-section">
+          <h3>العمود الأيسر</h3>
+          <div class="form-group"><label>العنوان الرئيسي</label><textarea id="phil-headline" rows="2" placeholder="لم نُؤسَّس&#10;لنبيع خدمات."></textarea></div>
+          <div class="form-group"><label>الفقرة الأولى</label><textarea id="phil-p1" rows="2"></textarea></div>
+          <div class="form-group"><label>الفقرة الثانية</label><textarea id="phil-p2" rows="2"></textarea></div>
+          <div class="form-group"><label>الاقتباس (البار الذهبي)</label><textarea id="phil-quote" rows="2"></textarea></div>
+        </div>
+        <div class="form-section">
+          <h3>سطور المانيفيستو (العمود الأيمن)</h3>
+          <div class="form-group"><label>السطر الأول</label><input type="text" id="phil-mani1"></div>
+          <div class="form-group"><label>السطر الثاني</label><input type="text" id="phil-mani2"></div>
+          <div class="form-group"><label>السطر الثالث</label><input type="text" id="phil-mani3"></div>
+        </div>
+      </div>
+
+      <!-- ═══ PROCESS ═══ -->
+      <div id="panel-process" class="panel">
+        <div class="cards-grid">
+          <div class="editor-card">
+            <h4><div class="card-num">١</div> الخطوة الأولى</h4>
+            <div class="form-group"><label>العنوان</label><input type="text" id="step1-title" placeholder="الاستشارة"></div>
+            <div class="form-group"><label>الوصف</label><textarea id="step1-desc" rows="2"></textarea></div>
+          </div>
+          <div class="editor-card">
+            <h4><div class="card-num">٢</div> الخطوة الثانية</h4>
+            <div class="form-group"><label>العنوان</label><input type="text" id="step2-title" placeholder="الاستراتيجية"></div>
+            <div class="form-group"><label>الوصف</label><textarea id="step2-desc" rows="2"></textarea></div>
+          </div>
+          <div class="editor-card">
+            <h4><div class="card-num">٣</div> الخطوة الثالثة</h4>
+            <div class="form-group"><label>العنوان</label><input type="text" id="step3-title" placeholder="التنفيذ"></div>
+            <div class="form-group"><label>الوصف</label><textarea id="step3-desc" rows="2"></textarea></div>
+          </div>
+          <div class="editor-card">
+            <h4><div class="card-num">٤</div> الخطوة الرابعة</h4>
+            <div class="form-group"><label>العنوان</label><input type="text" id="step4-title" placeholder="الأثر"></div>
+            <div class="form-group"><label>الوصف</label><textarea id="step4-desc" rows="2"></textarea></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ TESTIMONIALS ═══ -->
+      <div id="panel-testimonials" class="panel">
+        <div class="cards-grid">
+          <div class="editor-card">
+            <h4><div class="card-num">١</div> الشهادة الأولى</h4>
+            <div class="form-group"><label>الحرف الأول (الأفاتار)</label><input type="text" id="test1-initial" maxlength="1" style="width:60px"></div>
+            <div class="form-group"><label>نص الشهادة</label><textarea id="test1-text" rows="3"></textarea></div>
+            <div class="form-group"><label>الاسم</label><input type="text" id="test1-name"></div>
+            <div class="form-group"><label>المنصب والشركة</label><input type="text" id="test1-role"></div>
+          </div>
+          <div class="editor-card">
+            <h4><div class="card-num">٢</div> الشهادة الثانية</h4>
+            <div class="form-group"><label>الحرف الأول</label><input type="text" id="test2-initial" maxlength="1" style="width:60px"></div>
+            <div class="form-group"><label>نص الشهادة</label><textarea id="test2-text" rows="3"></textarea></div>
+            <div class="form-group"><label>الاسم</label><input type="text" id="test2-name"></div>
+            <div class="form-group"><label>المنصب والشركة</label><input type="text" id="test2-role"></div>
+          </div>
+          <div class="editor-card">
+            <h4><div class="card-num">٣</div> الشهادة الثالثة</h4>
+            <div class="form-group"><label>الحرف الأول</label><input type="text" id="test3-initial" maxlength="1" style="width:60px"></div>
+            <div class="form-group"><label>نص الشهادة</label><textarea id="test3-text" rows="3"></textarea></div>
+            <div class="form-group"><label>الاسم</label><input type="text" id="test3-name"></div>
+            <div class="form-group"><label>المنصب والشركة</label><input type="text" id="test3-role"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PORTFOLIO ═══ -->
+      <div id="panel-portfolio" class="panel">
+        <div class="port-controls">
+          <label>طريقة العرض على الموقع:</label>
+          <div class="toggle-group">
+            <button class="toggle-btn active" id="disp-grid" onclick="setDisplay('grid')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;margin-left:4px"><rect x="3" y="3" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="3" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="13" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/></svg>
+              شبكة Grid
+            </button>
+            <button class="toggle-btn" id="disp-carousel" onclick="setDisplay('carousel')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;margin-left:4px"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 12h8M14 9l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              كاروسيل
+            </button>
+          </div>
+          <div style="margin-right:auto;font-size:12px;color:var(--mut)" id="display-hint">الشبكة: عرض كل المشاريع مرة واحدة</div>
+        </div>
+
+        <div class="port-add">
+          <h4>+ إضافة مشروع جديد</h4>
+          <div class="form-row">
+            <div class="form-group"><label>عنوان المشروع</label><input type="text" id="new-port-title" placeholder="اسم المشروع"></div>
+            <div class="form-group"><label>التصنيف</label><input type="text" id="new-port-cat" placeholder="براندينغ / تسويق / موقع..."></div>
+          </div>
+          <div class="form-group"><label>الوصف (اختياري)</label><textarea id="new-port-desc" rows="2" placeholder="وصف قصير للمشروع..."></textarea></div>
+          <div class="form-row">
+            <div class="form-group"><label>رابط الصورة (URL)</label><input type="url" id="new-port-img" placeholder="https://..." dir="ltr"></div>
+            <div class="form-group"><label>رابط المشروع (اختياري)</label><input type="url" id="new-port-link" placeholder="https://..." dir="ltr"></div>
+          </div>
+          <button class="btn-top btn-save" onclick="addPortfolioItem()">إضافة المشروع</button>
+        </div>
+
+        <div id="port-list"></div>
+      </div>
+
+      <!-- ═══ BLOG ═══ -->
+      <div id="panel-blog" class="panel">
+        <div class="cards-grid">
+          <div class="editor-card">
+            <h4><div class="card-num">١</div> المقال الأول</h4>
+            <div class="form-group"><label>التصنيف</label><input type="text" id="blog1-cat"></div>
+            <div class="form-group"><label>العنوان</label><textarea id="blog1-title" rows="2"></textarea></div>
+            <div class="form-group"><label>المقتطف</label><textarea id="blog1-excerpt" rows="2"></textarea></div>
+            <div class="form-group"><label>وقت القراءة</label><input type="text" id="blog1-readtime" placeholder="٥ دقائق قراءة"></div>
+          </div>
+          <div class="editor-card">
+            <h4><div class="card-num">٢</div> المقال الثاني</h4>
+            <div class="form-group"><label>التصنيف</label><input type="text" id="blog2-cat"></div>
+            <div class="form-group"><label>العنوان</label><textarea id="blog2-title" rows="2"></textarea></div>
+            <div class="form-group"><label>المقتطف</label><textarea id="blog2-excerpt" rows="2"></textarea></div>
+            <div class="form-group"><label>وقت القراءة</label><input type="text" id="blog2-readtime"></div>
+          </div>
+          <div class="editor-card">
+            <h4><div class="card-num">٣</div> المقال الثالث</h4>
+            <div class="form-group"><label>التصنيف</label><input type="text" id="blog3-cat"></div>
+            <div class="form-group"><label>العنوان</label><textarea id="blog3-title" rows="2"></textarea></div>
+            <div class="form-group"><label>المقتطف</label><textarea id="blog3-excerpt" rows="2"></textarea></div>
+            <div class="form-group"><label>وقت القراءة</label><input type="text" id="blog3-readtime"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ BOOKINGS ═══ -->
+      <div id="panel-bookings" class="panel">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div style="font-family:'Cairo',sans-serif;font-size:14px;color:var(--mut)">الحجوزات الواردة عبر فورم الموقع</div>
+          <button class="btn-top btn-preview-top" onclick="loadBookings()">تحديث ↻</button>
+        </div>
+        <div class="table-wrap" style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>الاسم</th><th>البريد</th><th>الخدمة</th><th>التاريخ</th><th>الوقت</th><th>الحالة</th><th>إجراء</th>
+              </tr>
+            </thead>
+            <tbody id="bookings-body">
+              <tr><td colspan="7" style="text-align:center;color:var(--mut);padding:32px">جاري تحميل الحجوزات...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ═══ SETTINGS ═══ -->
+      <div id="panel-settings" class="panel">
+        <div class="form-section">
+          <h3>معلومات التواصل</h3>
+          <div class="form-group"><label>البريد الإلكتروني</label><input type="email" id="set-email" dir="ltr" placeholder="info@auramediagroup.com"></div>
+          <div class="form-group"><label>رابط واتساب</label><input type="url" id="set-wa" dir="ltr" placeholder="https://wa.me/..."></div>
+        </div>
+        <div class="form-section">
+          <h3>محتوى الفوتر</h3>
+          <div class="form-group"><label>جملة الفوتر (tagline)</label><textarea id="set-footer-tag" rows="2"></textarea></div>
+        </div>
+        <div class="form-section">
+          <h3>إعدادات نموذج الحجز</h3>
+          <div class="form-group">
+            <label>Web3Forms Key</label>
+            <input type="text" id="set-web3key" dir="ltr" placeholder="مفتاح web3forms.com">
+            <div class="form-hint">احصل على مفتاح مجاني من <strong>web3forms.com</strong></div>
+          </div>
+          <div class="form-group">
+            <label>EmailJS Service ID</label>
+            <input type="text" id="set-emailjs-service" dir="ltr" placeholder="service_xxxxxxx">
+            <div class="form-hint">مفتاحك العام محفوظ: vaADDae7AJ5KMftDh | القالب: template_l63roi8</div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>كلمة مرور لوحة التحكم</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>كلمة المرور الجديدة</label>
+              <input type="password" id="new-pwd" placeholder="اترك فارغاً للإبقاء على الحالي">
+            </div>
+            <div class="form-group">
+              <label>تأكيد كلمة المرور</label>
+              <input type="password" id="confirm-pwd">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SETUP ═══ -->
+      <div id="panel-setup" class="panel">
+        <div class="setup-step" data-step="الخطوة ١">
+          <h3>افتح لوحة تحكم Supabase</h3>
+          <p>اذهب إلى <a href="https://supabase.com/dashboard" target="_blank" class="setup-link">supabase.com/dashboard ↗</a>، افتح مشروعك، ثم انتقل إلى <strong>SQL Editor</strong></p>
+        </div>
+
+        <div class="setup-step" data-step="الخطوة ٢">
+          <h3>أنشئ جداول قاعدة البيانات</h3>
+          <p>انسخ هذا الكود وشغّله في SQL Editor:</p>
+          <div class="sql-block" id="sql-setup">
+            <button class="copy-btn" onclick="copySQL()">نسخ</button>
+-- جدول المحتوى الرئيسي
+CREATE TABLE IF NOT EXISTS aura_content (
+  id bigserial primary key,
+  section text unique not null,
+  data jsonb not null default '{}',
+  updated_at timestamptz default now()
+);
+
+-- جدول الحجوزات
+CREATE TABLE IF NOT EXISTS aura_bookings (
+  id uuid default gen_random_uuid() primary key,
+  name text,
+  email text,
+  date text,
+  time text,
+  service text,
+  message text,
+  status text default 'pending',
+  created_at timestamptz default now()
+);
+
+-- تفعيل صلاحيات القراءة والكتابة (RLS)
+ALTER TABLE aura_content ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "public_all" ON aura_content USING (true) WITH CHECK (true);
+
+ALTER TABLE aura_bookings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "public_insert" ON aura_bookings FOR INSERT WITH CHECK (true);
+CREATE POLICY "public_read" ON aura_bookings FOR SELECT USING (true);
+CREATE POLICY "public_update" ON aura_bookings FOR UPDATE USING (true);
+          </div>
+        </div>
+
+        <div class="setup-step" data-step="الخطوة ٣">
+          <h3>إعداد EmailJS لإشعارات الحجز</h3>
+          <p>١. اذهب إلى <a href="https://dashboard.emailjs.com/admin" target="_blank" class="setup-link">dashboard.emailjs.com ↗</a></p>
+          <p>٢. أضف Email Service جديد (Gmail أو Outlook)</p>
+          <p>٣. انسخ الـ Service ID وضعه في <strong>الإعدادات</strong> → EmailJS Service ID</p>
+          <p>٤. تأكد من أن Template ID هو: <strong>template_l63roi8</strong></p>
+          <p style="margin-top:8px;font-size:12px;background:rgba(176,137,90,.1);padding:10px 14px;border-radius:8px;color:var(--brzd)">
+            Public Key: <strong dir="ltr">vaADDae7AJ5KMftDh</strong> — محفوظ تلقائياً ✓
+          </p>
+        </div>
+
+        <div class="setup-step" data-step="الخطوة ٤">
+          <h3>تحقق من الاتصال</h3>
+          <p>بعد تشغيل SQL، اضغط الزر أدناه للتحقق من الاتصال بقاعدة البيانات:</p>
+          <button class="btn-top btn-save" onclick="testConnection()" style="margin-top:4px">اختبار الاتصال</button>
+          <div id="conn-result" style="margin-top:12px;font-size:13px;"></div>
+        </div>
+      </div>
+
+    </div><!-- /panel-wrap -->
+  </div><!-- /main-content -->
+</div><!-- /dash -->
+
+<!-- PREVIEW MODAL -->
+<div id="preview-modal">
+  <div class="preview-bar">
+    <span>معاينة الموقع — <span id="prev-url" style="opacity:.6;font-size:12px"></span></span>
+    <button class="preview-bar button btn-refresh" onclick="refreshPreview()">تحديث ↻</button>
+    <button class="preview-bar button btn-close-prev" onclick="closePreview()">إغلاق ✕</button>
+  </div>
+  <iframe id="preview-frame" src="../brand/website-mockup.html"></iframe>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ══ CONFIG ══
+const SUPA_URL = 'https://fqggbuutyqibcddxeqaf.supabase.co';
+const SUPA_KEY = 'sb_publishable_ZIvYx8-nBGHY4TLcx4L8pA_SGwHJABr';
+const EMAILJS_PUB = 'vaADDae7AJ5KMftDh';
+const EMAILJS_TMPL = 'template_l63roi8';
+
+// ══ AUTH ══
+function doLogin(e){
+  e.preventDefault();
+  const pwd = document.getElementById('pwd').value;
+  const stored = localStorage.getItem('aura_admin_pwd') || 'aura2024';
+  if(pwd === stored){
+    sessionStorage.setItem('aura_auth','1');
+    startDash();
+  } else {
+    const err = document.getElementById('login-err');
+    err.style.display = 'block';
+    setTimeout(()=> err.style.display='none', 3000);
+  }
+}
+
+function checkAuth(){
+  if(sessionStorage.getItem('aura_auth')==='1') startDash();
+}
+
+function startDash(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('dash').style.display='flex';
+  loadAllSections();
+  loadOverview();
+}
+
+function logout(){
+  sessionStorage.removeItem('aura_auth');
+  location.reload();
+}
+
+// ══ SUPABASE REST ══
+async function sbGet(table, query=''){
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}${query}`,{
+    headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,'Accept':'application/json'}
+  });
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+
+async function sbUpsert(table, body, conflict='section'){
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?on_conflict=${conflict}`,{
+    method:'POST',
+    headers:{
+      'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,
+      'Content-Type':'application/json',
+      'Prefer':'resolution=merge-duplicates,return=minimal'
+    },
+    body: JSON.stringify(body)
+  });
+  return r.ok;
+}
+
+async function sbPatch(table, id, body){
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?id=eq.${id}`,{
+    method:'PATCH',
+    headers:{
+      'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,
+      'Content-Type':'application/json','Prefer':'return=minimal'
+    },
+    body: JSON.stringify(body)
+  });
+  return r.ok;
+}
+
+// ══ CONTENT CACHE ══
+const cache = {};
+
+async function loadAllSections(){
+  try{
+    const rows = await sbGet('aura_content','?select=section,data');
+    rows.forEach(r=>{ cache[r.section]=r.data; });
+    populateForms();
+  } catch(e){
+    showToast('تعذر الاتصال بقاعدة البيانات — أدخل SQL أولاً','err');
+  }
+}
+
+function gV(id){ const el=document.getElementById(id); return el?el.value.trim():''; }
+function sV(id,val){ const el=document.getElementById(id); if(el) el.value=(val??''); }
+
+function populateForms(){
+  const def = (s,k,d) => (cache[s]&&cache[s][k]!=null) ? cache[s][k] : d;
+
+  // HERO
+  sV('hero-badge', def('hero','badge','نهندس الهيبة الرقمية'));
+  sV('hero-headline', def('hero','headline','حضورك الرقمي\nإما أن <em>يُهاب</em>,\nأو لا يُرى.'));
+  sV('hero-subtitle', def('hero','subtitle','نهندس الهيبة الرقمية للعلامات التي ترفض الاندماج في الضجيج.\nلسنا وكالة تسويق — نحن مهندسو الوجود.'));
+  sV('hero-stat1n', def('hero','stat1_n','+120')); sV('hero-stat1l', def('hero','stat1_l','علامة تجارية'));
+  sV('hero-stat2n', def('hero','stat2_n','3.4x')); sV('hero-stat2l', def('hero','stat2_l','متوسط النمو'));
+  sV('hero-stat3n', def('hero','stat3_n','98%')); sV('hero-stat3l', def('hero','stat3_l','بقاء العملاء'));
+
+  // STICKY
+  sV('sticky-text', def('sticky','text','مقاعدنا <em>محدودة</em> — احجز استشارتك المجانية الآن'));
+  sV('sticky-link', def('sticky','link','تواصل معنا ←'));
+
+  // SERVICES
+  const svcs = cache['services']||[
+    {title:'بناء العلامة',en:'Branding',desc:'نبني هوية بصرية متكاملة تجعل علامتك لا تُنسى.',items:'تصميم الشعار\nالهوية البصرية\nاستراتيجية العلامة\nتموضع العلامة\nدليل الصوت والرسالة'},
+    {title:'التسويق',en:'Marketing',desc:'حملات مدروسة تجذب العملاء المناسبين.',items:'إدارة السوشال ميديا\nإعلانات ميتا\nإعلانات تيك توك\nإعلانات جوجل\nجذب العملاء المحتملين'},
+    {title:'صناعة المحتوى',en:'Content',desc:'محتوى إبداعي يوقف التمرير.',items:'ريلز\nمونتاج فيديو\nكتابة إعلانية\nإدارة التصوير\nتصميم جرافيك'},
+    {title:'تطوير المواقع',en:'Web',desc:'مواقع وصفحات هبوط سريعة وأنيقة.',items:'برمجة مخصصة\nReact / Next.js\nووردبريس\nشوبيفاي\nصفحات هبوط\nتحسين معدّلات التحويل'}
+  ];
+  [1,2,3,4].forEach(i=>{
+    const s=svcs[i-1]||{};
+    sV(`svc${i}-title`,s.title||''); sV(`svc${i}-en`,s.en||'');
+    sV(`svc${i}-desc`,s.desc||'');
+    const items = Array.isArray(s.items) ? s.items.join('\n') : (s.items||'');
+    sV(`svc${i}-items`,items);
+  });
+
+  // PERSONAL BRANDING
+  const pb = cache['pb']||{};
+  sV('pb-seats-total', pb.seats_total||3);
+  sV('pb-seats-taken', pb.seats_taken||0);
+  sV('pb-desc', pb.desc||'الناس لا يتابعون شركات — يتابعون أشخاصاً. برنامج حصري لرواد الأعمال.');
+  const pbItems = Array.isArray(pb.items) ? pb.items.join('\n') : (pb.items||'استراتيجية علامة شخصية\nدليل الصوت والرسالة\nLinkedIn & سوشال\nBio & Media Kit\nمحتوى القيادة الفكرية\nاستشارات شهرية');
+  sV('pb-items', pbItems);
+  updateSeatsVisual();
+
+  // PHILOSOPHY
+  const ph = cache['philosophy']||{};
+  sV('phil-headline', ph.headline||'لم نُؤسَّس\nلنبيع خدمات.');
+  sV('phil-p1', ph.p1||'في عالم مليء بوكالات تتسابق على الأسعار، اخترنا مساراً مختلفاً تماماً — التسابق على الأثر.');
+  sV('phil-p2', ph.p2||'نحن نؤمن أن الهيبة الرقمية ليست صدفة، إنها قرار يُنفَّذ بدقة، ويُبنى بإتقان.');
+  sV('phil-quote', ph.quote||'"نختار عملاءنا بعناية —\nونبني معهم امبراطوريات رقمية تدوم."');
+  sV('phil-mani1', ph.mani1||'لسنا نصمم مواقع — نبني معمار رقمي.');
+  sV('phil-mani2', ph.mani2||'لسنا ننشر محتوى — نهندس تأثيراً.');
+  sV('phil-mani3', ph.mani3||'لسنا ندير إعلانات — نبني أنظمة نمو.');
+
+  // PROCESS
+  const pr = cache['process']||{};
+  const steps = pr.steps||[
+    {title:'الاستشارة',desc:'جلسة مجانية نفهم فيها علامتك وطموحاتك وسوقك بعمق.'},
+    {title:'الاستراتيجية',desc:'نبني خارطة طريق رقمية مخصصة لك تماماً بناءً على البيانات.'},
+    {title:'التنفيذ',desc:'ننفذ بدقة متناهية مع تغذية راجعة مستمرة منك في كل مرحلة.'},
+    {title:'الأثر',desc:'نقيس النتائج ونطوّر باستمرار لضمان النمو الحقيقي والمستدام.'}
+  ];
+  [1,2,3,4].forEach(i=>{ const s=steps[i-1]||{}; sV(`step${i}-title`,s.title||''); sV(`step${i}-desc`,s.desc||''); });
+
+  // TESTIMONIALS
+  const te = cache['testimonials']||{};
+  const tests = te.items||[
+    {initial:'م',text:'تعاملت مع عدة وكالات قبل Aura، لكن الفرق كان واضحاً من الجلسة الأولى. هم لا يبيعون خدمات — يبنون رؤية.',name:'محمد الراشد',role:'مؤسس · Novar'},
+    {initial:'س',text:'بعد ثلاثة أشهر، أصبح اسمي يُذكر في كل نقاش عن مجالي. النتائج تتحدث عن نفسها.',name:'سارة الأمين',role:'مستشارة أعمال · Aurel'},
+    {initial:'خ',text:'الفريق يفكر معك كشريك حقيقي لا كمورّد. هذا هو الفرق الذي يصعب إيجاده في السوق.',name:'خالد الجابر',role:'CEO · Veyra Group'}
+  ];
+  [1,2,3].forEach(i=>{ const t=tests[i-1]||{}; sV(`test${i}-initial`,t.initial||''); sV(`test${i}-text`,t.text||''); sV(`test${i}-name`,t.name||''); sV(`test${i}-role`,t.role||''); });
+
+  // PORTFOLIO
+  renderPortfolioAdmin(cache['portfolio']);
+
+  // BLOG
+  const bl = cache['blog']||{};
+  const arts = bl.articles||[
+    {cat:'استراتيجية رقمية',title:'لماذا معظم العلامات التجارية تُخفق رقمياً رغم الميزانيات الضخمة؟',excerpt:'المشكلة ليست في الإنفاق — المشكلة في غياب الهندسة.',readtime:'٥ دقائق قراءة'},
+    {cat:'Personal Branding',title:'العلامة الشخصية: كيف تجعل اسمك يُذكر قبل شركتك؟',excerpt:'في عصر الثقة الرقمية، الناس يتابعون أشخاصاً لا شعارات.',readtime:'٧ دقائق قراءة'},
+    {cat:'براندينغ فاخر',title:'الفخامة الرقمية: ما الذي يجعل علامة ما تبدو بمليون وأخرى بألف؟',excerpt:'الفرق ليس في السعر — إنه في القرارات التصميمية الصغيرة.',readtime:'٦ دقائق قراءة'}
+  ];
+  [1,2,3].forEach(i=>{ const a=arts[i-1]||{}; sV(`blog${i}-cat`,a.cat||''); sV(`blog${i}-title`,a.title||''); sV(`blog${i}-excerpt`,a.excerpt||''); sV(`blog${i}-readtime`,a.readtime||''); });
+
+  // SETTINGS
+  const se = cache['settings']||{};
+  sV('set-email', se.email||'info@auramediagroup.com');
+  sV('set-wa', se.wa_link||'https://wa.me/message/JSA24DL5WBQ6A1');
+  sV('set-footer-tag', se.footer_tag||'"نهندس الهيبة الرقمية للعلامات التي ترفض الاندماج في الضجيج."');
+  sV('set-web3key', se.web3forms_key||'');
+  sV('set-emailjs-service', se.emailjs_service||'');
+}
+
+// ══ CURRENT PANEL ══
+let currentPanel = 'overview';
+
+function showPanel(el){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  const pname = el.dataset.panel;
+  document.getElementById(`panel-${pname}`).classList.add('active');
+  document.getElementById('panel-title').textContent = el.querySelector('span').textContent;
+  currentPanel = pname;
+  if(pname==='bookings') loadBookings();
+  if(pname==='overview') loadOverview();
+}
+
+function saveCurrentPanel(){
+  const fns = {
+    hero:saveHero, sticky:saveSticky, services:saveServices, pb:savePB,
+    philosophy:savePhilosophy, process:saveProcess, testimonials:saveTestimonials,
+    portfolio:savePortfolio, blog:saveBlog, settings:saveSettings
+  };
+  if(fns[currentPanel]) fns[currentPanel]();
+  else showToast('اختر قسماً لحفظه','err');
+}
+
+// ══ SAVE FUNCTIONS ══
+async function saveSection(section, data){
+  const ok = await sbUpsert('aura_content',{section, data, updated_at: new Date().toISOString()});
+  if(ok){ cache[section]=data; showToast('تم الحفظ وتحديث الموقع ✓','ok'); refreshPreview(); }
+  else showToast('خطأ في الحفظ — تحقق من إعداد قاعدة البيانات','err');
+}
+
+function saveHero(){
+  saveSection('hero',{
+    badge:gV('hero-badge'), headline:gV('hero-headline'), subtitle:gV('hero-subtitle'),
+    stat1_n:gV('hero-stat1n'), stat1_l:gV('hero-stat1l'),
+    stat2_n:gV('hero-stat2n'), stat2_l:gV('hero-stat2l'),
+    stat3_n:gV('hero-stat3n'), stat3_l:gV('hero-stat3l')
+  });
+}
+
+function saveSticky(){
+  saveSection('sticky',{text:gV('sticky-text'), link:gV('sticky-link')});
+}
+
+function saveServices(){
+  const svcs=[];
+  [1,2,3,4].forEach(i=>{
+    svcs.push({
+      title:gV(`svc${i}-title`), en:gV(`svc${i}-en`), desc:gV(`svc${i}-desc`),
+      items:gV(`svc${i}-items`).split('\n').filter(Boolean)
+    });
+  });
+  saveSection('services', svcs);
+}
+
+function savePB(){
+  const total=parseInt(gV('pb-seats-total'))||3;
+  const taken=parseInt(gV('pb-seats-taken'))||0;
+  saveSection('pb',{
+    seats_total:total, seats_taken:Math.min(taken,total),
+    desc:gV('pb-desc'),
+    items:gV('pb-items').split('\n').filter(Boolean)
+  });
+}
+
+function savePhilosophy(){
+  saveSection('philosophy',{
+    headline:gV('phil-headline'), p1:gV('phil-p1'), p2:gV('phil-p2'),
+    quote:gV('phil-quote'), mani1:gV('phil-mani1'), mani2:gV('phil-mani2'), mani3:gV('phil-mani3')
+  });
+}
+
+function saveProcess(){
+  const steps=[];
+  [1,2,3,4].forEach(i=>{ steps.push({title:gV(`step${i}-title`),desc:gV(`step${i}-desc`)}); });
+  saveSection('process',{steps});
+}
+
+function saveTestimonials(){
+  const items=[];
+  [1,2,3].forEach(i=>{ items.push({initial:gV(`test${i}-initial`),text:gV(`test${i}-text`),name:gV(`test${i}-name`),role:gV(`test${i}-role`)}); });
+  saveSection('testimonials',{items});
+}
+
+function saveBlog(){
+  const articles=[];
+  [1,2,3].forEach(i=>{ articles.push({cat:gV(`blog${i}-cat`),title:gV(`blog${i}-title`),excerpt:gV(`blog${i}-excerpt`),readtime:gV(`blog${i}-readtime`)}); });
+  saveSection('blog',{articles});
+}
+
+async function saveSettings(){
+  const newPwd = gV('new-pwd');
+  const confPwd = gV('confirm-pwd');
+  if(newPwd && newPwd !== confPwd){ showToast('كلمتا المرور غير متطابقتين','err'); return; }
+  if(newPwd) localStorage.setItem('aura_admin_pwd', newPwd);
+  await saveSection('settings',{
+    email:gV('set-email'), wa_link:gV('set-wa'),
+    footer_tag:gV('set-footer-tag'),
+    web3forms_key:gV('set-web3key'),
+    emailjs_service:gV('set-emailjs-service')
+  });
+  if(newPwd) showToast('تم تغيير كلمة المرور ✓','ok');
+}
+
+// ══ PORTFOLIO ══
+let portItems = [];
+let portDisplay = 'grid';
+
+function setDisplay(mode){
+  portDisplay = mode;
+  document.getElementById('disp-grid').classList.toggle('active', mode==='grid');
+  document.getElementById('disp-carousel').classList.toggle('active', mode==='carousel');
+  document.getElementById('display-hint').textContent = mode==='grid'
+    ? 'الشبكة: عرض كل المشاريع مرة واحدة'
+    : 'الكاروسيل: مشروع واحد في الوقت، يمكن التمرير';
+}
+
+function renderPortfolioAdmin(data){
+  if(data){ portDisplay = data.display||'grid'; portItems = data.items||[]; }
+  setDisplay(portDisplay);
+  const list = document.getElementById('port-list');
+  if(!portItems.length){ list.innerHTML='<p style="color:var(--mut);font-size:13.5px;padding:16px">لا توجد مشاريع بعد — أضف أول مشروع أعلاه ✦</p>'; return; }
+  list.innerHTML = portItems.map((p,i)=>`
+    <div class="port-item">
+      ${p.img_url ? `<img src="${p.img_url}" class="port-img-preview" alt="${p.title}" onerror="this.style.display='none'">` : `<div class="port-img-placeholder">لا صورة</div>`}
+      <div class="port-info">
+        <strong>${p.title||'بلا عنوان'}</strong>
+        <span style="color:var(--brz);font-size:11px;font-weight:700">${p.category||p.cat||''}</span>
+        <span>${p.desc||''}</span>
+        ${p.link ? `<a href="${p.link}" target="_blank" style="font-size:11.5px;color:var(--brz)">رابط المشروع ↗</a>` : ''}
+      </div>
+      <button class="btn-del" onclick="deletePortItem(${i})">حذف</button>
+    </div>
+  `).join('');
+}
+
+function addPortfolioItem(){
+  const title=gV('new-port-title'); if(!title){ showToast('أدخل عنوان المشروع','err'); return; }
+  portItems.push({
+    title, category:gV('new-port-cat'), desc:gV('new-port-desc'),
+    img_url:gV('new-port-img'), link:gV('new-port-link')
+  });
+  ['new-port-title','new-port-cat','new-port-desc','new-port-img','new-port-link'].forEach(id=>sV(id,''));
+  savePortfolio();
+}
+
+function deletePortItem(i){ portItems.splice(i,1); savePortfolio(); }
+
+async function savePortfolio(){
+  const ok = await sbUpsert('aura_content',{section:'portfolio', data:{display:portDisplay, items:portItems}, updated_at:new Date().toISOString()});
+  if(ok){ cache['portfolio']={display:portDisplay,items:portItems}; showToast('تم حفظ المعرض ✓','ok'); refreshPreview(); renderPortfolioAdmin(); }
+  else showToast('خطأ في الحفظ','err');
+}
+
+// ══ SEATS VISUAL ══
+function updateSeatsVisual(){
+  const total=parseInt(document.getElementById('pb-seats-total')?.value)||3;
+  const taken=parseInt(document.getElementById('pb-seats-taken')?.value)||0;
+  const vis=document.getElementById('seats-visual'); if(!vis) return;
+  vis.innerHTML=Array.from({length:total},(_, i)=>`
+    <div class="seat-dot ${i<taken?'taken':''}" title="${i<taken?'مشغول':'متاح'}">
+      ${i<taken ? '✓' : '🪑'}
+    </div>
+  `).join('') + `<span style="font-size:13px;color:var(--mut)">متاح: ${total-taken} / ${total}</span>`;
+}
+document.addEventListener('input', e=>{
+  if(['pb-seats-total','pb-seats-taken'].includes(e.target.id)) updateSeatsVisual();
+});
+
+// ══ BOOKINGS ══
+async function loadBookings(){
+  const tbody = document.getElementById('bookings-body');
+  try{
+    const data = await sbGet('aura_bookings','?order=created_at.desc&limit=50');
+    if(!data.length){ tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--mut);padding:32px">لا توجد حجوزات بعد</td></tr>'; return; }
+    tbody.innerHTML = data.map(b=>`
+      <tr>
+        <td><strong>${esc(b.name||'')}</strong></td>
+        <td style="direction:ltr;font-size:12.5px">${esc(b.email||'')}</td>
+        <td>${esc(b.service||'—')}</td>
+        <td>${esc(b.date||'—')}</td>
+        <td>${esc(b.time||'—')}</td>
+        <td><span class="status-badge status-${b.status||'pending'}">${statusLabel(b.status)}</span></td>
+        <td>
+          <button class="btn-sm btn-confirm" onclick="updateBooking('${b.id}','confirmed')">تأكيد</button>
+          <button class="btn-sm btn-cancel" onclick="updateBooking('${b.id}','cancelled')">إلغاء</button>
+        </td>
+      </tr>
+    `).join('');
+  } catch(e){
+    tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:#c0392b;padding:24px">خطأ في تحميل الحجوزات — تأكد من إعداد قاعدة البيانات</td></tr>';
+  }
+}
+
+async function updateBooking(id, status){
+  const ok = await sbPatch('aura_bookings', id, {status});
+  if(ok){ showToast(status==='confirmed'?'تم تأكيد الحجز ✓':'تم إلغاء الحجز','ok'); loadBookings(); }
+}
+
+function statusLabel(s){ return {pending:'قيد الانتظار',confirmed:'مؤكد',cancelled:'ملغى'}[s]||s; }
+
+// ══ OVERVIEW ══
+async function loadOverview(){
+  try{
+    const bookings = await sbGet('aura_bookings','?select=status');
+    const total=bookings.length;
+    const pending=bookings.filter(b=>b.status==='pending').length;
+    document.getElementById('stat-bookings').textContent=total;
+    document.getElementById('stat-pending-badge').textContent=`${pending} قيد الانتظار`;
+
+    const pb = cache['pb']||{};
+    const avail=(pb.seats_total||3)-(pb.seats_taken||0);
+    document.getElementById('stat-seats').textContent=avail;
+    document.getElementById('stat-seats-badge').textContent=avail>0?'مقاعد متاحة':'مكتملة';
+
+    const port = cache['portfolio']||{};
+    document.getElementById('stat-portfolio').textContent=(port.items||[]).length;
+
+    const allContent = await sbGet('aura_content','?order=updated_at.desc&limit=1&select=updated_at');
+    if(allContent[0]){
+      const d=new Date(allContent[0].updated_at);
+      document.getElementById('stat-updated').textContent=d.toLocaleDateString('ar-AE',{day:'numeric',month:'short'});
+    }
+
+    const recent = await sbGet('aura_bookings','?order=created_at.desc&limit=5&select=name,service,date,status');
+    const rb=document.getElementById('recent-bookings-body');
+    rb.innerHTML=recent.length ? recent.map(b=>`
+      <tr>
+        <td><strong>${esc(b.name||'')}</strong></td>
+        <td>${esc(b.service||'—')}</td>
+        <td>${esc(b.date||'—')}</td>
+        <td><span class="status-badge status-${b.status||'pending'}">${statusLabel(b.status)}</span></td>
+      </tr>
+    `).join('') : '<tr><td colspan="4" style="text-align:center;color:var(--mut)">لا توجد حجوزات</td></tr>';
+  } catch(e){ /* Supabase not set up yet */ }
+}
+
+// ══ PREVIEW ══
+function openPreview(){
+  const modal=document.getElementById('preview-modal');
+  modal.classList.add('open');
+  document.getElementById('prev-url').textContent='../brand/website-mockup.html';
+}
+
+function closePreview(){ document.getElementById('preview-modal').classList.remove('open'); }
+
+function refreshPreview(){
+  const fr=document.getElementById('preview-frame');
+  fr.src=fr.src; // reload
+}
+
+// ══ TEST CONNECTION ══
+async function testConnection(){
+  const el=document.getElementById('conn-result');
+  el.textContent='جاري الاختبار...';
+  el.style.color='var(--mut)';
+  try{
+    const rows=await sbGet('aura_content','?limit=1');
+    el.innerHTML='✅ الاتصال ناجح — قاعدة البيانات جاهزة!';
+    el.style.color='#27ae60';
+  } catch(e){
+    el.innerHTML='❌ فشل الاتصال — تأكد من تشغيل SQL في Supabase أولاً';
+    el.style.color='#c0392b';
+  }
+}
+
+// ══ COPY SQL ══
+function copySQL(){
+  const el=document.getElementById('sql-setup');
+  const text=el.innerText.replace('نسخ','').trim();
+  navigator.clipboard.writeText(text).then(()=>showToast('تم نسخ SQL ✓','ok'));
+}
+
+// ══ TOAST ══
+let toastTimer;
+function showToast(msg, type='ok'){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='show '+(type==='ok'?'ok':'err');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>{ t.className=''; },3200);
+}
+
+// ══ SIDEBAR TOGGLE (mobile) ══
+function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); }
+
+// ══ UTILS ══
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ══ INIT ══
+checkAuth();
+</script>
+</body>
+</html>
