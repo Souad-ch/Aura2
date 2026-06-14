@@ -10,11 +10,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'DINNextArabic';
+      src: url('fonts/DINNextLTArabic-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
     *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
     :root{
       --espresso:#2D2620; --coffee:#3E342B; --bronze:#B0895A; --bronze-d:#8A6A42;
       --cream:#F7F1E8; --sand:#ECE1D1; --linen:#FCF8F2; --muted:#94856F;
       --bronze-a4:rgba(176,137,90,.4); --bronze-a1:rgba(176,137,90,.10);
+      --font-din:'DINNextArabic','Cairo',sans-serif;
     }
     html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
     body{ font-family:'Tajawal',sans-serif; color:var(--coffee); background:var(--cream); line-height:1.85; }
@@ -22,6 +30,8 @@
     img,svg{ display:block; }
     .container{ width:100%; max-width:1140px; margin:0 auto; padding:0 24px; }
     h1,h2,h3,h4,h5{ font-family:'Cairo',sans-serif; color:var(--espresso); }
+    /* DIN Next Arabic — للهيرو فقط */
+    .hero h1{ font-family:var(--font-din),'Cairo',sans-serif; }
 
     .btn{ font-family:'Cairo',sans-serif; font-weight:700; font-size:14px; padding:13px 28px;
       border-radius:100px; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
