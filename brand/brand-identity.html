@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Media Group — Brand Identity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0F172A;
+      --gold:    #D4B483;
+      --white:   #FFFFFF;
+      --gray:    #F8F8F8;
+      --navy2:   #1a2840;
+      --muted:   #6B7280;
+      --gold-a4: rgba(212,180,131,0.4);
+      --gold-a1: rgba(212,180,131,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #EDEDED;
+      color: var(--navy);
+    }
+
+    /* ─────────────────────────────────────────
+       SVG LOGO MARK — shared helper
+    ───────────────────────────────────────── */
+    .mark svg { display: block; }
+
+    /* ─────────────────────────────────────────
+       INLINE LOGO COMPONENT
+    ───────────────────────────────────────── */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+    }
+    .logo .divider {
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      align-self: stretch;
+      margin: 0 18px;
+      opacity: .55;
+    }
+    .logo .wordmark { display: flex; flex-direction: column; }
+    .logo .wm-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      letter-spacing: .18em;
+      line-height: 1;
+    }
+    .logo .wm-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      letter-spacing: .40em;
+      color: var(--gold);
+      margin-top: 5px;
+    }
+    /* size variants */
+    .logo.lg .wm-name { font-size: 44px; }
+    .logo.lg .wm-sub  { font-size: 11px; }
+    .logo.lg .divider { min-height: 70px; }
+
+    .logo.md .wm-name { font-size: 28px; }
+    .logo.md .wm-sub  { font-size: 8.5px; }
+    .logo.md .divider { min-height: 46px; }
+
+    .logo.sm .wm-name { font-size: 18px; }
+    .logo.sm .wm-sub  { font-size: 6.5px; }
+    .logo.sm .divider { min-height: 32px; }
+
+    /* colour variants */
+    .on-light .wm-name { color: var(--navy); }
+    .on-dark  .wm-name { color: var(--white); }
+
+    /* ─────────────────────────────────────────
+       STACKED LOGO
+    ───────────────────────────────────────── */
+    .logo-stacked {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo-stacked .wordmark { text-align: center; }
+    .logo-stacked .wm-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: .22em;
+      line-height: 1;
+    }
+    .logo-stacked .wm-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: .5em;
+      color: var(--gold);
+      margin-top: 6px;
+    }
+
+    /* ─────────────────────────────────────────
+       SECTIONS
+    ───────────────────────────────────────── */
+    .page {
+      padding: 80px 0;
+    }
+    .page + .page { margin-top: 3px; }
+    .page.white  { background: var(--white); }
+    .page.soft   { background: var(--gray); }
+    .page.navy   { background: var(--navy); }
+    .page.navy .section-num,
+    .page.navy .section-title { color: var(--white); }
+
+    .inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .section-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 48px;
+    }
+
+    /* ─────────────────────────────────────────
+       01 COVER
+    ───────────────────────────────────────── */
+    .cover {
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      gap: 32px;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,180,131,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 25% at 20% 80%, rgba(212,180,131,.05) 0%, transparent 60%);
+    }
+    .cover-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .45em;
+      color: var(--gold);
+      text-transform: uppercase;
+      border: 1px solid var(--gold-a4);
+      padding: 7px 20px;
+      border-radius: 100px;
+    }
+    .cover-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: .25em;
+      color: rgba(255,255,255,.38);
+      text-transform: uppercase;
+    }
+    .cover-divider-h {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto;
+    }
+    .cover-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,.45);
+      line-height: 1.8;
+      max-width: 480px;
+    }
+    .cover-footer {
+      position: absolute;
+      bottom: 36px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: rgba(255,255,255,.18);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .cover > * { position: relative; z-index: 1; }
+
+    /* ─────────────────────────────────────────
+       02 LOGO SYSTEM
+    ───────────────────────────────────────── */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+    .logo-box {
+      padding: 64px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      min-height: 260px;
+    }
+    .logo-box.light  { background: var(--white); }
+    .logo-box.dark   { background: var(--navy); }
+    .logo-box.soft   { background: var(--gray); }
+    .logo-box.dark2  { background: #0d1828; }
+
+    .box-caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .logo-box.dark  .box-caption,
+    .logo-box.dark2 .box-caption { color: rgba(255,255,255,.25); }
+
+    /* icon-only row */
+    .icon-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-top: 3px;
+    }
+    .icon-box {
+      padding: 48px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    /* ─────────────────────────────────────────
+       03 COLOR PALETTE
+    ───────────────────────────────────────── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .swatch {
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.09);
+    }
+    .swatch-color { height: 150px; }
+    .swatch-info  { background: var(--white); padding: 20px; }
+    .swatch-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+    .swatch-hex {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+    .swatch-tag {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gold);
+      background: var(--gold-a1);
+      border: 1px solid var(--gold-a4);
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: .05em;
+    }
+    .swatch-usage {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    /* ─────────────────────────────────────────
+       04 TYPOGRAPHY
+    ───────────────────────────────────────── */
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+    .type-panel {
+      background: var(--white);
+      padding: 48px;
+    }
+    .type-panel.soft { background: var(--gray); }
+
+    .type-family-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .type-role {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .type-display {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.0;
+      letter-spacing: -.01em;
+      margin-bottom: 4px;
+    }
+    .type-display-light {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--navy);
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .type-weights { display: flex; flex-direction: column; gap: 10px; }
+    .tw-row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      border-top: 1px solid #eee;
+      padding-top: 10px;
+    }
+    .tw-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: var(--muted);
+      width: 72px;
+      flex-shrink: 0;
+    }
+    .tw-sample-m { font-family: 'Montserrat', sans-serif; color: var(--navy); font-size: 16px; }
+    .tw-sample-i { font-family: 'Inter', sans-serif; color: var(--navy); font-size: 15px; }
+
+    .type-body-display {
+      font-family: 'Inter', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .type-body-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    /* ─────────────────────────────────────────
+       05 BUSINESS CARD
+    ───────────────────────────────────────── */
+    .card-showcase {
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .card-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+    }
+
+    .bcard {
+      width: 380px;
+      height: 214px;
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 24px 60px rgba(0,0,0,.22),
+        0 4px 12px rgba(0,0,0,.12);
+      flex-shrink: 0;
+    }
+
+    /* FRONT */
+    .bcard-front {
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 32px;
+    }
+    .bcard-front::before {
+      content: '';
+      position: absolute;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,180,131,.10) 0%, transparent 65%);
+      top: -110px; right: -90px;
+    }
+    .bcard-front::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      opacity: .7;
+    }
+    .bcard-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7.5px;
+      font-weight: 300;
+      letter-spacing: .3em;
+      color: rgba(255,255,255,.35);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* BACK */
+    .bcard-back {
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 36px;
+    }
+    .bcard-back::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      opacity: .45;
+    }
+    .bc-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: .04em;
+    }
+    .bc-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: .32em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .bc-line {
+      width: 55%;
+      height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      margin: 12px 0;
+    }
+    .bc-contacts { display: flex; flex-direction: column; gap: 5px; }
+    .bc-contact {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      color: #555;
+      letter-spacing: .03em;
+    }
+    .bc-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .bc-logo-wrap {
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bc-logo-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .2em;
+      color: var(--navy);
+    }
+    .bc-logo-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 5.5px;
+      font-weight: 400;
+      letter-spacing: .32em;
+      color: var(--gold);
+    }
+
+    /* ─────────────────────────────────────────
+       06 SOCIAL MEDIA
+    ───────────────────────────────────────── */
+    .social-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Instagram mockup */
+    .ig-phone {
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,.14);
+    }
+    .ig-cover {
+      background: var(--navy);
+      height: 90px;
+      position: relative;
+    }
+    .ig-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 100% at 70% 50%, rgba(212,180,131,.1), transparent);
+    }
+    .ig-body { padding: 0 16px 20px; }
+    .ig-top-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: -36px;
+      margin-bottom: 12px;
+    }
+    .ig-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 3px solid var(--white);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      flex-shrink: 0;
+    }
+    .ig-follow-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 7px 22px;
+      letter-spacing: .05em;
+      cursor: pointer;
+    }
+    .ig-stats {
+      display: flex;
+      gap: 20px;
+      margin: 14px 0 4px;
+    }
+    .ig-stat { text-align: center; }
+    .ig-stat-n {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .ig-stat-l {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: #888;
+    }
+    .ig-uname {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .ig-cat {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: #888;
+      margin-top: 1px;
+    }
+    .ig-bio-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #222;
+      line-height: 1.65;
+      margin-top: 8px;
+    }
+    .ig-bio-text .gold { color: var(--gold); font-weight: 600; }
+    .ig-link-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #1d9bf0;
+      margin-top: 3px;
+    }
+    .ig-highlights {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+      overflow-x: auto;
+    }
+    .ig-hl {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .ig-hl-circle {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      background: var(--navy);
+    }
+    .ig-hl-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      color: var(--navy);
+    }
+    .ig-postsep {
+      height: 1px;
+      background: #eee;
+      margin: 16px 0 10px;
+    }
+    .ig-pgrid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 2px;
+    }
+    .ig-pgrid div {
+      aspect-ratio: 1;
+      background: var(--navy);
+    }
+    .ig-pgrid div:nth-child(2) { background: #192b4a; }
+    .ig-pgrid div:nth-child(3) { background: #c4a060; }
+    .ig-pgrid div:nth-child(4) { background: #0f2035; }
+    .ig-pgrid div:nth-child(5) { background: var(--navy); }
+    .ig-pgrid div:nth-child(6) { background: #1e3050; }
+
+    /* Post template */
+    .post-frame {
+      aspect-ratio: 1;
+      background: var(--navy);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 12px 48px rgba(0,0,0,.22);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 36px 36px 30px;
+    }
+    .post-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 65% 55% at 80% 20%, rgba(212,180,131,.11) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 10% 90%, rgba(212,180,131,.06) 0%, transparent 60%);
+    }
+    .post-gold-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, transparent 5%, var(--gold) 40%, var(--gold) 60%, transparent 95%);
+    }
+    .post-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative; z-index: 1;
+    }
+    .post-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .38em;
+      color: var(--gold);
+      text-transform: uppercase;
+      border: 1px solid var(--gold-a4);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+    .post-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(255,255,255,.3);
+    }
+    .post-mid {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 28px 0;
+    }
+    .post-headline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .post-headline em { color: var(--gold); font-style: normal; }
+    .post-body-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,.55);
+      line-height: 1.75;
+    }
+    .post-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 18px;
+    }
+    .post-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .post-logo-text { display: flex; flex-direction: column; }
+    .post-logo-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: .18em;
+    }
+    .post-logo-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 6.5px;
+      font-weight: 400;
+      letter-spacing: .42em;
+      color: var(--gold);
+    }
+    .post-dots {
+      display: flex;
+      gap: 5px;
+    }
+    .post-dots span {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .post-dots span:first-child { opacity: .3; }
+    .post-dots span:nth-child(2) { opacity: .6; }
+
+    /* ─────────────────────────────────────────
+       07 LETTERHEAD
+    ───────────────────────────────────────── */
+    .letterhead {
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,.10);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .lh-header {
+      background: var(--navy);
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .lh-addr {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: rgba(255,255,255,.35);
+      line-height: 1.9;
+      text-align: right;
+    }
+    .lh-body { padding: 48px; }
+    .lh-date {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: #aaa;
+      margin-bottom: 32px;
+    }
+    .lh-subject {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .lh-greeting {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+    .lh-para {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+    .lh-sig { margin-top: 36px; }
+    .lh-sig-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .lh-sig-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+    .lh-sig-line {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      margin-top: 16px;
+    }
+    .lh-footer {
+      background: var(--navy);
+      padding: 14px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .lh-footer-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: rgba(255,255,255,.22);
+      letter-spacing: .1em;
+    }
+    .lh-footer-line {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      opacity: .3;
+    }
+
+    /* ─────────────────────────────────────────
+       08 BRAND VALUES
+    ───────────────────────────────────────── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(5,1fr);
+      gap: 20px;
+    }
+    .value-card {
+      background: rgba(212,180,131,.06);
+      border: 1px solid rgba(212,180,131,.18);
+      border-radius: 14px;
+      padding: 28px 18px 24px;
+      text-align: center;
+    }
+    .value-icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3560 100%);
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .value-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      letter-spacing: .04em;
+    }
+    .value-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ─────────────────────────────────────────
+       09 KEY MESSAGES
+    ───────────────────────────────────────── */
+    .messages-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+    .msg-card {
+      padding: 52px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .msg-card.dark  { background: var(--navy); }
+    .msg-card.light { background: var(--gray); }
+    .msg-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    }
+    .msg-lang {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .msg-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .msg-card.dark  .msg-text { color: var(--white); }
+    .msg-card.light .msg-text { color: var(--navy); }
+    .msg-text em { color: var(--gold); font-style: normal; }
+
+    /* ─────────────────────────────────────────
+       GLOBAL FOOTER
+    ───────────────────────────────────────── */
+    .site-footer {
+      background: var(--navy);
+      padding: 56px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sf-copy {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,.22);
+      letter-spacing: .12em;
+    }
+    .sf-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212,180,131,.25), transparent);
+      margin: 0 40px;
+    }
+
+    /* ─────────────────────────────────────────
+       UTILITY
+    ───────────────────────────────────────── */
+    .mt-3 { margin-top: 3px; }
+    .divider-gold {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      opacity: .2;
+      margin: 52px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     00  COVER
+═══════════════════════════════════════════ -->
+<section class="cover">
+  <div class="cover-badge">Brand Identity Guidelines 2024</div>
+
+  <!-- Logo (large, on dark) -->
+  <div class="logo lg on-dark">
+    <!-- MARK -->
+    <div class="mark">
+      <svg viewBox="0 0 100 100" width="90" height="90" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+        <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+        <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+        <line x1="12" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+        <line x1="88" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+        <line x1="31" y1="62" x2="69" y2="62" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="divider"></div>
+    <div class="wordmark">
+      <span class="wm-name">AURA</span>
+      <span class="wm-sub">MEDIA GROUP</span>
+    </div>
+  </div>
+
+  <div class="cover-divider-h"></div>
+  <div class="cover-tagline">Your Marketing Growth Partner</div>
+  <p class="cover-desc">
+    We don't just market brands — we build them.<br>
+    A complete visual identity system crafted for growth, trust, and distinction.
+  </p>
+  <div class="cover-footer">Confidential — Internal Use Only</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     01  LOGO SYSTEM
+═══════════════════════════════════════════ -->
+<section class="page white mt-3">
+  <div class="inner">
+    <div class="section-num">01 — Logo System</div>
+    <div class="section-title">Logo Variations</div>
+  </div>
+
+  <!-- Primary logo on light -->
+  <div class="logo-grid">
+    <div class="logo-box light" style="grid-column:1/-1;">
+      <div class="logo md on-light">
+        <div class="mark">
+          <svg viewBox="0 0 100 100" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+            <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+            <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+            <line x1="12" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+            <line x1="88" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+            <line x1="31" y1="62" x2="69" y2="62" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="divider"></div>
+        <div class="wordmark">
+          <span class="wm-name">AURA</span>
+          <span class="wm-sub">MEDIA GROUP</span>
+        </div>
+      </div>
+      <div class="box-caption">Primary — Light Background</div>
+    </div>
+
+    <!-- On navy -->
+    <div class="logo-box dark">
+      <div class="logo md on-dark">
+        <div class="mark">
+          <svg viewBox="0 0 100 100" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+            <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+            <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+            <line x1="12" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+            <line x1="88" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+            <line x1="31" y1="62" x2="69" y2="62" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="divider"></div>
+        <div class="wordmark">
+          <span class="wm-name">AURA</span>
+          <span class="wm-sub">MEDIA GROUP</span>
+        </div>
+      </div>
+      <div class="box-caption">Reversed — Dark Background</div>
+    </div>
+
+    <!-- Stacked on soft gray -->
+    <div class="logo-box soft">
+      <div class="logo-stacked on-light">
+        <div class="mark">
+          <svg viewBox="0 0 100 100" width="58" height="58" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+            <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+            <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+            <line x1="12" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+            <line x1="88" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+            <line x1="31" y1="62" x2="69" y2="62" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="wordmark">
+          <div class="wm-name">AURA</div>
+          <div class="wm-sub">MEDIA GROUP</div>
+        </div>
+      </div>
+      <div class="box-caption">Stacked — Light Background</div>
+    </div>
+  </div>
+
+  <!-- Icon only -->
+  <div class="icon-row">
+    <div class="icon-box light">
+      <svg viewBox="0 0 100 100" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+        <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+        <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+        <line x1="12" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+        <line x1="88" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+        <line x1="31" y1="62" x2="69" y2="62" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+      <div class="box-caption" style="color:var(--muted)">Icon — Light</div>
+    </div>
+    <div class="icon-box" style="background:#0F172A;">
+      <svg viewBox="0 0 100 100" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+        <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+        <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+        <line x1="12" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+        <line x1="88" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+        <line x1="31" y1="62" x2="69" y2="62" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+      <div class="box-caption" style="color:rgba(255,255,255,.25)">Icon — Dark</div>
+    </div>
+    <div class="icon-box" style="background:#D4B483;">
+      <svg viewBox="0 0 100 100" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+        <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+        <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+        <line x1="12" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+        <line x1="88" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+        <line x1="31" y1="62" x2="69" y2="62" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+      <div class="box-caption" style="color:rgba(15,23,42,0.4)">Icon — Gold</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     02  COLOR PALETTE
+═══════════════════════════════════════════ -->
+<section class="page soft mt-3">
+  <div class="inner">
+    <div class="section-num">02 — Color Palette</div>
+    <div class="section-title">Brand Colors</div>
+    <div class="color-grid">
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0F172A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Midnight Navy</div>
+          <div class="swatch-hex">#0F172A</div>
+          <span class="swatch-tag">Primary</span>
+          <div class="swatch-usage">Trust · Professionalism<br>Leadership · Stability</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#D4B483;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Champagne Gold</div>
+          <div class="swatch-hex">#D4B483</div>
+          <span class="swatch-tag">Accent</span>
+          <div class="swatch-usage">Luxury · Success<br>High Value · Achievement</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#FFFFFF; border:1px solid #eee;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Pure White</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <span class="swatch-tag">Background</span>
+          <div class="swatch-usage">Clarity · Simplicity<br>Modernity · Space</div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F8F8F8; border:1px solid #eee;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Soft Gray</div>
+          <div class="swatch-hex">#F8F8F8</div>
+          <span class="swatch-tag">Surface</span>
+          <div class="swatch-usage">Neutral balance<br>Sections · Cards · Panels</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     03  TYPOGRAPHY
+═══════════════════════════════════════════ -->
+<section class="page white mt-3">
+  <div class="inner">
+    <div class="section-num">03 — Typography</div>
+    <div class="section-title">Type System</div>
+  </div>
+  <div class="type-grid">
+    <div class="type-panel">
+      <div class="type-family-label">Montserrat</div>
+      <div class="type-role">Headlines · Display · Brand</div>
+      <div class="type-display">Build<br>Brands.</div>
+      <div class="type-display-light">Drive Growth</div>
+      <div class="type-weights">
+        <div class="tw-row">
+          <span class="tw-label">900 Black</span>
+          <span class="tw-sample-m" style="font-weight:900;">Aura Media Group</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">800 ExtraBold</span>
+          <span class="tw-sample-m" style="font-weight:800;">Aura Media Group</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">700 Bold</span>
+          <span class="tw-sample-m" style="font-weight:700;">Aura Media Group</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">500 Medium</span>
+          <span class="tw-sample-m" style="font-weight:500;">Aura Media Group</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">300 Light</span>
+          <span class="tw-sample-m" style="font-weight:300;">Aura Media Group</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-panel soft">
+      <div class="type-family-label">Inter</div>
+      <div class="type-role">Body · UI · Captions</div>
+      <div class="type-body-display">Clear<br>Sharp.</div>
+      <div class="type-body-sub">Readable at every scale</div>
+      <div class="type-weights">
+        <div class="tw-row">
+          <span class="tw-label">700 Bold</span>
+          <span class="tw-sample-i" style="font-weight:700;">We build brands that grow.</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">600 SemiBold</span>
+          <span class="tw-sample-i" style="font-weight:600;">We build brands that grow.</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">500 Medium</span>
+          <span class="tw-sample-i" style="font-weight:500;">We build brands that grow.</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">400 Regular</span>
+          <span class="tw-sample-i" style="font-weight:400;">We build brands that grow.</span>
+        </div>
+        <div class="tw-row">
+          <span class="tw-label">300 Light</span>
+          <span class="tw-sample-i" style="font-weight:300;">We build brands that grow.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     04  BUSINESS CARD
+═══════════════════════════════════════════ -->
+<section class="page navy mt-3">
+  <div class="inner">
+    <div class="section-num">04 — Collateral</div>
+    <div class="section-title">Business Card</div>
+    <div class="card-showcase">
+
+      <!-- FRONT -->
+      <div class="card-wrap">
+        <div class="bcard bcard-front">
+          <div class="logo sm on-dark" style="position:relative;z-index:1;">
+            <div class="mark">
+              <svg viewBox="0 0 100 100" width="38" height="38" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2.2" stroke-linecap="round" opacity="0.28"/>
+                <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.7" stroke-linecap="round" opacity="0.60"/>
+                <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3.2" stroke-linecap="round" opacity="1"/>
+                <line x1="12" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+                <line x1="88" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+                <line x1="31" y1="62" x2="69" y2="62" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="divider"></div>
+            <div class="wordmark">
+              <span class="wm-name">AURA</span>
+              <span class="wm-sub">MEDIA GROUP</span>
+            </div>
+          </div>
+          <div class="bcard-tagline" style="position:relative;z-index:1;">
+            Your Marketing Growth Partner
+          </div>
+        </div>
+        <div class="card-label">Front</div>
+      </div>
+
+      <!-- BACK -->
+      <div class="card-wrap">
+        <div class="bcard bcard-back">
+          <div class="bc-top">
+            <div class="bc-name">Sara Al-Rashid</div>
+            <div class="bc-title">CEO & Brand Strategist</div>
+            <div class="bc-line"></div>
+            <div class="bc-contacts">
+              <div class="bc-contact"><span class="bc-dot"></span>hello@auramediagroup.com</div>
+              <div class="bc-contact"><span class="bc-dot"></span>+971 50 000 0000</div>
+              <div class="bc-contact"><span class="bc-dot"></span>auramediagroup.com</div>
+              <div class="bc-contact"><span class="bc-dot"></span>@auramediagroup</div>
+            </div>
+          </div>
+          <div class="bc-logo-wrap">
+            <svg viewBox="0 0 100 100" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+              <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+              <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+              <line x1="12" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+              <line x1="88" y1="90" x2="50" y2="34" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+              <line x1="31" y1="62" x2="69" y2="62" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <div class="bc-logo-name">AURA</div>
+              <div class="bc-logo-sub">MEDIA GROUP</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-label">Back</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     05  SOCIAL MEDIA
+═══════════════════════════════════════════ -->
+<section class="page soft mt-3">
+  <div class="inner">
+    <div class="section-num">05 — Digital Presence</div>
+    <div class="section-title">Social Media</div>
+    <div class="social-grid">
+
+      <!-- Instagram mockup -->
+      <div>
+        <div class="ig-phone">
+          <div class="ig-cover"></div>
+          <div class="ig-body">
+            <div class="ig-top-row">
+              <div class="ig-avatar">
+                <svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+                  <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+                  <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+                  <line x1="12" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+                  <line x1="88" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+                  <line x1="31" y1="62" x2="69" y2="62" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <button class="ig-follow-btn">Follow</button>
+            </div>
+            <div class="ig-stats">
+              <div class="ig-stat"><div class="ig-stat-n">248</div><div class="ig-stat-l">Posts</div></div>
+              <div class="ig-stat"><div class="ig-stat-n">14.2K</div><div class="ig-stat-l">Followers</div></div>
+              <div class="ig-stat"><div class="ig-stat-n">382</div><div class="ig-stat-l">Following</div></div>
+            </div>
+            <div class="ig-uname">Aura Media Group</div>
+            <div class="ig-cat">Marketing Agency</div>
+            <div class="ig-bio-text">
+              <span class="gold">Branding · Marketing · Content</span><br>
+              Helping Brands Scale &amp; Grow 🚀<br>
+              We Don't Market Brands — We Build Them.<br>
+              📩 Book Your Free Consultation ↓
+            </div>
+            <div class="ig-link-text">auramediagroup.com/consult</div>
+            <div class="ig-highlights">
+              <div class="ig-hl"><div class="ig-hl-circle">✦</div><div class="ig-hl-label">Services</div></div>
+              <div class="ig-hl"><div class="ig-hl-circle">📈</div><div class="ig-hl-label">Results</div></div>
+              <div class="ig-hl"><div class="ig-hl-circle">🎨</div><div class="ig-hl-label">Branding</div></div>
+              <div class="ig-hl"><div class="ig-hl-circle">💡</div><div class="ig-hl-label">Tips</div></div>
+              <div class="ig-hl"><div class="ig-hl-circle">🤝</div><div class="ig-hl-label">About Us</div></div>
+            </div>
+            <div class="ig-postsep"></div>
+            <div class="ig-pgrid">
+              <div></div><div></div><div></div>
+              <div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post template -->
+      <div>
+        <div class="post-frame">
+          <div class="post-gold-bar"></div>
+          <div class="post-top">
+            <div class="post-tag">Marketing Tips</div>
+            <div class="post-num">01 / 05</div>
+          </div>
+          <div class="post-mid">
+            <div class="post-headline">
+              لماذا إعلاناتك<br>
+              لا تحقق <em>نتائج</em>؟
+            </div>
+            <div class="post-body-text">
+              السبب الحقيقي ليس الميزانية —<br>
+              بل غياب الاستراتيجية الصحيحة.
+            </div>
+          </div>
+          <div class="post-bottom">
+            <div class="post-logo-area">
+              <svg viewBox="0 0 100 100" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+                <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+                <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+                <line x1="12" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+                <line x1="88" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+                <line x1="31" y1="62" x2="69" y2="62" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+              </svg>
+              <div class="post-logo-text">
+                <div class="post-logo-name">AURA</div>
+                <div class="post-logo-sub">MEDIA GROUP</div>
+              </div>
+            </div>
+            <div class="post-dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     06  LETTERHEAD
+═══════════════════════════════════════════ -->
+<section class="page white mt-3">
+  <div class="inner">
+    <div class="section-num">06 — Collateral</div>
+    <div class="section-title">Letterhead</div>
+  </div>
+  <div style="padding: 0 60px;">
+    <div class="letterhead">
+      <div class="lh-header">
+        <div class="logo sm on-dark">
+          <div class="mark">
+            <svg viewBox="0 0 100 100" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+              <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+              <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+              <line x1="12" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+              <line x1="88" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+              <line x1="31" y1="62" x2="69" y2="62" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="divider"></div>
+          <div class="wordmark">
+            <span class="wm-name">AURA</span>
+            <span class="wm-sub">MEDIA GROUP</span>
+          </div>
+        </div>
+        <div class="lh-addr">
+          Dubai, United Arab Emirates<br>
+          hello@auramediagroup.com<br>
+          auramediagroup.com
+        </div>
+      </div>
+      <div class="lh-body">
+        <div class="lh-date">June 14, 2024</div>
+        <div class="lh-subject">Proposal — Brand Growth Partnership</div>
+        <div class="lh-greeting">Dear Valued Client,</div>
+        <div class="lh-para">
+          Thank you for considering Aura Media Group as your growth partner. We believe that great
+          marketing is not about noise — it is about building a brand that resonates, attracts, and
+          converts. Our team brings together strategic thinking, creative execution, and data-driven
+          insights to deliver measurable results.
+        </div>
+        <div class="lh-para">
+          We would be delighted to walk you through a tailored proposal crafted specifically for
+          your brand goals and market position. Our commitment is simple: we succeed when you succeed.
+        </div>
+        <div class="lh-sig">
+          <div class="lh-sig-line"></div>
+          <div style="height:12px;"></div>
+          <div class="lh-sig-name">Sara Al-Rashid</div>
+          <div class="lh-sig-title">CEO & Brand Strategist — Aura Media Group</div>
+        </div>
+      </div>
+      <div class="lh-footer">
+        <div class="lh-footer-text">auramediagroup.com</div>
+        <div class="lh-footer-line"></div>
+        <div class="lh-footer-text">© 2024 Aura Media Group</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     07  BRAND VALUES
+═══════════════════════════════════════════ -->
+<section class="page soft mt-3">
+  <div class="inner">
+    <div class="section-num">07 — Brand DNA</div>
+    <div class="section-title">Core Values</div>
+    <div class="values-grid">
+
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 10 3 L 17 7 L 17 13 L 10 17 L 3 13 L 3 7 Z" stroke="#D4B483" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="value-name">Partnership</div>
+        <div class="value-desc">We succeed when the client succeeds.</div>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="3" stroke="#D4B483" stroke-width="1.5"/>
+            <path d="M10 2 L10 5 M10 15 L10 18 M2 10 L5 10 M15 10 L18 10" stroke="#D4B483" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="value-name">Creativity</div>
+        <div class="value-desc">Innovative solutions, never copied.</div>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="3,14 8,9 12,12 17,5" stroke="#D4B483" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="14,5 17,5 17,8" stroke="#D4B483" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="value-name">Growth</div>
+        <div class="value-desc">Every decision supports sustainable growth.</div>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 10 2 L 12.4 7.4 L 18 8.2 L 14 12.1 L 14.9 18 L 10 15.4 L 5.1 18 L 6 12.1 L 2 8.2 L 7.6 7.4 Z" stroke="#D4B483" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="value-name">Excellence</div>
+        <div class="value-desc">Professional execution at the highest standard.</div>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="7" stroke="#D4B483" stroke-width="1.5"/>
+            <path d="M10 6 L10 10 L13 13" stroke="#D4B483" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="value-name">Transparency</div>
+        <div class="value-desc">Full clarity with every client, always.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     08  KEY MESSAGES
+═══════════════════════════════════════════ -->
+<section class="page white mt-3">
+  <div class="inner">
+    <div class="section-num">08 — Brand Voice</div>
+    <div class="section-title">Core Messages</div>
+  </div>
+  <div class="messages-grid">
+
+    <div class="msg-card dark">
+      <div class="msg-lang">English</div>
+      <div class="msg-text">
+        We Become Part<br>
+        Of Your Business,<br>
+        Not Just <em>Another Agency.</em>
+      </div>
+    </div>
+
+    <div class="msg-card light">
+      <div class="msg-lang">العربية</div>
+      <div class="msg-text" style="direction:rtl; font-family:'Inter',sans-serif; font-size:18px; line-height:1.6;">
+        نحن لا ندير صفحاتك فقط،<br>
+        بل نصبح <em>شريك النمو</em><br>
+        الذي يساعد علامتك التجارية<br>
+        على التوسع وتحقيق نتائج حقيقية.
+      </div>
+    </div>
+
+    <div class="msg-card light">
+      <div class="msg-lang">Tagline Option 01</div>
+      <div class="msg-text">
+        <em>Your Marketing</em><br>
+        Growth Partner.
+      </div>
+    </div>
+
+    <div class="msg-card dark">
+      <div class="msg-lang">Tagline Option 02</div>
+      <div class="msg-text">
+        We Don't Market Brands,<br>
+        <em>We Build Them.</em>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     GLOBAL FOOTER
+═══════════════════════════════════════════ -->
+<footer class="site-footer mt-3">
+  <div class="logo sm on-dark">
+    <div class="mark">
+      <svg viewBox="0 0 100 100" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.28"/>
+        <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.60"/>
+        <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
+        <line x1="12" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+        <line x1="88" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+        <line x1="31" y1="62" x2="69" y2="62" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="divider"></div>
+    <div class="wordmark">
+      <span class="wm-name">AURA</span>
+      <span class="wm-sub">MEDIA GROUP</span>
+    </div>
+  </div>
+  <div class="sf-line"></div>
+  <div class="sf-copy">© 2024 Aura Media Group — Brand Identity System</div>
+</footer>
+
+</body>
+</html>
