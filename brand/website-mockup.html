@@ -1,206 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aura Media Group — We Build Brands</title>
+  <title>أورا ميديا جروب — نحن نبني العلامات التجارية</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy:#0F172A; --navy2:#1a2840; --gold:#D4B483; --white:#fff;
-      --gray:#F8F8F8; --muted:#6B7280;
-      --gold-a4:rgba(212,180,131,.4); --gold-a1:rgba(212,180,131,.1);
+    *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+    :root{
+      --espresso:#2D2620; --coffee:#3E342B; --bronze:#B0895A; --bronze-d:#8A6A42;
+      --cream:#F7F1E8; --sand:#ECE1D1; --linen:#FCF8F2; --muted:#94856F;
+      --bronze-a4:rgba(176,137,90,.4); --bronze-a1:rgba(176,137,90,.10);
     }
-    html { scroll-behavior:smooth; }
-    body { font-family:'Inter',sans-serif; color:var(--navy); background:var(--white); line-height:1.6; }
-    a { text-decoration:none; color:inherit; }
-    .container { max-width:1140px; margin:0 auto; padding:0 32px; }
+    html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+    body{ font-family:'Tajawal',sans-serif; color:var(--coffee); background:var(--cream); line-height:1.85; }
+    a{ text-decoration:none; color:inherit; }
+    img,svg{ display:block; }
+    .container{ width:100%; max-width:1140px; margin:0 auto; padding:0 20px; }
+    h1,h2,h3,h4,h5{ font-family:'Cairo',sans-serif; color:var(--espresso); }
 
-    /* logo helper */
-    .logo { display:inline-flex; align-items:center; gap:0; }
-    .logo .divider { width:1px; align-self:stretch; margin:0 14px;
-      background:linear-gradient(to bottom,transparent,var(--gold),transparent); opacity:.55; min-height:34px; }
-    .logo .wordmark { display:flex; flex-direction:column; }
-    .logo .wm-name { font-family:'Montserrat',sans-serif; font-weight:800; letter-spacing:.18em; line-height:1; font-size:19px; }
-    .logo .wm-sub  { font-family:'Montserrat',sans-serif; font-weight:400; letter-spacing:.4em; font-size:6.5px; color:var(--gold); margin-top:4px; }
-    .on-dark .wm-name { color:#fff; } .on-light .wm-name { color:var(--navy); }
+    .btn{ font-family:'Cairo',sans-serif; font-weight:700; font-size:14px; padding:13px 26px;
+      border-radius:100px; cursor:pointer; display:inline-block; transition:all .2s; border:1px solid transparent; white-space:nowrap; }
+    .btn-bronze{ background:var(--bronze); color:#fff; }
+    .btn-bronze:hover{ background:var(--bronze-d); transform:translateY(-1px); }
+    .btn-ghost{ background:transparent; color:var(--cream); border-color:var(--bronze-a4); }
+    .btn-ghost:hover{ background:var(--bronze-a1); border-color:var(--bronze); }
+    .btn-espresso{ background:var(--espresso); color:var(--cream); }
+    .btn-espresso:hover{ background:#1f1a16; }
 
-    /* ── NAV ── */
-    header {
-      position:sticky; top:0; z-index:50;
-      background:rgba(15,23,42,.92); backdrop-filter:blur(10px);
-      border-bottom:1px solid rgba(212,180,131,.12);
-    }
-    .nav { display:flex; align-items:center; justify-content:space-between; height:74px; }
-    .nav-links { display:flex; gap:34px; align-items:center; }
-    .nav-links a {
-      font-size:13px; font-weight:500; color:rgba(255,255,255,.7);
-      letter-spacing:.02em; transition:color .2s;
-    }
-    .nav-links a:hover { color:var(--gold); }
-    .btn {
-      font-family:'Montserrat',sans-serif; font-weight:600; font-size:12px;
-      letter-spacing:.04em; padding:11px 24px; border-radius:100px; cursor:pointer;
-      display:inline-block; transition:all .2s; border:1px solid transparent;
-    }
-    .btn-gold { background:var(--gold); color:var(--navy); }
-    .btn-gold:hover { background:#e0c597; transform:translateY(-1px); }
-    .btn-ghost { background:transparent; color:#fff; border-color:var(--gold-a4); }
-    .btn-ghost:hover { background:var(--gold-a1); border-color:var(--gold); }
+    /* NAV */
+    header{ position:sticky; top:0; z-index:50; background:rgba(247,241,232,.92);
+      backdrop-filter:blur(10px); border-bottom:1px solid #E4D8C5; }
+    .nav{ display:flex; align-items:center; justify-content:space-between; min-height:72px; }
+    .nav-logo{ height:42px; width:auto; }
+    .nav-links{ display:flex; gap:30px; align-items:center; }
+    .nav-links a{ font-family:'Tajawal',sans-serif; font-size:15px; font-weight:500; color:var(--coffee); transition:color .2s; }
+    .nav-links a:hover{ color:var(--bronze-d); }
+    .nav-toggle{ display:none; }
+    .burger{ display:none; cursor:pointer; width:42px; height:42px; border-radius:10px;
+      border:1px solid var(--bronze-a4); align-items:center; justify-content:center; flex-direction:column; gap:5px; }
+    .burger span{ width:20px; height:2px; background:var(--bronze-d); border-radius:2px; }
 
-    /* ── HERO ── */
-    .hero {
-      background:var(--navy); position:relative; overflow:hidden;
-      padding:120px 0 130px; text-align:center;
-    }
-    .hero::before {
-      content:''; position:absolute; inset:0;
-      background:
-        radial-gradient(ellipse 55% 45% at 50% 35%, rgba(212,180,131,.09) 0%, transparent 68%),
-        radial-gradient(ellipse 30% 30% at 15% 85%, rgba(212,180,131,.05) 0%, transparent 60%);
-    }
-    .hero > * { position:relative; z-index:1; }
-    .hero-badge {
-      display:inline-block; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600;
-      letter-spacing:.35em; text-transform:uppercase; color:var(--gold);
-      border:1px solid var(--gold-a4); padding:8px 22px; border-radius:100px; margin-bottom:34px;
-    }
-    .hero h1 {
-      font-family:'Montserrat',sans-serif; font-weight:800; color:#fff;
-      font-size:62px; line-height:1.08; letter-spacing:-.015em; margin-bottom:28px;
-    }
-    .hero h1 em { color:var(--gold); font-style:normal; }
-    .hero p {
-      font-size:17px; font-weight:300; color:rgba(255,255,255,.6);
-      max-width:560px; margin:0 auto 42px; line-height:1.8;
-    }
-    .hero-cta { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-    .hero-stats {
-      display:flex; gap:56px; justify-content:center; margin-top:80px;
-      padding-top:44px; border-top:1px solid rgba(255,255,255,.07);
-    }
-    .hstat-n { font-family:'Montserrat',sans-serif; font-weight:800; font-size:38px; color:#fff; }
-    .hstat-n span { color:var(--gold); }
-    .hstat-l { font-size:12px; color:rgba(255,255,255,.45); letter-spacing:.05em; margin-top:4px; }
+    /* HERO */
+    .hero{ background:var(--espresso); position:relative; overflow:hidden; padding:60px 0 86px; text-align:center; }
+    .hero::before{ content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 50% at 50% 30%, rgba(176,137,90,.16) 0%, transparent 66%); }
+    .hero > *{ position:relative; z-index:1; }
+    .hero-logo{ width:min(300px,76vw); height:auto; margin:0 auto 14px; }
+    .hero-badge{ display:inline-block; font-family:'Cairo',sans-serif; font-size:12px; font-weight:700;
+      color:var(--bronze); border:1px solid var(--bronze-a4); padding:8px 22px; border-radius:100px; margin-bottom:24px; }
+    .hero h1{ font-weight:800; color:var(--cream); font-size:clamp(28px,6.5vw,52px); line-height:1.3; }
+    .hero h1 em{ color:var(--bronze); font-style:normal; }
+    .hero p{ font-size:clamp(15px,2.4vw,18px); font-weight:400; color:rgba(247,241,232,.72);
+      max-width:600px; margin:20px auto 36px; line-height:2; }
+    .hero-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .hero-stats{ display:flex; gap:clamp(24px,6vw,60px); justify-content:center; flex-wrap:wrap;
+      margin-top:58px; padding-top:38px; border-top:1px solid rgba(247,241,232,.12); }
+    .hstat-n{ font-family:'Cairo',sans-serif; font-weight:800; font-size:clamp(28px,6vw,38px); color:var(--cream); }
+    .hstat-n span{ color:var(--bronze); }
+    .hstat-l{ font-size:13px; color:rgba(247,241,232,.55); margin-top:4px; }
 
-    /* ── SECTION SHELL ── */
-    section { padding:100px 0; }
-    .eyebrow {
-      font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600;
-      letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin-bottom:14px;
-    }
-    .sec-title {
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:38px;
-      color:var(--navy); line-height:1.15; letter-spacing:-.01em;
-    }
-    .sec-title.on-dark { color:#fff; }
-    .sec-head { max-width:620px; margin-bottom:60px; }
-    .sec-head.center { margin-left:auto; margin-right:auto; text-align:center; }
-    .sec-sub { font-size:15px; color:var(--muted); margin-top:18px; font-weight:300; }
-    .sec-head.on-dark .sec-sub { color:rgba(255,255,255,.55); }
+    /* SECTION */
+    section{ padding:clamp(60px,9vw,100px) 0; }
+    .eyebrow{ font-family:'Cairo',sans-serif; font-size:13px; font-weight:700; color:var(--bronze-d); margin-bottom:12px; }
+    .sec-title{ font-weight:800; font-size:clamp(26px,5vw,38px); line-height:1.35; }
+    .sec-title.on-dark{ color:var(--cream); }
+    .sec-head{ max-width:660px; margin-bottom:50px; }
+    .sec-head.center{ margin-inline:auto; text-align:center; }
+    .sec-sub{ font-size:16px; color:var(--muted); margin-top:16px; }
+    .sec-head.on-dark .sec-sub{ color:rgba(247,241,232,.6); }
 
-    /* ── SERVICES ── */
-    .svc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
-    .svc {
-      background:var(--white); border:1px solid #eee; border-radius:16px;
-      padding:34px 28px; transition:all .25s;
-    }
-    .svc:hover { border-color:var(--gold-a4); transform:translateY(-4px); box-shadow:0 18px 40px rgba(15,23,42,.08); }
-    .svc-ic {
-      width:52px; height:52px; border-radius:14px; margin-bottom:22px;
-      background:linear-gradient(135deg,var(--navy),#1e3560);
-      display:flex; align-items:center; justify-content:center;
-    }
-    .svc h3 { font-family:'Montserrat',sans-serif; font-weight:700; font-size:18px; margin-bottom:12px; }
-    .svc p { font-size:13px; color:var(--muted); line-height:1.7; }
+    /* SERVICES (detailed, no packages/prices) */
+    .svc-list{ display:flex; flex-direction:column; gap:20px; }
+    .svc{ background:var(--linen); border:1px solid #E4D8C5; border-radius:20px; overflow:hidden;
+      display:grid; grid-template-columns:300px 1fr; transition:all .25s; }
+    .svc:hover{ border-color:var(--bronze-a4); box-shadow:0 16px 40px rgba(45,38,32,.08); }
+    .svc-side{ background:var(--espresso); padding:36px 32px; display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden; }
+    .svc-side::after{ content:''; position:absolute; width:170px; height:170px; border-radius:50%;
+      background:radial-gradient(circle,rgba(176,137,90,.16),transparent 65%); top:-60px; left:-50px; }
+    .svc-ic{ width:54px; height:54px; border-radius:15px; border:1px solid var(--bronze-a4);
+      display:flex; align-items:center; justify-content:center; margin-bottom:18px; position:relative; z-index:1; }
+    .svc-side h3{ color:var(--cream); font-size:22px; font-weight:800; position:relative; z-index:1; }
+    .svc-side .en{ font-family:'Cairo',sans-serif; font-size:12px; color:var(--bronze); letter-spacing:.12em;
+      margin-top:6px; position:relative; z-index:1; text-transform:uppercase; }
+    .svc-body{ padding:34px 36px; display:flex; flex-direction:column; justify-content:center; }
+    .svc-desc{ font-size:14.5px; color:var(--muted); margin-bottom:18px; line-height:1.9; }
+    .svc-items{ display:flex; flex-wrap:wrap; gap:9px; }
+    .svc-item{ font-family:'Tajawal',sans-serif; font-size:13.5px; font-weight:500; color:var(--coffee);
+      background:var(--bronze-a1); border:1px solid var(--bronze-a4); padding:7px 15px; border-radius:100px; }
 
-    /* ── WHY / VALUE BAND ── */
-    .band { background:var(--navy); position:relative; overflow:hidden; }
-    .band::before {
-      content:''; position:absolute; width:480px; height:480px; border-radius:50%;
-      background:radial-gradient(circle,rgba(212,180,131,.08),transparent 65%);
-      top:-200px; right:-160px;
-    }
-    .band .container { position:relative; z-index:1; }
-    .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:48px 40px; }
-    .why-item { }
-    .why-num {
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:15px;
-      color:var(--navy); background:var(--gold); width:38px; height:38px;
-      border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:18px;
-    }
-    .why-item h4 { font-family:'Montserrat',sans-serif; color:#fff; font-size:17px; font-weight:700; margin-bottom:10px; }
-    .why-item p { font-size:13.5px; color:rgba(255,255,255,.55); line-height:1.7; font-weight:300; }
+    /* WHY */
+    .band{ background:var(--sand); }
+    .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:38px 34px; }
+    .why-num{ font-family:'Cairo',sans-serif; font-weight:800; font-size:15px; color:var(--cream);
+      background:var(--espresso); width:42px; height:42px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+    .why-item h4{ font-size:18px; font-weight:700; margin-bottom:8px; }
+    .why-item p{ font-size:14.5px; color:var(--muted); line-height:1.9; }
 
-    /* ── PACKAGES ── */
-    .pkg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:stretch; }
-    .pkg {
-      background:#fff; border:1px solid #eee; border-radius:18px; overflow:hidden;
-      display:flex; flex-direction:column; transition:all .25s;
-    }
-    .pkg:hover { box-shadow:0 18px 44px rgba(15,23,42,.09); transform:translateY(-4px); }
-    .pkg.featured { border-color:var(--gold); box-shadow:0 18px 50px rgba(212,180,131,.18); }
-    .pkg-top { padding:32px 30px 26px; border-bottom:1px solid #f0f0f0; position:relative; }
-    .pkg.featured .pkg-top { background:var(--navy); }
-    .pkg-flag {
-      position:absolute; top:18px; right:24px; font-family:'Montserrat',sans-serif;
-      font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
-      color:var(--navy); background:var(--gold); padding:4px 12px; border-radius:100px;
-    }
-    .pkg-name { font-family:'Montserrat',sans-serif; font-weight:800; font-size:22px; }
-    .pkg.featured .pkg-name { color:#fff; }
-    .pkg-for { font-size:12px; color:var(--muted); margin-top:4px; }
-    .pkg.featured .pkg-for { color:rgba(255,255,255,.5); }
-    .pkg-price { margin-top:22px; font-family:'Montserrat',sans-serif; }
-    .pkg-price .amt { font-size:40px; font-weight:800; color:var(--navy); }
-    .pkg.featured .pkg-price .amt { color:var(--gold); }
-    .pkg-price .per { font-size:13px; color:var(--muted); font-weight:400; }
-    .pkg.featured .pkg-price .per { color:rgba(255,255,255,.5); }
-    .pkg-body { padding:28px 30px 32px; display:flex; flex-direction:column; flex:1; }
-    .pkg-feats { display:flex; flex-direction:column; gap:13px; margin-bottom:28px; flex:1; }
-    .pkg-feat { display:flex; gap:11px; align-items:flex-start; font-size:13.5px; color:#374151; }
-    .pkg-feat .ck { width:18px; height:18px; border-radius:50%; background:var(--gold-a1);
-      display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
-    .pkg .btn { text-align:center; width:100%; }
-    .btn-navy { background:var(--navy); color:#fff; }
-    .btn-navy:hover { background:#1c2c4a; }
+    /* CTA */
+    .cta-band{ background:var(--espresso); text-align:center; position:relative; overflow:hidden; }
+    .cta-band::before{ content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 50% 60% at 50% 50%,rgba(176,137,90,.16),transparent 70%); }
+    .cta-band .container{ position:relative; z-index:1; }
+    .cta-band h2{ font-weight:800; font-size:clamp(26px,5vw,42px); color:var(--cream); line-height:1.4; margin-bottom:16px; }
+    .cta-band h2 em{ color:var(--bronze); font-style:normal; }
+    .cta-band p{ color:rgba(247,241,232,.66); font-size:16px; max-width:520px; margin:0 auto 32px; }
 
-    /* ── CTA ── */
-    .cta-band { background:linear-gradient(135deg,var(--navy) 0%,#16223d 100%); text-align:center; position:relative; overflow:hidden; }
-    .cta-band::before {
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(ellipse 50% 60% at 50% 50%,rgba(212,180,131,.10),transparent 70%);
-    }
-    .cta-band .container { position:relative; z-index:1; }
-    .cta-band h2 { font-family:'Montserrat',sans-serif; font-weight:800; font-size:42px; color:#fff; line-height:1.2; margin-bottom:20px; }
-    .cta-band h2 em { color:var(--gold); font-style:normal; }
-    .cta-band p { color:rgba(255,255,255,.6); font-size:16px; font-weight:300; max-width:480px; margin:0 auto 36px; }
+    /* FOOTER */
+    footer{ background:#221C17; padding:58px 0 30px; }
+    .foot-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:36px;
+      padding-bottom:42px; border-bottom:1px solid rgba(247,241,232,.08); }
+    .foot-logo{ height:48px; width:auto; margin-bottom:18px; }
+    .foot-tag{ font-size:14px; color:rgba(247,241,232,.5); line-height:2; max-width:300px; }
+    .foot-col h5{ font-family:'Cairo',sans-serif; font-size:14px; font-weight:700; color:var(--bronze); margin-bottom:16px; }
+    .foot-col a{ display:block; font-size:14.5px; color:rgba(247,241,232,.58); margin-bottom:11px; transition:color .2s; }
+    .foot-col a:hover{ color:var(--cream); }
+    .foot-bottom{ display:flex; justify-content:space-between; align-items:center; padding-top:24px; flex-wrap:wrap; gap:14px; }
+    .foot-bottom span{ font-size:13px; color:rgba(247,241,232,.32); }
+    .foot-social{ display:flex; gap:12px; direction:ltr; }
+    .foot-social a{ width:36px; height:36px; border-radius:50%; border:1px solid var(--bronze-a4);
+      display:flex; align-items:center; justify-content:center; color:var(--bronze); transition:all .2s; }
+    .foot-social a:hover{ background:var(--bronze); color:var(--espresso); }
 
-    /* ── FOOTER ── */
-    footer { background:#0b1220; padding:64px 0 32px; }
-    .foot-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.07); }
-    .foot-tag { font-size:13px; color:rgba(255,255,255,.45); line-height:1.8; margin-top:22px; max-width:280px; font-weight:300; }
-    .foot-col h5 { font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
-    .foot-col a { display:block; font-size:13.5px; color:rgba(255,255,255,.55); margin-bottom:11px; transition:color .2s; }
-    .foot-col a:hover { color:#fff; }
-    .foot-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:26px; flex-wrap:wrap; gap:14px; }
-    .foot-bottom span { font-size:12px; color:rgba(255,255,255,.3); letter-spacing:.05em; }
-    .foot-social { display:flex; gap:12px; }
-    .foot-social a {
-      width:34px; height:34px; border-radius:50%; border:1px solid rgba(212,180,131,.25);
-      display:flex; align-items:center; justify-content:center; color:var(--gold); transition:all .2s;
-    }
-    .foot-social a:hover { background:var(--gold); color:var(--navy); }
-
+    /* MOBILE */
     @media(max-width:900px){
-      .svc-grid,.why-grid,.pkg-grid,.foot-grid{ grid-template-columns:1fr; }
-      .hero h1{ font-size:42px; }
-      .nav-links{ display:none; }
-      .hero-stats{ gap:28px; flex-wrap:wrap; }
+      .why-grid{ grid-template-columns:repeat(2,1fr); }
+      .foot-grid{ grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:680px){
+      .burger{ display:flex; }
+      .nav-links{ position:absolute; top:72px; right:0; left:0; flex-direction:column; gap:0;
+        background:var(--cream); border-bottom:1px solid #E4D8C5; max-height:0; overflow:hidden;
+        transition:max-height .3s ease; padding:0 20px; }
+      .nav-toggle:checked ~ .nav-links{ max-height:340px; padding:10px 20px 22px; }
+      .nav-links a{ width:100%; padding:13px 0; border-bottom:1px solid #E4D8C5; font-size:16px; }
+      .nav-links a.btn{ margin-top:14px; text-align:center; border-bottom:none; }
+      .svc{ grid-template-columns:1fr; }
+      .svc-side{ padding:28px; }
+      .why-grid{ grid-template-columns:1fr; }
+      .foot-grid{ grid-template-columns:1fr; gap:28px; text-align:center; }
+      .foot-tag{ margin-inline:auto; }
+      .foot-logo{ margin-inline:auto; }
+      .foot-bottom{ justify-content:center; text-align:center; }
+      .hero-cta .btn{ width:100%; max-width:320px; }
     }
   </style>
 </head>
@@ -209,23 +155,13 @@
 <!-- NAV -->
 <header>
   <div class="container nav">
-    <a href="#" class="logo on-dark">
-      <svg viewBox="0 0 100 100" width="38" height="38" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2" stroke-linecap="round" opacity="0.28"/>
-        <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-        <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3" stroke-linecap="round" opacity="1"/>
-        <line x1="12" y1="90" x2="50" y2="34" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-        <line x1="88" y1="90" x2="50" y2="34" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-        <line x1="31" y1="62" x2="69" y2="62" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-      </svg>
-      <div class="divider"></div>
-      <div class="wordmark"><span class="wm-name">AURA</span><span class="wm-sub">MEDIA GROUP</span></div>
-    </a>
+    <a href="#" aria-label="أورا ميديا جروب"><img class="nav-logo" src="logo.svg" alt="أورا ميديا جروب"></a>
+    <input type="checkbox" id="navtoggle" class="nav-toggle">
+    <label for="navtoggle" class="burger" aria-label="القائمة"><span></span><span></span><span></span></label>
     <nav class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#why">Why Aura</a>
-      <a href="#packages">Packages</a>
-      <a href="#contact" class="btn btn-gold">Free Consultation</a>
+      <a href="#services">الخدمات</a>
+      <a href="#why">لماذا أورا</a>
+      <a href="#contact" class="btn btn-bronze">استشارة مجانية</a>
     </nav>
   </div>
 </header>
@@ -233,50 +169,102 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">Your Marketing Growth Partner</div>
-    <h1>We Don't Market Brands.<br><em>We Build Them.</em></h1>
-    <p>Aura Media Group becomes part of your business — a dedicated growth team that builds your identity, attracts customers, and scales your brand with real, measurable results.</p>
+    <img class="hero-logo" src="logo-animated.svg" alt="أورا ميديا جروب">
+    <div class="hero-badge">شريكك في النمو التسويقي</div>
+    <h1>نحن لا نُسوّق العلامات.<br><em>بل نبنيها.</em></h1>
+    <p>تصبح «أورا ميديا جروب» جزءاً من عملك — فريق نمو متكامل يبني هويتك، يجذب عملاءك، ويوسّع علامتك التجارية بنتائج حقيقية وقابلة للقياس.</p>
     <div class="hero-cta">
-      <a href="#contact" class="btn btn-gold">Book Your Free Consultation</a>
-      <a href="#services" class="btn btn-ghost">Explore Services</a>
+      <a href="#contact" class="btn btn-bronze">احجز استشارتك المجانية</a>
+      <a href="#services" class="btn btn-ghost">استكشف الخدمات</a>
     </div>
     <div class="hero-stats">
-      <div><div class="hstat-n">120<span>+</span></div><div class="hstat-l">Brands Built</div></div>
-      <div><div class="hstat-n">3.4<span>x</span></div><div class="hstat-l">Avg. Growth</div></div>
-      <div><div class="hstat-n">98<span>%</span></div><div class="hstat-l">Client Retention</div></div>
+      <div><div class="hstat-n"><span>+</span>120</div><div class="hstat-l">علامة تجارية</div></div>
+      <div><div class="hstat-n">3.4<span>x</span></div><div class="hstat-l">متوسط النمو</div></div>
+      <div><div class="hstat-n">98<span>%</span></div><div class="hstat-l">بقاء العملاء</div></div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- SERVICES (detailed, no packages, no prices) -->
 <section id="services">
   <div class="container">
     <div class="sec-head center">
-      <div class="eyebrow">What We Do</div>
-      <h2 class="sec-title">Full-Service Growth</h2>
-      <p class="sec-sub">From identity to revenue — everything your brand needs under one roof.</p>
+      <div class="eyebrow">خدماتنا</div>
+      <h2 class="sec-title">كل ما تحتاجه علامتك تحت سقفٍ واحد</h2>
+      <p class="sec-sub">من الهوية إلى الإيرادات — حلول متكاملة مصمّمة خصيصاً لنموّ علامتك التجارية.</p>
     </div>
-    <div class="svc-grid">
+    <div class="svc-list">
+
       <div class="svc">
-        <div class="svc-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3 L19 7 L19 13 L12 17 L5 13 L5 7 Z" stroke="#D4B483" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.2" stroke="#D4B483" stroke-width="1.4"/></svg></div>
-        <h3>Branding</h3>
-        <p>Logo design, visual identity, brand strategy &amp; positioning that make you unforgettable.</p>
+        <div class="svc-side">
+          <div class="svc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#B0895A" stroke-width="1.4"/><path d="M9 16 L12 7 L15 16 M10.2 13 L13.8 13" stroke="#F7F1E8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>بناء العلامة</h3>
+          <div class="en">Branding</div>
+        </div>
+        <div class="svc-body">
+          <p class="svc-desc">نبني هوية بصرية متكاملة تجعل علامتك لا تُنسى وتعكس قيمتها الحقيقية في السوق.</p>
+          <div class="svc-items">
+            <span class="svc-item">تصميم الشعار</span>
+            <span class="svc-item">الهوية البصرية</span>
+            <span class="svc-item">استراتيجية العلامة</span>
+            <span class="svc-item">تموضع العلامة</span>
+          </div>
+        </div>
       </div>
+
       <div class="svc">
-        <div class="svc-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 15 L4 9 L9 9 L16 5 L16 19 L9 15 Z" stroke="#D4B483" stroke-width="1.4" stroke-linejoin="round"/><path d="M18 9 C20 10.5 20 13.5 18 15" stroke="#D4B483" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-        <h3>Marketing</h3>
-        <p>Meta, TikTok &amp; Google Ads, social media management and lead generation that convert.</p>
+        <div class="svc-side">
+          <div class="svc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 15 L4 9 L9 9 L16 5 L16 19 L9 15 Z" stroke="#B0895A" stroke-width="1.4" stroke-linejoin="round"/><path d="M18 9 C20 10.5 20 13.5 18 15" stroke="#B0895A" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <h3>التسويق</h3>
+          <div class="en">Marketing</div>
+        </div>
+        <div class="svc-body">
+          <p class="svc-desc">حملات مدروسة تجذب العملاء المناسبين وتحوّلهم إلى مبيعات حقيقية عبر كل المنصات.</p>
+          <div class="svc-items">
+            <span class="svc-item">إدارة السوشال ميديا</span>
+            <span class="svc-item">إعلانات ميتا</span>
+            <span class="svc-item">إعلانات تيك توك</span>
+            <span class="svc-item">إعلانات جوجل</span>
+            <span class="svc-item">جذب العملاء المحتملين</span>
+          </div>
+        </div>
       </div>
+
       <div class="svc">
-        <div class="svc-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#D4B483" stroke-width="1.4"/><path d="M10 9.5 L14.5 12 L10 14.5 Z" fill="#D4B483"/></svg></div>
-        <h3>Content Creation</h3>
-        <p>Reels, video editing, copywriting, photography direction &amp; graphic design that stop the scroll.</p>
+        <div class="svc-side">
+          <div class="svc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#B0895A" stroke-width="1.4"/><path d="M10 9.5 L14.5 12 L10 14.5 Z" fill="#F7F1E8"/></svg></div>
+          <h3>صناعة المحتوى</h3>
+          <div class="en">Content</div>
+        </div>
+        <div class="svc-body">
+          <p class="svc-desc">محتوى إبداعي يوقف التمرير ويبني علاقة حقيقية بين علامتك وجمهورك.</p>
+          <div class="svc-items">
+            <span class="svc-item">ريلز</span>
+            <span class="svc-item">مونتاج فيديو</span>
+            <span class="svc-item">كتابة إعلانية</span>
+            <span class="svc-item">إدارة التصوير</span>
+            <span class="svc-item">تصميم جرافيك</span>
+          </div>
+        </div>
       </div>
+
       <div class="svc">
-        <div class="svc-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#D4B483" stroke-width="1.4"/><path d="M3 9 L21 9" stroke="#D4B483" stroke-width="1.4"/><circle cx="5.6" cy="7" r="0.7" fill="#D4B483"/><circle cx="7.8" cy="7" r="0.7" fill="#D4B483"/></svg></div>
-        <h3>Web Development</h3>
-        <p>Shopify, WordPress, high-converting landing pages and conversion-rate optimization.</p>
+        <div class="svc-side">
+          <div class="svc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#B0895A" stroke-width="1.4"/><path d="M3 9 L21 9" stroke="#B0895A" stroke-width="1.4"/><circle cx="5.6" cy="7" r="0.7" fill="#F7F1E8"/><circle cx="7.8" cy="7" r="0.7" fill="#F7F1E8"/></svg></div>
+          <h3>تطوير المواقع</h3>
+          <div class="en">Web</div>
+        </div>
+        <div class="svc-body">
+          <p class="svc-desc">مواقع وصفحات هبوط سريعة وأنيقة مصمّمة لتحويل الزوار إلى عملاء.</p>
+          <div class="svc-items">
+            <span class="svc-item">شوبيفاي</span>
+            <span class="svc-item">ووردبريس</span>
+            <span class="svc-item">صفحات هبوط</span>
+            <span class="svc-item">تحسين معدّلات التحويل</span>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -284,85 +272,18 @@
 <!-- WHY -->
 <section id="why" class="band">
   <div class="container">
-    <div class="sec-head on-dark">
-      <div class="eyebrow">Why Aura</div>
-      <h2 class="sec-title on-dark">We Become Part of<br>Your Business.</h2>
-      <p class="sec-sub">Not just another agency. A growth partner that works inside your company.</p>
+    <div class="sec-head">
+      <div class="eyebrow">لماذا أورا</div>
+      <h2 class="sec-title">نصبح جزءاً من عملك.</h2>
+      <p class="sec-sub">لسنا مجرد وكالة أخرى، بل شريك نمو يعمل داخل شركتك.</p>
     </div>
     <div class="why-grid">
-      <div class="why-item"><div class="why-num">01</div><h4>Partnership</h4><p>We succeed only when you succeed. Your goals become our goals.</p></div>
-      <div class="why-item"><div class="why-num">02</div><h4>Creativity</h4><p>Innovative solutions crafted for you — never recycled templates.</p></div>
-      <div class="why-item"><div class="why-num">03</div><h4>Growth</h4><p>Every decision we make is measured against one thing: your growth.</p></div>
-      <div class="why-item"><div class="why-num">04</div><h4>Excellence</h4><p>Premium execution at the highest professional standard, every time.</p></div>
-      <div class="why-item"><div class="why-num">05</div><h4>Transparency</h4><p>Full clarity on strategy, spend and results. No black boxes.</p></div>
-      <div class="why-item"><div class="why-num">06</div><h4>Strategy First</h4><p>Data-driven planning before a single dollar is spent on ads.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- PACKAGES -->
-<section id="packages">
-  <div class="container">
-    <div class="sec-head center">
-      <div class="eyebrow">Packages</div>
-      <h2 class="sec-title">A Plan For Every Stage</h2>
-      <p class="sec-sub">Three tailored tracks — whether you're just starting or scaling fast.</p>
-    </div>
-    <div class="pkg-grid">
-
-      <div class="pkg">
-        <div class="pkg-top">
-          <div class="pkg-name">Aura Start</div>
-          <div class="pkg-for">Small business owners</div>
-          <div class="pkg-price"><span class="amt">$490</span><span class="per"> / mo</span></div>
-        </div>
-        <div class="pkg-body">
-          <div class="pkg-feats">
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Social page management</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>12 post designs / month</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Content writing</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Monthly strategy call</div>
-          </div>
-          <a href="#contact" class="btn btn-navy">Get Started</a>
-        </div>
-      </div>
-
-      <div class="pkg featured">
-        <div class="pkg-top">
-          <span class="pkg-flag">Most Popular</span>
-          <div class="pkg-name">Aura Growth</div>
-          <div class="pkg-for">Mid-sized companies</div>
-          <div class="pkg-price"><span class="amt">$1,290</span><span class="per"> / mo</span></div>
-        </div>
-        <div class="pkg-body">
-          <div class="pkg-feats">
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full social media management</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Paid ad campaigns (Meta / TikTok / Google)</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Content production &amp; reels</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Performance analytics</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Conversion optimization</div>
-          </div>
-          <a href="#contact" class="btn btn-gold">Get Started</a>
-        </div>
-      </div>
-
-      <div class="pkg">
-        <div class="pkg-top">
-          <div class="pkg-name">Aura Personal</div>
-          <div class="pkg-for">Entrepreneurs &amp; experts</div>
-          <div class="pkg-price"><span class="amt">$890</span><span class="per"> / mo</span></div>
-        </div>
-        <div class="pkg-body">
-          <div class="pkg-feats">
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Personal branding strategy</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Content strategy</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>LinkedIn &amp; Instagram growth</div>
-            <div class="pkg-feat"><span class="ck"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Personal identity building</div>
-          </div>
-          <a href="#contact" class="btn btn-navy">Get Started</a>
-        </div>
-      </div>
-
+      <div class="why-item"><div class="why-num">٠١</div><h4>الشراكة</h4><p>ننجح فقط عندما تنجح. أهدافك تصبح أهدافنا.</p></div>
+      <div class="why-item"><div class="why-num">٠٢</div><h4>الإبداع</h4><p>حلول مبتكرة مصمّمة لك — وليست قوالب مكرّرة.</p></div>
+      <div class="why-item"><div class="why-num">٠٣</div><h4>النمو</h4><p>كل قرار نتخذه يُقاس بشيء واحد: نموّك أنت.</p></div>
+      <div class="why-item"><div class="why-num">٠٤</div><h4>الاحترافية</h4><p>تنفيذ راقٍ بأعلى المعايير المهنية في كل مرة.</p></div>
+      <div class="why-item"><div class="why-num">٠٥</div><h4>الشفافية</h4><p>وضوح كامل في الاستراتيجية والتنفيذ والنتائج.</p></div>
+      <div class="why-item"><div class="why-num">٠٦</div><h4>الاستراتيجية أولاً</h4><p>تخطيط مبني على البيانات قبل أي خطوة تنفيذية.</p></div>
     </div>
   </div>
 </section>
@@ -370,9 +291,9 @@
 <!-- CTA -->
 <section id="contact" class="cta-band">
   <div class="container">
-    <h2>Ready to <em>Build Your Brand?</em></h2>
-    <p>Book a free consultation and let's map your growth — no obligations, just strategy.</p>
-    <a href="#" class="btn btn-gold">📩 Book Your Free Consultation</a>
+    <h2>جاهز <em>لبناء علامتك التجارية؟</em></h2>
+    <p>احجز استشارة مجانية ودعنا نرسم خطة نموّك — بدون أي التزامات، فقط استراتيجية.</p>
+    <a href="#" class="btn btn-bronze">📩 احجز استشارتك المجانية</a>
   </div>
 </section>
 
@@ -381,43 +302,32 @@
   <div class="container">
     <div class="foot-grid">
       <div>
-        <a href="#" class="logo on-dark">
-          <svg viewBox="0 0 100 100" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2" stroke-linecap="round" opacity="0.28"/>
-            <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-            <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3" stroke-linecap="round" opacity="1"/>
-            <line x1="12" y1="90" x2="50" y2="34" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-            <line x1="88" y1="90" x2="50" y2="34" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-            <line x1="31" y1="62" x2="69" y2="62" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-          </svg>
-          <div class="divider"></div>
-          <div class="wordmark"><span class="wm-name">AURA</span><span class="wm-sub">MEDIA GROUP</span></div>
-        </a>
-        <p class="foot-tag">We become part of your business, not just another agency. Building brands and driving growth across the Middle East.</p>
+        <img class="foot-logo" src="logo-light.svg" alt="أورا ميديا جروب">
+        <p class="foot-tag">نصبح جزءاً من عملك، لا مجرد وكالة أخرى. نبني العلامات ونقود النمو في الشرق الأوسط.</p>
       </div>
       <div class="foot-col">
-        <h5>Services</h5>
-        <a href="#">Branding</a>
-        <a href="#">Marketing</a>
-        <a href="#">Content Creation</a>
-        <a href="#">Web Development</a>
+        <h5>الخدمات</h5>
+        <a href="#">بناء العلامة</a>
+        <a href="#">التسويق</a>
+        <a href="#">صناعة المحتوى</a>
+        <a href="#">تطوير المواقع</a>
       </div>
       <div class="foot-col">
-        <h5>Company</h5>
-        <a href="#">About Us</a>
-        <a href="#">Case Studies</a>
-        <a href="#">Packages</a>
-        <a href="#">Contact</a>
+        <h5>الشركة</h5>
+        <a href="#">من نحن</a>
+        <a href="#">أعمالنا</a>
+        <a href="#">المدوّنة</a>
+        <a href="#">تواصل معنا</a>
       </div>
       <div class="foot-col">
-        <h5>Get In Touch</h5>
-        <a href="mailto:hello@auramediagroup.com">hello@auramediagroup.com</a>
-        <a href="#">+971 50 000 0000</a>
-        <a href="#">Dubai, United Arab Emirates</a>
+        <h5>تواصل معنا</h5>
+        <a href="mailto:hello@auramediagroup.com" dir="ltr">hello@auramediagroup.com</a>
+        <a href="#" dir="ltr">+971 50 000 0000</a>
+        <a href="#">دبي، الإمارات العربية المتحدة</a>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2024 Aura Media Group. All rights reserved.</span>
+      <span>© 2024 أورا ميديا جروب. جميع الحقوق محفوظة.</span>
       <div class="foot-social">
         <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
         <a href="#" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7 10 L7 17 M7 7 L7 7.01 M11 17 L11 13 C11 11 14 11 14 13 L14 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>

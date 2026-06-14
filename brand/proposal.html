@@ -1,117 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aura Media Group — Proposal & Pricing</title>
+  <title>أورا ميديا جروب — عرض تقديمي</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-    :root{ --navy:#0F172A; --gold:#D4B483; --white:#fff; --gray:#F8F8F8; --muted:#6B7280;
-           --gold-a4:rgba(212,180,131,.4); --gold-a1:rgba(212,180,131,.1); }
-    body{ font-family:'Inter',sans-serif; color:var(--navy); background:#E9E9EC; line-height:1.6; padding:40px 16px; }
+    *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+    :root{ --espresso:#2D2620; --coffee:#3E342B; --bronze:#B0895A; --bronze-d:#8A6A42;
+           --cream:#F7F1E8; --sand:#ECE1D1; --linen:#FCF8F2; --muted:#94856F;
+           --bronze-a4:rgba(176,137,90,.4); --bronze-a1:rgba(176,137,90,.10); }
+    body{ font-family:'Tajawal',sans-serif; color:var(--coffee); background:var(--sand); line-height:1.9; padding:36px 14px; -webkit-text-size-adjust:100%; }
+    h1,h2,h3,h4,h5{ font-family:'Cairo',sans-serif; color:var(--espresso); }
+    img,svg{ display:block; }
 
-    /* A4-ish document */
-    .doc{ max-width:820px; margin:0 auto 28px; background:#fff; border-radius:6px; overflow:hidden;
-          box-shadow:0 18px 60px rgba(15,23,42,.16); }
+    .doc{ width:100%; max-width:820px; margin:0 auto 24px; background:var(--linen); border-radius:8px; overflow:hidden;
+      box-shadow:0 18px 60px rgba(45,38,32,.18); }
 
-    .logo{ display:inline-flex; align-items:center; }
-    .logo .divider{ width:1px; align-self:stretch; margin:0 13px; min-height:36px;
-      background:linear-gradient(to bottom,transparent,var(--gold),transparent); opacity:.55; }
-    .logo .wordmark{ display:flex; flex-direction:column; }
-    .logo .wm-name{ font-family:'Montserrat',sans-serif; font-weight:800; letter-spacing:.18em; line-height:1; font-size:20px; }
-    .logo .wm-sub{ font-family:'Montserrat',sans-serif; font-weight:400; letter-spacing:.4em; font-size:7px; color:var(--gold); margin-top:4px; }
-    .on-dark .wm-name{ color:#fff; }
-
-    /* ── COVER PAGE ── */
-    .cover{ background:var(--navy); padding:70px 60px 60px; position:relative; overflow:hidden; }
-    .cover::before{ content:''; position:absolute; width:420px; height:420px; border-radius:50%;
-      background:radial-gradient(circle,rgba(212,180,131,.09),transparent 65%); top:-180px; right:-140px; }
-    .cover::after{ content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
-      background:linear-gradient(to bottom,transparent,var(--gold),transparent); }
+    /* COVER */
+    .cover{ background:var(--espresso); padding:54px 50px 48px; position:relative; overflow:hidden; }
+    .cover::before{ content:''; position:absolute; width:380px; height:380px; border-radius:50%;
+      background:radial-gradient(circle,rgba(176,137,90,.14),transparent 65%); top:-160px; left:-120px; }
     .cover > *{ position:relative; z-index:1; }
-    .cover-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:80px; }
-    .cover-ref{ text-align:right; font-size:11px; color:rgba(255,255,255,.4); line-height:1.9; }
-    .cover-eyebrow{ font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:.35em;
-      text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
-    .cover h1{ font-family:'Montserrat',sans-serif; font-weight:800; color:#fff; font-size:46px; line-height:1.12; letter-spacing:-.01em; }
-    .cover h1 em{ color:var(--gold); font-style:normal; }
-    .cover-sub{ color:rgba(255,255,255,.55); font-size:15px; font-weight:300; margin-top:22px; max-width:480px; line-height:1.8; }
-    .cover-meta{ display:flex; gap:48px; margin-top:54px; padding-top:30px; border-top:1px solid rgba(255,255,255,.1); }
-    .cm-l{ font-size:10px; text-transform:uppercase; letter-spacing:.18em; color:rgba(255,255,255,.4); margin-bottom:6px; }
-    .cm-v{ font-family:'Montserrat',sans-serif; font-size:14px; font-weight:600; color:#fff; }
+    .cover-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:64px; flex-wrap:wrap; }
+    .cover-logo{ height:54px; width:auto; }
+    .cover-ref{ text-align:left; font-size:12px; color:rgba(247,241,232,.45); line-height:1.9; direction:ltr; }
+    .cover-eyebrow{ font-family:'Cairo',sans-serif; font-size:13px; font-weight:700; color:var(--bronze); margin-bottom:16px; }
+    .cover h1{ font-weight:800; color:var(--cream); font-size:clamp(28px,6vw,42px); line-height:1.35; }
+    .cover h1 em{ color:var(--bronze); font-style:normal; }
+    .cover-sub{ color:rgba(247,241,232,.6); font-size:15px; margin-top:18px; max-width:480px; line-height:1.9; }
+    .cover-meta{ display:flex; gap:44px; flex-wrap:wrap; margin-top:48px; padding-top:28px; border-top:1px solid rgba(247,241,232,.12); }
+    .cm-l{ font-size:11px; color:rgba(247,241,232,.45); margin-bottom:6px; }
+    .cm-v{ font-family:'Cairo',sans-serif; font-size:15px; font-weight:700; color:var(--cream); }
 
-    /* ── BODY ── */
-    .body{ padding:56px 60px; }
-    .blk{ margin-bottom:52px; }
+    /* BODY */
+    .body{ padding:52px 50px; }
+    .blk{ margin-bottom:48px; }
     .blk:last-child{ margin-bottom:0; }
-    .eyebrow{ font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600; letter-spacing:.3em;
-      text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
-    .blk h2{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:24px; color:var(--navy); margin-bottom:18px; }
-    .blk p{ font-size:14px; color:#444; line-height:1.85; margin-bottom:12px; }
+    .eyebrow{ font-family:'Cairo',sans-serif; font-size:13px; font-weight:700; color:var(--bronze-d); margin-bottom:10px; }
+    .blk h2{ font-weight:800; font-size:25px; margin-bottom:16px; }
+    .blk p{ font-size:15px; color:var(--coffee); line-height:2; margin-bottom:12px; }
 
-    /* approach steps */
-    .steps{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:8px; }
-    .step{ background:var(--gray); border-radius:12px; padding:22px 24px; border-left:3px solid var(--gold); }
-    .step-n{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:13px; color:var(--gold); margin-bottom:8px; }
-    .step h4{ font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; margin-bottom:6px; }
-    .step p{ font-size:12.5px; color:var(--muted); margin:0; line-height:1.6; }
+    .steps{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:6px; }
+    .step{ background:var(--sand); border-radius:14px; padding:22px 24px; border-right:3px solid var(--bronze); }
+    .step-n{ font-family:'Cairo',sans-serif; font-weight:800; font-size:13px; color:var(--bronze-d); margin-bottom:6px; }
+    .step h4{ font-size:16px; font-weight:700; margin-bottom:6px; }
+    .step p{ font-size:13.5px; color:var(--muted); margin:0; line-height:1.8; }
 
-    /* ── PRICING TABLE ── */
-    .pricing{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .tier{ border:1px solid #eee; border-radius:14px; overflow:hidden; display:flex; flex-direction:column; }
-    .tier.feat{ border-color:var(--gold); box-shadow:0 12px 34px rgba(212,180,131,.16); }
-    .tier-h{ padding:24px 22px 20px; border-bottom:1px solid #f0f0f0; position:relative; }
-    .tier.feat .tier-h{ background:var(--navy); }
-    .tier-flag{ position:absolute; top:14px; right:16px; font-family:'Montserrat',sans-serif; font-size:8px; font-weight:700;
-      letter-spacing:.15em; text-transform:uppercase; color:var(--navy); background:var(--gold); padding:3px 9px; border-radius:100px; }
-    .tier-name{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:18px; }
-    .tier.feat .tier-name{ color:#fff; }
-    .tier-for{ font-size:11px; color:var(--muted); margin-top:3px; }
-    .tier.feat .tier-for{ color:rgba(255,255,255,.5); }
-    .tier-price{ margin-top:16px; font-family:'Montserrat',sans-serif; }
-    .tier-price .amt{ font-size:30px; font-weight:800; color:var(--navy); }
-    .tier.feat .tier-price .amt{ color:var(--gold); }
-    .tier-price .per{ font-size:12px; color:var(--muted); font-weight:400; }
-    .tier.feat .tier-price .per{ color:rgba(255,255,255,.5); }
-    .tier-b{ padding:20px 22px 24px; flex:1; }
-    .tier-feat{ display:flex; gap:9px; align-items:flex-start; font-size:12px; color:#374151; margin-bottom:10px; }
-    .tier-feat .ck{ width:15px; height:15px; border-radius:50%; background:var(--gold-a1); flex-shrink:0; margin-top:1px;
-      display:flex; align-items:center; justify-content:center; }
+    /* services included */
+    .inc{ display:flex; flex-direction:column; gap:14px; }
+    .inc-row{ background:var(--sand); border-radius:14px; padding:22px 26px; }
+    .inc-head{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .inc-dot{ width:30px; height:30px; border-radius:9px; background:var(--espresso); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .inc-head h4{ font-size:17px; font-weight:700; }
+    .inc-items{ display:flex; flex-wrap:wrap; gap:8px; }
+    .inc-item{ font-size:13.5px; color:var(--coffee); background:var(--bronze-a1); border:1px solid var(--bronze-a4); padding:6px 14px; border-radius:100px; }
 
-    /* ── INVESTMENT SUMMARY ── */
-    .inv{ background:var(--gray); border-radius:14px; padding:32px 34px; }
-    .inv-row{ display:flex; justify-content:space-between; align-items:center; padding:13px 0; border-bottom:1px dashed #ddd; font-size:14px; }
-    .inv-row:last-child{ border-bottom:none; }
-    .inv-row .lbl{ color:#444; }
-    .inv-row .val{ font-family:'Montserrat',sans-serif; font-weight:600; color:var(--navy); }
-    .inv-total{ display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding-top:20px; border-top:2px solid var(--navy); }
-    .inv-total .lbl{ font-family:'Montserrat',sans-serif; font-weight:700; font-size:16px; }
-    .inv-total .val{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:26px; color:var(--navy); }
-    .inv-total .val span{ color:var(--gold); }
-    .inv-note{ font-size:11.5px; color:var(--muted); margin-top:14px; line-height:1.6; }
+    /* timeline */
+    .tl{ display:flex; flex-direction:column; gap:0; }
+    .tl-item{ display:flex; gap:18px; padding-bottom:22px; position:relative; }
+    .tl-item:not(:last-child)::before{ content:''; position:absolute; right:15px; top:32px; bottom:0; width:1.5px; background:var(--bronze-a4); }
+    .tl-badge{ width:32px; height:32px; border-radius:50%; background:var(--bronze); color:#fff; font-family:'Cairo',sans-serif;
+      font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1; }
+    .tl-c h4{ font-size:16px; font-weight:700; margin-bottom:2px; }
+    .tl-c p{ font-size:13.5px; color:var(--muted); margin:0; }
 
-    /* ── TERMS ── */
-    .terms{ list-style:none; }
-    .terms li{ font-size:13px; color:#555; padding-left:20px; position:relative; margin-bottom:10px; line-height:1.7; }
-    .terms li::before{ content:''; position:absolute; left:0; top:8px; width:6px; height:6px; border-radius:50%; background:var(--gold); }
+    /* next step */
+    .next{ background:var(--espresso); border-radius:16px; padding:36px 34px; text-align:center; position:relative; overflow:hidden; }
+    .next::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 70% at 50% 40%,rgba(176,137,90,.16),transparent 70%); }
+    .next > *{ position:relative; z-index:1; }
+    .next h3{ color:var(--cream); font-size:22px; font-weight:800; margin-bottom:10px; }
+    .next p{ color:rgba(247,241,232,.62); font-size:14.5px; margin-bottom:22px; max-width:440px; margin-inline:auto; }
+    .next .pill{ display:inline-block; font-family:'Cairo',sans-serif; font-weight:700; font-size:14px;
+      background:var(--bronze); color:#fff; padding:12px 26px; border-radius:100px; }
+
+    .note{ font-size:12.5px; color:var(--muted); margin-top:16px; line-height:1.8; text-align:center; }
 
     /* sign */
-    .sign{ display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:14px; }
-    .sign-box{ }
-    .sign-line{ border-bottom:1.5px solid var(--navy); height:46px; margin-bottom:8px; }
-    .sign-lbl{ font-size:11px; color:var(--muted); letter-spacing:.05em; }
+    .sign{ display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:12px; }
+    .sign-line{ border-bottom:1.5px solid var(--espresso); height:46px; margin-bottom:8px; }
+    .sign-lbl{ font-size:12px; color:var(--muted); }
 
-    /* ── FOOTER ── */
-    .foot{ background:var(--navy); padding:24px 60px; display:flex; justify-content:space-between; align-items:center; }
-    .foot-txt{ font-size:11px; color:rgba(255,255,255,.35); letter-spacing:.05em; }
-    .foot-line{ width:50px; height:1px; background:var(--gold); opacity:.4; }
+    /* FOOTER */
+    .foot{ background:#221C17; padding:22px 50px; display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; }
+    .foot-txt{ font-size:12px; color:rgba(247,241,232,.4); direction:ltr; }
+    .foot-line{ width:46px; height:1px; background:var(--bronze); opacity:.5; }
 
     @media print{ body{ background:#fff; padding:0; } .doc{ box-shadow:none; margin:0; border-radius:0; } }
-    @media(max-width:720px){ .pricing,.steps,.sign{ grid-template-columns:1fr; } .cover h1{ font-size:34px; } }
+    @media(max-width:680px){ .steps,.sign{ grid-template-columns:1fr; } .body,.cover{ padding-left:26px; padding-right:26px; } }
   </style>
 </head>
 <body>
@@ -121,151 +100,97 @@
   <!-- COVER -->
   <div class="cover">
     <div class="cover-top">
-      <div class="logo on-dark">
-        <svg viewBox="0 0 100 100" width="42" height="42" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2" stroke-linecap="round" opacity="0.28"/>
-          <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-          <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3" stroke-linecap="round" opacity="1"/>
-          <line x1="12" y1="90" x2="50" y2="34" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-          <line x1="88" y1="90" x2="50" y2="34" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-          <line x1="31" y1="62" x2="69" y2="62" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-        </svg>
-        <div class="divider"></div>
-        <div class="wordmark"><span class="wm-name">AURA</span><span class="wm-sub">MEDIA GROUP</span></div>
-      </div>
-      <div class="cover-ref">
-        Proposal No. AMG-2024-0142<br>
-        June 14, 2024<br>
-        Valid for 30 days
-      </div>
+      <img class="cover-logo" src="logo-light.svg" alt="أورا ميديا جروب">
+      <div class="cover-ref">No. AMG-2024-0142<br>June 14, 2024</div>
     </div>
-    <div class="cover-eyebrow">Marketing Growth Proposal</div>
-    <h1>Building Your Brand,<br><em>Driving Real Growth.</em></h1>
-    <p class="cover-sub">A tailored partnership proposal prepared exclusively for your brand — strategy, execution, and measurable results under one roof.</p>
+    <div class="cover-eyebrow">عرض تقديمي — شراكة نمو</div>
+    <h1>نبني علامتك التجارية،<br><em>ونقود نموّها الحقيقي.</em></h1>
+    <p class="cover-sub">عرض شراكة مُعدّ خصيصاً لعلامتك — استراتيجية، تنفيذ، ونتائج قابلة للقياس تحت سقفٍ واحد.</p>
     <div class="cover-meta">
-      <div><div class="cm-l">Prepared For</div><div class="cm-v">[ Client Name ]</div></div>
-      <div><div class="cm-l">Prepared By</div><div class="cm-v">Sara Al-Rashid</div></div>
-      <div><div class="cm-l">Engagement</div><div class="cm-v">Growth Partnership</div></div>
+      <div><div class="cm-l">مُعدّ لـ</div><div class="cm-v">[ اسم العميل ]</div></div>
+      <div><div class="cm-l">مُعدّ بواسطة</div><div class="cm-v">سارة الراشد</div></div>
+      <div><div class="cm-l">نوع الخدمة</div><div class="cm-v">شراكة نمو</div></div>
     </div>
   </div>
 
   <!-- BODY -->
   <div class="body">
 
-    <!-- Intro -->
     <div class="blk">
-      <div class="eyebrow">01 — Overview</div>
-      <h2>The Partnership</h2>
-      <p>Aura Media Group is not a typical marketing agency. We become part of your business — an external growth team that operates inside your company, owning your brand's identity, awareness, customer acquisition, and revenue growth.</p>
-      <p>This proposal outlines how we'll help you build a strong digital presence and turn your brand into an influential, profitable asset — with full transparency on strategy, execution, and results.</p>
+      <div class="eyebrow">٠١ — نظرة عامة</div>
+      <h2>الشراكة</h2>
+      <p>«أورا ميديا جروب» ليست وكالة تسويق تقليدية. نحن نصبح جزءاً من عملك — فريق نمو خارجي يعمل داخل شركتك، ويتولّى هوية علامتك، والوعي بها، وجذب العملاء، وزيادة المبيعات.</p>
+      <p>يوضّح هذا العرض كيف سنساعدك على بناء حضور رقمي قوي وتحويل علامتك إلى أصلٍ مؤثّر ومربح — بوضوحٍ كامل في الاستراتيجية والتنفيذ والنتائج.</p>
     </div>
 
-    <!-- Approach -->
     <div class="blk">
-      <div class="eyebrow">02 — How We Work</div>
-      <h2>Our Approach</h2>
+      <div class="eyebrow">٠٢ — منهجية العمل</div>
+      <h2>كيف نعمل</h2>
       <div class="steps">
-        <div class="step"><div class="step-n">STEP 01</div><h4>Discover</h4><p>Deep audit of your brand, market, competitors and audience to define the opportunity.</p></div>
-        <div class="step"><div class="step-n">STEP 02</div><h4>Strategy</h4><p>A data-driven roadmap: positioning, messaging, channels and KPIs before any spend.</p></div>
-        <div class="step"><div class="step-n">STEP 03</div><h4>Build &amp; Launch</h4><p>Identity, content and campaigns crafted and deployed across the right platforms.</p></div>
-        <div class="step"><div class="step-n">STEP 04</div><h4>Optimize &amp; Scale</h4><p>Continuous testing, reporting and optimization to compound growth month over month.</p></div>
+        <div class="step"><div class="step-n">الخطوة ٠١</div><h4>الاكتشاف</h4><p>تحليل معمّق لعلامتك وسوقك ومنافسيك وجمهورك لتحديد الفرصة.</p></div>
+        <div class="step"><div class="step-n">الخطوة ٠٢</div><h4>الاستراتيجية</h4><p>خارطة طريق مبنية على البيانات: التموضع، الرسائل، القنوات والأهداف.</p></div>
+        <div class="step"><div class="step-n">الخطوة ٠٣</div><h4>البناء والإطلاق</h4><p>تصميم الهوية والمحتوى والحملات وإطلاقها على المنصات المناسبة.</p></div>
+        <div class="step"><div class="step-n">الخطوة ٠٤</div><h4>التحسين والتوسّع</h4><p>اختبار وتحليل وتحسين مستمر لمضاعفة النمو شهراً بعد شهر.</p></div>
       </div>
     </div>
 
-    <!-- Pricing -->
     <div class="blk">
-      <div class="eyebrow">03 — Investment Options</div>
-      <h2>Choose Your Track</h2>
-      <div class="pricing">
-
-        <div class="tier">
-          <div class="tier-h">
-            <div class="tier-name">Aura Start</div>
-            <div class="tier-for">Small businesses</div>
-            <div class="tier-price"><span class="amt">$490</span><span class="per">/mo</span></div>
-          </div>
-          <div class="tier-b">
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Page management</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>12 posts / month</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Content writing</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Monthly consulting</div>
-          </div>
+      <div class="eyebrow">٠٣ — نطاق العمل</div>
+      <h2>الخدمات المشمولة</h2>
+      <div class="inc">
+        <div class="inc-row">
+          <div class="inc-head"><span class="inc-dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#B0895A" stroke-width="1.6"/><path d="M9 16 L12 7 L15 16 M10.2 13 L13.8 13" stroke="#F7F1E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h4>بناء العلامة</h4></div>
+          <div class="inc-items"><span class="inc-item">تصميم الشعار</span><span class="inc-item">الهوية البصرية</span><span class="inc-item">استراتيجية العلامة</span><span class="inc-item">تموضع العلامة</span></div>
         </div>
-
-        <div class="tier feat">
-          <div class="tier-h">
-            <span class="tier-flag">Recommended</span>
-            <div class="tier-name">Aura Growth</div>
-            <div class="tier-for">Mid-sized companies</div>
-            <div class="tier-price"><span class="amt">$1,290</span><span class="per">/mo</span></div>
-          </div>
-          <div class="tier-b">
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full SM management</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Paid ad campaigns</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Content &amp; reels</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Performance analytics</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Conversion optimization</div>
-          </div>
+        <div class="inc-row">
+          <div class="inc-head"><span class="inc-dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 15 L4 9 L9 9 L16 5 L16 19 L9 15 Z" stroke="#B0895A" stroke-width="1.6" stroke-linejoin="round"/></svg></span><h4>التسويق</h4></div>
+          <div class="inc-items"><span class="inc-item">إدارة السوشال ميديا</span><span class="inc-item">إعلانات ميتا</span><span class="inc-item">إعلانات تيك توك</span><span class="inc-item">إعلانات جوجل</span><span class="inc-item">جذب العملاء</span></div>
         </div>
-
-        <div class="tier">
-          <div class="tier-h">
-            <div class="tier-name">Aura Personal</div>
-            <div class="tier-for">Founders &amp; experts</div>
-            <div class="tier-price"><span class="amt">$890</span><span class="per">/mo</span></div>
-          </div>
-          <div class="tier-b">
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Personal branding</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Content strategy</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>LinkedIn &amp; IG growth</div>
-            <div class="tier-feat"><span class="ck"><svg width="8" height="8" viewBox="0 0 9 9"><path d="M1 4.5 L3.5 7 L8 1.5" stroke="#9a7b3e" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Identity building</div>
-          </div>
+        <div class="inc-row">
+          <div class="inc-head"><span class="inc-dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#B0895A" stroke-width="1.6"/><path d="M10 9.5 L14.5 12 L10 14.5 Z" fill="#F7F1E8"/></svg></span><h4>صناعة المحتوى</h4></div>
+          <div class="inc-items"><span class="inc-item">ريلز</span><span class="inc-item">مونتاج فيديو</span><span class="inc-item">كتابة إعلانية</span><span class="inc-item">إدارة التصوير</span><span class="inc-item">تصميم جرافيك</span></div>
         </div>
-
+        <div class="inc-row">
+          <div class="inc-head"><span class="inc-dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#B0895A" stroke-width="1.6"/><path d="M3 9 L21 9" stroke="#B0895A" stroke-width="1.6"/></svg></span><h4>تطوير المواقع</h4></div>
+          <div class="inc-items"><span class="inc-item">شوبيفاي</span><span class="inc-item">ووردبريس</span><span class="inc-item">صفحات هبوط</span><span class="inc-item">تحسين التحويلات</span></div>
+        </div>
       </div>
     </div>
 
-    <!-- Investment summary -->
     <div class="blk">
-      <div class="eyebrow">04 — Investment Summary</div>
-      <h2>Your Investment</h2>
-      <div class="inv">
-        <div class="inv-row"><span class="lbl">Aura Growth — Monthly Retainer</span><span class="val">$1,290 / mo</span></div>
-        <div class="inv-row"><span class="lbl">One-time Brand Identity Setup</span><span class="val">$1,500</span></div>
-        <div class="inv-row"><span class="lbl">Ad Spend (managed, billed separately)</span><span class="val">From $1,000 / mo</span></div>
-        <div class="inv-row"><span class="lbl">Onboarding Discount</span><span class="val" style="color:#1c8a4a;">− $300</span></div>
-        <div class="inv-total"><span class="lbl">First Month Total</span><span class="val">$<span>2,490</span></span></div>
-        <div class="inv-note">* Prices exclude managed ad spend, which is paid directly to the platforms. A 3-month minimum engagement applies. All figures in USD.</div>
+      <div class="eyebrow">٠٤ — الجدول الزمني</div>
+      <h2>خطوات التنفيذ</h2>
+      <div class="tl">
+        <div class="tl-item"><div class="tl-badge">١</div><div class="tl-c"><h4>الأسبوع ١ — الاكتشاف والتدقيق</h4><p>اجتماع انطلاق، تحليل العلامة والسوق والمنافسين.</p></div></div>
+        <div class="tl-item"><div class="tl-badge">٢</div><div class="tl-c"><h4>الأسبوع ٢ — الاستراتيجية والهوية</h4><p>بناء خارطة الطريق والهوية البصرية والرسائل.</p></div></div>
+        <div class="tl-item"><div class="tl-badge">٣</div><div class="tl-c"><h4>الأسبوع ٣–٤ — الإنتاج والإطلاق</h4><p>إنتاج المحتوى وإطلاق أول الحملات على المنصات.</p></div></div>
+        <div class="tl-item"><div class="tl-badge">∞</div><div class="tl-c"><h4>مستمر — التحسين والتقارير</h4><p>تقارير شهرية وتحسين متواصل للأداء والنتائج.</p></div></div>
       </div>
     </div>
 
-    <!-- Terms -->
     <div class="blk">
-      <div class="eyebrow">05 — Terms</div>
-      <h2>Terms &amp; Conditions</h2>
-      <ul class="terms">
-        <li>Engagement is billed monthly in advance, with a minimum commitment of 3 months.</li>
-        <li>Either party may end the partnership with 30 days' written notice after the minimum term.</li>
-        <li>Managed ad spend is billed separately and paid directly to advertising platforms.</li>
-        <li>All deliverables, creative assets, and brand files are owned by the client upon full payment.</li>
-        <li>Aura Media Group provides full monthly reporting on strategy, spend, and performance.</li>
-      </ul>
+      <div class="eyebrow">٠٥ — الخطوة التالية</div>
+      <h2>لنبدأ سوياً</h2>
+      <div class="next">
+        <h3>جاهزون للانطلاق بعلامتك</h3>
+        <p>نرتّب اجتماعاً قصيراً نفهم فيه أهدافك، ونعدّ لك خطة عمل مخصّصة بالكامل لاحتياجات علامتك.</p>
+        <span class="pill">📩 احجز استشارتك المجانية</span>
+      </div>
+      <p class="note">* يُحدَّد نطاق العمل النهائي والتفاصيل بناءً على أهدافك بعد اجتماع الاكتشاف. الحدّ الأدنى للالتزام ٣ أشهر، وجميع الأصول والملفات تعود ملكيتها للعميل.</p>
     </div>
 
-    <!-- Sign -->
     <div class="blk">
-      <div class="eyebrow">06 — Agreement</div>
-      <h2>Let's Build Together</h2>
-      <p style="margin-bottom:26px;">By signing below, both parties agree to the scope, investment, and terms outlined in this proposal.</p>
+      <div class="eyebrow">٠٦ — الاتفاقية</div>
+      <h2>الموافقة</h2>
+      <p style="margin-bottom:22px;">بالتوقيع أدناه، يوافق الطرفان على نطاق العمل والمنهجية الموضّحة في هذا العرض.</p>
       <div class="sign">
-        <div class="sign-box"><div class="sign-line"></div><div class="sign-lbl">Client Signature &amp; Date</div></div>
-        <div class="sign-box"><div class="sign-line"></div><div class="sign-lbl">Aura Media Group — Sara Al-Rashid</div></div>
+        <div><div class="sign-line"></div><div class="sign-lbl">توقيع العميل والتاريخ</div></div>
+        <div><div class="sign-line"></div><div class="sign-lbl">أورا ميديا جروب — سارة الراشد</div></div>
       </div>
     </div>
 
   </div>
 
-  <!-- FOOTER -->
   <div class="foot">
     <div class="foot-txt">hello@auramediagroup.com</div>
     <div class="foot-line"></div>

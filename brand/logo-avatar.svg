@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Circular social avatar — navy fill, gold-aura A mark. Safe for Instagram / WhatsApp / LinkedIn profile photo. -->
+<!-- Aura Media Group — Circular social avatar. Espresso fill, bronze halo, cream A. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
-    <radialGradient id="auraGlow" cx="62%" cy="38%" r="70%">
-      <stop offset="0%"  stop-color="#1c2c4a"/>
-      <stop offset="100%" stop-color="#0F172A"/>
+    <radialGradient id="bg" cx="50%" cy="40%" r="72%">
+      <stop offset="0%"  stop-color="#3A302A"/>
+      <stop offset="100%" stop-color="#2D2620"/>
     </radialGradient>
   </defs>
 
-  <!-- Background -->
-  <circle cx="100" cy="100" r="100" fill="url(#auraGlow)"/>
-  <!-- Thin gold ring -->
-  <circle cx="100" cy="100" r="93" fill="none" stroke="#D4B483" stroke-width="1.5" opacity="0.55"/>
+  <circle cx="100" cy="100" r="100" fill="url(#bg)"/>
 
-  <!-- Mark, centered (scaled from 100x100 mark, translated) -->
-  <g transform="translate(50,52) scale(1.0)">
-    <path d="M 17,34 A 33,33 0 0 0 83,34" fill="none" stroke="#D4B483" stroke-width="2"   stroke-linecap="round" opacity="0.30"/>
-    <path d="M 25,34 A 25,25 0 0 0 75,34" fill="none" stroke="#D4B483" stroke-width="2.5" stroke-linecap="round" opacity="0.62"/>
-    <path d="M 35,34 A 15,15 0 0 0 65,34" fill="none" stroke="#D4B483" stroke-width="3"   stroke-linecap="round" opacity="1"/>
-    <line x1="12" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
-    <line x1="88" y1="90" x2="50" y2="34" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
-    <line x1="31" y1="62" x2="69" y2="62" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
-  </g>
+  <!-- halo rings -->
+  <circle cx="100" cy="100" r="62" fill="none" stroke="#B0895A" stroke-width="1.4" opacity="0.30"/>
+  <circle cx="100" cy="100" r="52" fill="none" stroke="#B0895A" stroke-width="2"   opacity="0.95"/>
+  <circle cx="100" cy="100" r="41" fill="none" stroke="#B0895A" stroke-width="1.2" opacity="0.40"/>
+  <circle cx="100" cy="48"  r="3.4" fill="#B0895A"/>
+
+  <!-- the A in cream -->
+  <line x1="81"  y1="128" x2="100" y2="80" stroke="#F7F1E8" stroke-width="5.2" stroke-linecap="round"/>
+  <line x1="119" y1="128" x2="100" y2="80" stroke="#F7F1E8" stroke-width="5.2" stroke-linecap="round"/>
+  <line x1="88"  y1="110" x2="112" y2="110" stroke="#F7F1E8" stroke-width="5.2" stroke-linecap="round"/>
 </svg>
